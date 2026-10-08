@@ -1,0 +1,130 @@
+## Computational results
+
+[DIRECTLY FROM DATA]
+
+All five requested cases passed the corrected structural validation.
+
+| \(r\) | \(n\) | \(n_2\) | diameter | radius | exact \(b(T_r)\) | \(b(T_r)=r\) | max covered after \(r-1\) rounds | maximal states |
+| ----: | ----: | ------: | -------: | -----: | ---------------: | :----------: | -------------------------------: | -------------: |
+|     6 |    30 |      20 |       10 |      5 |            **6** |      YES     |                     29 = \(n-1\) |             10 |
+|     7 |    40 |      30 |       12 |      6 |            **7** |      YES     |                     39 = \(n-1\) |             12 |
+|     8 |    52 |      42 |       14 |      7 |            **8** |      YES     |                     51 = \(n-1\) |             14 |
+|     9 |    66 |      56 |       16 |      8 |            **9** |      YES     |                     65 = \(n-1\) |             16 |
+|    10 |    82 |      72 |       18 |      9 |           **10** |      YES     |                     81 = \(n-1\) |             18 |
+
+Thus:
+
+$$
+\boxed{b(T_r)=r\quad\text{for every tested }r=6,7,8,9,10.}
+$$
+
+[DIRECTLY FROM DATA]
+
+One shortest burning sequence for every case is, under the fixed construction labeling,
+
+$$
+\boxed{[0,1,2,\ldots,r-1]},
+$$
+
+where vertex \(0\) is the center and \(1,\ldots,r-1\) are the consecutive vertices on one long arm.
+
+So explicitly:
+
+```text
+r=6:  [0,1,2,3,4,5]
+r=7:  [0,1,2,3,4,5,6]
+r=8:  [0,1,2,3,4,5,6,7]
+r=9:  [0,1,2,3,4,5,6,7,8]
+r=10: [0,1,2,3,4,5,6,7,8,9]
+```
+
+For every \(r\),
+
+$$
+\operatorname{maxcov}(r-1)=n-1,
+$$
+
+so no \(r-1\)-round sequence can burn the whole tree.
+
+### Lower-bound obstruction
+
+[DIRECTLY FROM DATA]
+
+For each \(r=6,\ldots,10\):
+
+* the best possible coverage after exactly \(r-1\) rounds is \(n-1\);
+* there are exactly
+
+  $$
+  \boxed{2(r-1)}
+  $$
+
+  labeled maximal-coverage states;
+* these correspond to exactly **two** symmetry classes.
+
+The two canonical maximal states leave exactly one vertex uncovered:
+
+$$
+\boxed{\text{position }r-2}
+$$
+
+or
+
+$$
+\boxed{\text{position }r-1}
+$$
+
+on one distinguished long arm, where position \(r-1\) is the terminal vertex.
+
+For example:
+
+```text
+r=8:
+missing position 6, or position 7
+
+r=9:
+missing position 7, or position 8
+
+r=10:
+missing position 8, or position 9
+```
+
+Therefore the stronger statement
+
+> every maximal configuration leaves the terminal vertex uncovered
+
+is **false**.
+
+What is directly verified is:
+
+> every maximal \(r-1\)-round configuration leaves exactly one vertex of a long arm uncovered, and the only two canonical possibilities place that vertex at the final two positions of that arm.
+
+[STRUCTURAL HYPOTHESIS]
+
+This suggests a very specific local obstruction near the tip of a long arm, rather than a statement specifically about the terminal vertex.
+
+### Hypothesis suggested by the finite computation
+
+[STRUCTURAL HYPOTHESIS]
+
+For this particular spider family,
+
+$$
+\boxed{b(T_r)=r}
+$$
+
+may continue to hold for larger \(r\).
+
+This has **not** been proved or tested beyond \(r=10\).
+
+### Execution note
+
+The exact burning-state recurrence and source-selection rule were unchanged. A symmetry reduction by permutations of equal-length arms was used only as an execution optimization; the maximal labeled-state counts were recovered from the corresponding symmetry orbits.
+
+### Output files
+
+[Machine-readable JSON](sandbox:/mnt/data/k19_critical_spider_family_corrected.json)
+
+[Human-readable report](sandbox:/mnt/data/k19_critical_spider_family_corrected_report.txt)
+
+**Status: COMPLETED**
