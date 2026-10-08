@@ -1,0 +1,532 @@
+下面是可以直接追加到 `research_log.md` 的报告；所有数值均来自本次对 \(K_{1,9}\), \(\sum s_i=6\) 的实际执行。
+
+# Computational Structural Analysis — q=4
+
+## Focused structural experiment: \(H=K_{1,9}\), \(\sum_i s_i=6\)
+
+### Experiment status
+
+[DIRECTLY FROM DATA]
+
+The experiment was completed successfully.
+
+The exact previously validated burning-number algorithm was used without changing its mathematical definition or search logic.
+
+No enumeration of all 16-vertex trees was performed.
+
+The subdivision vectors were enumerated up to permutation of the nine symmetric leaves, i.e. as integer partitions of 6 into at most 9 nonnegative parts.
+
+There are exactly 11 such patterns.
+
+All 11 resulting trees have:
+
+$$
+|V(T)|=16,
+\qquad
+|E(T)|=15,
+\qquad
+b(H)=2.
+$$
+
+---
+
+## 1. Complete results for all 11 subdivision patterns
+
+### [DIRECTLY FROM DATA]
+
+| Subdivision vector | \(|V(T)|\) | Degree sequence of \(T\) | Diameter | Radius | \(b(T)\) | \(b(H)\) | \(\Delta_b\) |
+|---|---:|---|---:|---:|---:|---:|---:|
+| \((6,0,0,0,0,0,0,0,0)\) | 16 | \((9,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1)\) | 8 | 4 | 3 | 2 | 1 |
+| \((5,1,0,0,0,0,0,0,0)\) | 16 | \((9,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1)\) | 8 | 4 | 3 | 2 | 1 |
+| \((4,2,0,0,0,0,0,0,0)\) | 16 | \((9,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1)\) | 8 | 4 | 3 | 2 | 1 |
+| \((4,1,1,0,0,0,0,0,0)\) | 16 | \((9,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1)\) | 7 | 4 | 3 | 2 | 1 |
+| \((3,3,0,0,0,0,0,0,0)\) | 16 | \((9,2,2,2,2,2,2,1,1,1,1,1,1,1,1)\) | 8 | 4 | 3 | 2 | 1 |
+| \((3,2,1,0,0,0,0,0,0)\) | 16 | \((9,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1)\) | 7 | 4 | 3 | 2 | 1 |
+| \((3,1,1,1,0,0,0,0,0)\) | 16 | \((9,2,2,2,2,2,2,1,1,1,1,1,1,1,1)\) | 6 | 3 | 3 | 2 | 1 |
+| \((2,2,2,0,0,0,0,0,0)\) | 16 | \((9,2,2,2,2,2,2,1,1,1,1,1,1,1,1)\) | 6 | 3 | **4** | 2 | **2** |
+| \((2,2,1,1,0,0,0,0,0)\) | 16 | \((9,2,2,2,2,2,2,1,1,1,1,1,1,1,1)\) | 6 | 3 | 3 | 2 | 1 |
+| \((2,1,1,1,1,0,0,0,0)\) | 16 | \((9,2,2,2,2,2,2,1,1,1,1,1,1,1,1)\) | 5 | 3 | 3 | 2 | 1 |
+| \((1,1,1,1,1,1,0,0,0)\) | 16 | \((9,2,2,2,2,2,2,1,1,1,1,1,1,1,1)\) | 4 | 2 | 3 | 2 | 1 |
+
+The degree sequence is identical for all 11 patterns because every pattern inserts six degree-2 vertices into the same nine-edge star while leaving the center degree and nine leaf degrees unchanged.
+
+---
+
+## 2. Compact summary sorted by decreasing \(b(T)\)
+
+### [DIRECTLY FROM DATA]
+
+| Subdivision vector      | \(b(T)\) | \(\Delta_b\) | Maximum \(s_i\) | Number of subdivided edges | Diameter | Radius |
+| ----------------------- | -------: | -----------: | --------------: | -------------------------: | -------: | -----: |
+| \((2,2,2,0,0,0,0,0,0)\) |    **4** |        **2** |               2 |                          3 |        6 |      3 |
+| \((6,0,0,0,0,0,0,0,0)\) |        3 |            1 |               6 |                          1 |        8 |      4 |
+| \((5,1,0,0,0,0,0,0,0)\) |        3 |            1 |               5 |                          2 |        8 |      4 |
+| \((4,2,0,0,0,0,0,0,0)\) |        3 |            1 |               4 |                          2 |        8 |      4 |
+| \((4,1,1,0,0,0,0,0,0)\) |        3 |            1 |               4 |                          3 |        7 |      4 |
+| \((3,3,0,0,0,0,0,0,0)\) |        3 |            1 |               3 |                          2 |        8 |      4 |
+| \((3,2,1,0,0,0,0,0,0)\) |        3 |            1 |               3 |                          3 |        7 |      4 |
+| \((3,1,1,1,0,0,0,0,0)\) |        3 |            1 |               3 |                          4 |        6 |      3 |
+| \((2,2,1,1,0,0,0,0,0)\) |        3 |            1 |               2 |                          4 |        6 |      3 |
+| \((2,1,1,1,1,0,0,0,0)\) |        3 |            1 |               2 |                          5 |        5 |      3 |
+| \((1,1,1,1,1,1,0,0,0)\) |        3 |            1 |               1 |                          6 |        4 |      2 |
+
+---
+
+## 3. Which patterns give \(b(T)=4\)?
+
+### [DIRECTLY FROM DATA]
+
+Exactly one pattern:
+
+$$
+\boxed{(2,2,2,0,0,0,0,0,0)}.
+$$
+
+Therefore:
+
+$$
+\boxed{\#\{T:b(T)=4\}=1}.
+$$
+
+---
+
+## 4. Which patterns give \(b(T)=3\)?
+
+### [DIRECTLY FROM DATA]
+
+The remaining ten patterns all give \(b(T)=3\):
+
+$$
+\begin{aligned}
+&(6),\\
+&(5,1),\\
+&(4,2),\\
+&(4,1,1),\\
+&(3,3),\\
+&(3,2,1),\\
+&(3,1,1,1),\\
+&(2,2,1,1),\\
+&(2,1,1,1,1),\\
+&(1,1,1,1,1,1).
+\end{aligned}
+$$
+
+Equivalently,
+
+$$
+\boxed{\#\{T:b(T)=3\}=10}.
+$$
+
+---
+
+## 5. Are any patterns giving \(b(T)\ge5\)?
+
+### [DIRECTLY FROM DATA]
+
+No.
+
+$$
+\boxed{\#\{T:b(T)\ge5\}=0}.
+$$
+
+The maximum observed burning number in this focused experiment is:
+
+$$
+\boxed{4}.
+$$
+
+---
+
+## 6. Is \((2,2,2,0,\ldots,0)\) unique in producing \(\Delta_b=2\)?
+
+### [DIRECTLY FROM DATA]
+
+Yes.
+
+Exactly one pattern has
+
+$$
+\Delta_b=2:
+$$
+
+$$
+\boxed{(2,2,2,0,0,0,0,0,0)}.
+$$
+
+The other ten patterns all have
+
+$$
+\Delta_b=1.
+$$
+
+Thus:
+
+$$
+\boxed{\#\{\Delta_b=2\}=1}.
+$$
+
+---
+
+## 7. Does concentration of subdivision vertices correlate with larger \(b(T)\)?
+
+### [DIRECTLY FROM DATA]
+
+There is no simple monotone relationship in these 11 cases.
+
+Using the maximum subdivision length \(\max_i s_i\):
+
+| \(\max_i s_i\) | Patterns | \(b(T)\) values |
+| -------------: | -------: | --------------- |
+|              1 |        1 | 3               |
+|              2 |        3 | 3, 3, **4**     |
+|              3 |        3 | 3, 3, 3         |
+|              4 |        2 | 3, 3            |
+|              5 |        1 | 3               |
+|              6 |        1 | 3               |
+
+In particular:
+
+* the most concentrated pattern \((6,0,\ldots,0)\) has \(b(T)=3\);
+* \((5,1,0,\ldots,0)\) has \(b(T)=3\);
+* \((4,2,0,\ldots,0)\) has \(b(T)=3\);
+* the unique \(b(T)=4\) case has only \(\max_i s_i=2\).
+
+So, for this finite \(K_{1,9}\), \(\sum s_i=6\) experiment:
+
+$$
+\boxed{\text{maximum subdivision length alone does not determine }b(T).}
+$$
+
+### [STRUCTURAL HYPOTHESIS]
+
+The exceptional behavior appears to depend on the distribution of subdivision mass across several branches rather than simply on making one branch very long.
+
+This is only a hypothesis suggested by the finite data.
+
+---
+
+## 8. Does the number of subdivided edges matter?
+
+### [DIRECTLY FROM DATA]
+
+The number of subdivided edges is not sufficient by itself to determine \(b(T)\).
+
+| Number of subdivided edges | Patterns | \(b(T)\) values |
+| -------------------------: | -------: | --------------- |
+|                          1 |        1 | 3               |
+|                          2 |        3 | 3               |
+|                          3 |        3 | 3, 3, **4**     |
+|                          4 |        2 | 3               |
+|                          5 |        1 | 3               |
+|                          6 |        1 | 3               |
+
+The unique \(b(T)=4\) pattern has exactly 3 subdivided edges, but two other patterns with exactly 3 subdivided edges have \(b(T)=3\):
+
+$$
+(4,1,1),
+\qquad
+(3,2,1).
+$$
+
+Therefore:
+
+$$
+\boxed{\text{number of subdivided edges alone is not enough}.}
+$$
+
+### [STRUCTURAL HYPOTHESIS]
+
+The precise sizes of the subdivisions, together with their distribution over the branches, appear more relevant than the number of affected edges alone.
+
+This has not been established beyond these 11 cases.
+
+---
+
+## 9. Does the maximum subdivision length matter?
+
+### [DIRECTLY FROM DATA]
+
+Again, not by itself.
+
+The largest possible value in this experiment is:
+
+$$
+\max_i s_i=6,
+$$
+
+but
+
+$$
+b(T)=3.
+$$
+
+The unique \(b(T)=4\) case has:
+
+$$
+\max_i s_i=2.
+$$
+
+Therefore:
+
+$$
+\boxed{\text{larger maximum subdivision length does not imply larger }b(T)\text{ in this experiment}.}
+$$
+
+There is also no monotone progression:
+
+$$
+6\to3,\quad5\to3,\quad4\to3,\quad3\to3,\quad2\to\{3,4\},\quad1\to3.
+$$
+
+---
+
+## 10. Simple computed comparison of the exceptional pattern
+
+### [SIMPLE COMPUTATION]
+
+For the unique exceptional pattern
+
+$$
+(2,2,2,0,0,0,0,0,0),
+$$
+
+we have:
+
+$$
+|V(T)|=16,
+$$
+
+$$
+\deg(T)
+=
+(9,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1),
+$$
+
+$$
+\operatorname{diam}(T)=6,
+\qquad
+\operatorname{rad}(T)=3,
+$$
+
+$$
+b(T)=4,
+\qquad
+b(H)=2,
+\qquad
+\Delta_b=2.
+$$
+
+For \(H=K_{1,9}\):
+
+$$
+\operatorname{diam}(H)=2,
+\qquad
+\operatorname{rad}(H)=1.
+$$
+
+So the subdivision changes the diameter and radius from
+
+$$
+(2,1)
+$$
+
+to
+
+$$
+(6,3),
+$$
+
+while the burning number changes from
+
+$$
+2
+$$
+
+to
+
+$$
+4.
+$$
+
+---
+
+## 11. Overall empirical classification
+
+### [DIRECTLY FROM DATA]
+
+The complete 11-pattern distribution is:
+
+$$
+\boxed{
+10\text{ patterns with }b(T)=3,
+\quad
+1\text{ pattern with }b(T)=4,
+\quad
+0\text{ patterns with }b(T)\ge5.
+}
+$$
+
+And:
+
+$$
+\boxed{
+10\text{ patterns with }\Delta_b=1,
+\quad
+1\text{ pattern with }\Delta_b=2.
+}
+$$
+
+The unique \(\Delta_b=2\) pattern is exactly:
+
+$$
+\boxed{(2,2,2,0,0,0,0,0,0)}.
+$$
+
+---
+
+## 12. Most interesting empirical observation
+
+### [DIRECTLY FROM DATA]
+
+The most striking result is that the previously identified exceptional pattern is **not** the most concentrated subdivision pattern.
+
+The extremal concentration
+
+$$
+(6,0,0,0,0,0,0,0,0)
+$$
+
+produces
+
+$$
+b(T)=3,
+$$
+
+whereas the much more balanced pattern
+
+$$
+(2,2,2,0,0,0,0,0,0)
+$$
+
+is the unique one producing
+
+$$
+b(T)=4.
+$$
+
+Thus the exceptional \(\Delta_b=2\) behavior occurs at an intermediate subdivision profile rather than at maximum concentration.
+
+### [STRUCTURAL HYPOTHESIS]
+
+This suggests that, for this star core, the interaction among several moderately elongated branches may be more important than simply creating one extremely long branch.
+
+This is an empirical hypothesis only.
+
+---
+
+## 13. Recommended next computational test
+
+### [STRUCTURAL HYPOTHESIS]
+
+The single most useful next test is to keep the same core \(K_{1,9}\) but vary the total subdivision sum:
+
+$$
+\sum_i s_i = 0,1,2,\ldots
+$$
+
+and enumerate all integer partitions for each total.
+
+The immediate priority should be a focused scan of
+
+$$
+\boxed{\sum_i s_i=0,1,2,\ldots,10}
+$$
+
+or, at minimum, sums around 6.
+
+The purpose would be to determine whether the isolated pattern
+
+$$
+(2,2,2)
+$$
+
+is a one-off phenomenon at total subdivision 6 or part of a broader family of balanced multi-branch subdivision patterns.
+
+### [NOT EXECUTED]
+
+No such additional experiment was performed in this run.
+
+---
+
+## 14. Files generated
+
+### [DIRECTLY FROM DATA]
+
+Complete machine-readable results:
+
+`k19_star_subdivision_sum6.json`
+
+File size:
+
+$$
+\boxed{38,188\text{ bytes}}
+$$
+
+Complete human-readable report:
+
+`k19_star_subdivision_sum6_report.txt`
+
+File size:
+
+$$
+\boxed{4,999\text{ bytes}}
+$$
+
+## 15. Execution record
+
+### [DIRECTLY FROM DATA]
+
+* Python: **3.13.5**
+* NetworkX: **3.6.1**
+* Platform: **Linux 6.18.44-x86_64-with-glibc2.41**
+* Start (UTC): **2026-10-08T07:52:21.702989+00:00**
+* End (UTC): **2026-10-08T07:52:21.702989+00:00** through completion recorded by the run at approximately **07:52:21–07:52:22 UTC**
+* Number of partitions tested: **11**
+* Successful completion: **YES**
+
+No expected pattern was absent: all 11 requested partitions were present and evaluated.
+
+---
+
+## Final computational conclusion
+
+### [DIRECTLY FROM DATA]
+
+For the complete set of subdivision vectors of 6 over the nine symmetric edges of \(K_{1,9}\):
+
+$$
+\boxed{
+\begin{array}{c|c}
+b(T)&\text{number of patterns}\\
+\hline
+3&10\\
+4&1\\
+\ge5&0
+\end{array}}
+$$
+
+The unique \(\Delta_b=2\) case is:
+
+$$
+\boxed{(2,2,2,0,0,0,0,0,0)}.
+$$
+
+No other partition of 6 produces \(\Delta_b=2\).
+
+### [NOT EXECUTED]
+
+No conclusion beyond this finite \(K_{1,9}\), \(\sum s_i=6\) experiment has been computationally established here.
+
+[Download the complete machine-readable results](sandbox:/mnt/data/k19_star_subdivision_sum6.json)
+
+[Download the human-readable report](sandbox:/mnt/data/k19_star_subdivision_sum6_report.txt)
