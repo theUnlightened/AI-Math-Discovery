@@ -1,0 +1,432 @@
+You are acting ONLY as a computational runner and structural data analyst.
+
+Do not act as a mathematical research editor.
+Do not discuss novelty or literature.
+Do not attempt to prove the conjecture.
+Do not modify the validated exact burning-number algorithm.
+
+The purpose of this experiment is NOT to search blindly for more counterexamples.
+
+The purpose is to extract structural patterns from the already completed exact computations for n <= 19.
+
+# Research Problem
+
+For a tree T on n vertices, define
+
+$$
+q=\lceil\sqrt n\rceil
+$$
+
+and let n2(T) be the number of degree-2 vertices.
+
+The target statement is
+
+$$
+n_2(T)\le2q-2
+\quad\Longrightarrow\quad
+b(T)\le q.
+$$
+
+Its contrapositive is
+
+$$
+b(T)\ge q+1
+\quad\Longrightarrow\quad
+n_2(T)\ge2q-1.
+$$
+
+We now want to understand the STRUCTURAL reason that the number
+
+$$
+2q-1
+$$
+
+might arise.
+
+# Existing Exact Computations
+
+The exact burning-number algorithm has already been validated.
+
+Complete exhaustive computations are available for:
+
+$$
+5\le n\le19.
+$$
+
+In particular:
+
+* all non-isomorphic trees for each n were generated;
+* trees satisfying the relevant n2 boundary were exactly evaluated;
+* no counterexample was found through n=19.
+
+Do NOT rerun the full n<=19 exhaustive search unless necessary to recover missing data.
+
+Use existing saved data whenever possible.
+
+# Main Objective
+
+Compare two populations:
+
+## Population A — Boundary trees
+
+For each n, let
+
+$$
+q=\lceil\sqrt n\rceil.
+$$
+
+Collect trees satisfying
+
+$$
+n_2(T)\le2q-2
+$$
+
+with the largest possible burning number, especially trees with
+
+$$
+b(T)=q.
+$$
+
+These are the trees that come closest to violating the conjecture while still satisfying the degree-2 boundary.
+
+## Population B — Burning obstructions
+
+Collect trees with
+
+$$
+b(T)\ge q+1,
+$$
+
+even if they have many more than \(2q-2\) degree-2 vertices.
+
+These are the actual burning obstructions.
+
+The purpose is to compare their structures.
+
+# For Every Selected Tree, Compute
+
+At minimum:
+
+1. n
+2. q
+3. b(T)
+4. n2
+5. degree sequence
+6. number of leaves
+7. maximum degree
+8. number of vertices of degree >= 3
+9. diameter
+10. radius
+11. center size
+12. maximal degree-2 path lengths
+13. sorted list of maximal degree-2 path lengths
+14. number of maximal degree-2 paths
+15. longest degree-2 path
+16. number of leaves at each branching vertex, when naturally definable
+
+Also record the graph in a reproducible representation, preferably graph6 or an edge list.
+
+# Critical Derived Quantities
+
+For every tree compute:
+
+$$
+\Delta_{n_2}
+=
+n_2-(2q-2).
+$$
+
+Also compute:
+
+$$
+E(T)=n_2-(2q-1)
+$$
+
+for obstruction trees.
+
+For trees with b(T) >= q+1, pay particular attention to the quantity
+
+$$
+n_2-(2q-1).
+$$
+
+We want to know whether the smallest observed values cluster tightly around zero or are much larger.
+
+# Most Important Analysis
+
+For each q value occurring in the data, determine:
+
+$$
+m_q=
+\min\{n_2(T):b(T)\ge q+1\}.
+$$
+
+Do NOT treat q as an independent parameter.
+
+Always use
+
+$$
+q=\lceil\sqrt n\rceil
+$$
+
+for the actual order n.
+
+Report:
+
+|  q | n range | minimum n2 among b>=q+1 | 2q-1 | gap |
+| -: | ------- | ----------------------: | ---: | --: |
+
+If no obstruction occurs in the available n range for a particular q, report that explicitly.
+
+# Boundary Extremes
+
+For each n, find:
+
+### A. Maximum burning number inside the conjectured region
+
+$$
+B_{\mathrm{boundary}}(n)
+=
+\max\{b(T):n_2(T)\le2q-2\}.
+$$
+
+### B. Minimum n2 among actual obstructions
+
+$$
+M_{\mathrm{obstruction}}(n)
+=
+\min\{n_2(T):b(T)\ge q+1\}.
+$$
+
+Report both whenever data exist.
+
+This comparison is more important than raw frequency counts.
+
+# Structural Comparison
+
+Compare Population A and Population B.
+
+Look for empirical differences in:
+
+* diameter;
+* radius;
+* leaf count;
+* maximum degree;
+* number of branching vertices;
+* degree sequence;
+* longest degree-2 chain;
+* number of degree-2 chains;
+* distribution of degree-2 vertices among paths;
+* balanced versus unbalanced arms;
+* spider-like versus highly branched structure.
+
+Do NOT assume that a correlation is a theorem.
+
+The output should be descriptive.
+
+# Special Attention: Degree-2 Path Decomposition
+
+For every tree, suppress all degree-2 vertices and obtain the underlying topological core.
+
+Record:
+
+* number of core vertices;
+* degree sequence of the core;
+* number of core edges;
+* subdivision length assigned to each core edge.
+
+Represent a tree schematically as:
+
+$$
+(H;\,s_1,s_2,\ldots,s_m),
+$$
+
+where H is the degree-not-2 core and \(s_i\) is the number of degree-2 vertices subdividing core edge i.
+
+This is especially important because previous experiments found high-burning examples among subdivided stars.
+
+# Known Reference Family
+
+A previously observed family is:
+
+$$
+T_r:
+$$
+
+a star with \(r-1\) arms of actual length \(r-1\), and the remaining \(10-r\) arms of actual length 1.
+
+For this family:
+
+$$
+n(T_r)=r^2-3r+12,
+$$
+
+$$
+n_2(T_r)=(r-1)(r-2),
+$$
+
+and computational experiments found
+
+$$
+b(T_r)=r
+$$
+
+for the tested values.
+
+Use this family ONLY as a structural reference.
+
+Do not assume it characterizes all obstructions.
+
+# Important Questions to Test Computationally
+
+Do NOT answer these theoretically. Only test them against the data.
+
+### Question 1
+
+Among trees with the same n and similar n2, does larger diameter correlate with larger b(T)?
+
+### Question 2
+
+Among trees with the same n2, does concentrating degree-2 vertices into a few long paths tend to increase b(T)?
+
+### Question 3
+
+Do actual obstructions tend to have few branching vertices?
+
+### Question 4
+
+Do actual obstructions tend to have multiple balanced long arms?
+
+### Question 5
+
+For obstruction trees, does the minimum observed n2 appear close to
+
+$$
+2q-1?
+$$
+
+### Question 6
+
+Can the degree-2 vertices of an obstruction be organized into a small number of long paths whose total length is forced to be at least \(2q-1\)?
+
+Do NOT attempt to prove Question 6.
+
+Only report whether the computational data suggest such a pattern.
+
+# Minimal / Extremal Examples
+
+For every q for which obstruction trees exist, report the 5–10 trees with the smallest n2 among
+
+$$
+b(T)\ge q+1.
+$$
+
+For each one, report:
+
+```text
+n
+q
+b
+n2
+degree sequence
+diameter
+radius
+core degree sequence
+core edge count
+subdivision lengths
+```
+
+Also report the 5–10 most extreme boundary trees satisfying
+
+$$
+n_2\le2q-2
+$$
+
+and maximizing b(T).
+
+# Important Negative Result
+
+If every boundary tree satisfies
+
+$$
+b(T)\le q,
+$$
+
+do NOT interpret this as a proof.
+
+The purpose is to identify structural patterns that might explain the result.
+
+# Output Format
+
+## 1. Data Availability
+
+List exactly which n values and which tree records were available.
+
+## 2. Extremal Burning Data
+
+For every n:
+
+|  n |  q | max b under n2<=2q-2 | number attaining max |
+| -: | -: | -------------------: | -------------------: |
+
+## 3. Obstruction Data
+
+For every q:
+
+|  q | n range | min n2 with b>=q+1 | 2q-1 | gap |
+| -: | ------- | -----------------: | ---: | --: |
+
+## 4. Boundary Examples
+
+List representative extremal trees.
+
+## 5. Obstruction Examples
+
+List the trees with smallest n2 among actual obstructions.
+
+## 6. Structural Comparison
+
+Summarize observed differences between boundary trees and obstruction trees.
+
+## 7. Core/Subdivision Analysis
+
+Report the most common and most extreme core structures.
+
+## 8. Candidate Structural Pattern
+
+Give ONLY computational observations.
+
+For example:
+
+```text
+Observed pattern:
+All sampled obstruction trees with b>=q+1 had ...
+```
+
+Do not formulate a theorem unless it is explicitly presented as an empirical hypothesis.
+
+## 9. Reproducibility
+
+Report:
+
+* Python version
+* NetworkX version
+* source data used
+* exact algorithm version
+* runtime
+* output file names
+
+# Final Restriction
+
+Do NOT:
+
+* prove the conjecture;
+* claim novelty;
+* search literature;
+* redesign the burning-number algorithm;
+* invent a theorem;
+* treat correlations as proofs;
+* treat the T_r family as universal;
+* rerun expensive computations unnecessarily.
+
+This is a structural data-mining experiment based on the already validated exact computations.
