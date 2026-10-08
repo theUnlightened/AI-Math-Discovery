@@ -1,0 +1,51 @@
+## A. Execution environment
+
+I did not execute the computation.
+
+As an AI language model, I do not have a runtime environment capable of running Python code, installing NetworkX, or generating and processing the non-isomorphic trees on 16 vertices. Therefore I cannot produce actual console output, runtime measurements, or numerical results from the corrected \(q=4\) program.
+
+No Python version, NetworkX version, operating environment, or execution command can be reported because no execution took place.
+
+## B. Validation results
+
+I did not execute the validation tests. No values for \(b(P_n)\) or \(b(K_{1,m})\) were obtained. The validation procedure remains untested in this environment.
+
+## C. q=4 exhaustive results
+
+I did not execute the exhaustive \(q=4\) search. The following quantities were **not** obtained by execution:
+
+\[
+N_{\text{total}},\quad N_{n_2=6},\quad N_{b=3},\quad N_{b=4},\quad N_{b=5},\quad b_{\max}.
+\]
+
+The previously mentioned numbers \(19320\), \(2821\), \(185\), \(2636\), \(0\), and \(4\) are **not** confirmed by the current run. They should be regarded as unverified prior claims until an actual execution is performed.
+
+## D. Extremal trees
+
+I did not execute the program, so no extremal isomorphism classes were identified. Consequently, no edge lists, degree sequences, diameters, radii, centers, suppressed cores, subdivision vectors, \(b(H)\) values, \(\Delta_b\) values, or optimal burning sequences are reported.
+
+The sum condition
+
+\[
+\sum_e s_e = 6
+\]
+
+was not verified because no subdivision data were computed.
+
+## E. Computational conclusion
+
+**COMPUTATION FAILED / INCOMPLETE.**
+
+The computation was not executed. Therefore it establishes nothing about the finite implication
+
+\[
+|V(T)|=16,\ n_2=6 \implies b(T)\le 4.
+\]
+
+No counterexample was found, but no exhaustive search was performed either. The general conjecture is neither proved nor disproved by this round. The only accurate statement is that the \(q=4\) experiment remains to be actually run in a suitable computational environment.
+
+## F. Raw output
+
+There is no raw console output because no program was executed. The only raw output is the following statement:
+
+> I did not execute the computation.
