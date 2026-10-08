@@ -1,0 +1,158 @@
+The requested computational search is complete.
+
+### Search integrity
+
+* Exact previously validated burning-number algorithm: **unchanged**
+* Burning-number definition: **unchanged**
+* All-tree enumeration: **none beyond \(n\le16\)**
+* Arbitrary partition scans: **none**
+* Machine learning: **none**
+
+A validation run of the path and star tests passed before the search.
+
+## Main results
+
+[DIRECTLY FROM DATA]
+
+The completed exhaustive search covered **all 32,508 non-isomorphic trees with \(1\le n\le16\)**.
+
+| \(q\) | target \(2q-1\) | exhaustive max \(n\) | trees examined | obstruction trees in exhaustive range | minimum \(n_2\) in exhaustive range | best observed \(n_2\) including targeted witness |
+| ----: | --------------: | -------------------: | -------------: | ------------------------------------: | ----------------------------------: | -----------------------------------------------: |
+|     3 |               5 |                   16 |         32,508 |                            **21,825** |                               **0** |                                            **0** |
+|     4 |               7 |                   16 |         32,508 |                                 **0** |                                none |                                           **12** |
+|     5 |               9 |                   16 |         32,508 |                                 **0** |                                none |                                           **20** |
+|     6 |              11 |                   16 |         32,508 |                                 **0** |                                none |                                           **30** |
+
+### q = 3
+
+[DIRECTLY FROM DATA]
+
+The minimum observed value is
+
+$$
+\boxed{n_2=0},
+$$
+
+with
+
+$$
+b(T)\ge4.
+$$
+
+There are **69 non-isomorphic extremal trees** in the exhaustive \(n\le16\) search having
+
+$$
+b(T)\ge4,\qquad n_2=0.
+$$
+
+The smallest such trees have \(n=14\).
+
+This is therefore flagged as:
+
+**POTENTIAL COUNTEREXAMPLE TO THE TARGET IMPLICATION**
+
+because
+
+$$
+0<2q-1=5.
+$$
+
+All 69 extremal examples, including degree sequence, leaves, maximum degree, diameter, radius, spider flag, graph6 code, and edge list, are contained in the machine-readable results.
+
+### q = 4
+
+[DIRECTLY FROM DATA]
+
+No tree with
+
+$$
+b(T)\ge5
+$$
+
+occurred among **all 32,508 trees with \(n\le16\)**.
+
+A targeted exact witness was also computed:
+
+$$
+(3,3,3,3,0,\ldots,0),
+$$
+
+with
+
+$$
+n=22,\qquad n_2=12,\qquad b(T)=5.
+$$
+
+Thus the smallest **observed** \(n_2\) in the completed search set is 12, but **12 is not an exhaustive minimum over all tree orders**.
+
+### q = 5
+
+[DIRECTLY FROM DATA]
+
+No tree with
+
+$$
+b(T)\ge6
+$$
+
+occurred in the exhaustive \(n\le16\) search.
+
+A targeted exact witness was computed with
+
+$$
+(4,4,4,4,4,0,0,0,0),
+$$
+
+giving
+
+$$
+n=30,\qquad n_2=20,\qquad b(T)=6.
+$$
+
+So the smallest **observed** value is 20, without claiming it is globally minimal.
+
+### q = 6
+
+[DIRECTLY FROM DATA]
+
+No tree with
+
+$$
+b(T)\ge7
+$$
+
+occurred in the exhaustive \(n\le16\) search.
+
+A targeted exact witness was computed with
+
+$$
+(5,5,5,5,5,5,0,0,0),
+$$
+
+giving
+
+$$
+n=40,\qquad n_2=30,\qquad b(T)=7.
+$$
+
+Again, 30 is an observed value, not an exhaustive global minimum.
+
+## Important limitation
+
+[DIRECTLY FROM DATA]
+
+The **completed exhaustive range is \(n\le16\)**.
+
+An attempted q=4 extension to \(n=17,18\) did not finish and contributed no results, so those orders are not counted in the reported search.
+
+For q=4,5,6, the values 12,20,30 come from exact targeted witnesses beyond the exhaustive range, not from exhaustive minimization over all trees.
+
+## Files
+
+[Download minimum_n2_obstruction_search.json](sandbox:/mnt/data/minimum_n2_obstruction_search.json)
+
+[Download minimum_n2_obstruction_search_report.txt](sandbox:/mnt/data/minimum_n2_obstruction_search_report.txt)
+
+The JSON contains **all 69 q=3 extremal trees** and the full search metadata.
+
+**Execution status: COMPLETED**
