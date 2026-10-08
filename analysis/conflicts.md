@@ -146,3 +146,73 @@ adversarial mathematical reviewer.
 
 The reviewer should attempt to disprove the conclusions,
 find hidden errors, and identify prior work that was missed.
+
+
+## Final Audit — GPT
+
+Date: 2026-10-08
+
+The GPT final audit identified several important errors shared by
+the DeepSeek and Gemini reports.
+
+### Major corrections
+
+1. Yellowstone permutation
+   - DeepSeek and Gemini incorrectly treated surjectivity as open.
+   - The 2015 Applegate et al. paper proves that every positive integer
+     occurs.
+   - Therefore the permutation/surjectivity question is solved.
+
+2. Proper divisor sum square
+   - For every prime p, sigma(p)-p = 1 = 1^2.
+   - Hence infinitely many solutions exist trivially.
+
+3. Practical numbers
+   - Melfi's relevant paper was published in 1996, not 2005.
+   - The stated Goldbach-type result is already proved.
+
+4. tau(n) = tau(n+1)
+   - Heath-Brown proved infinitely many solutions in 1984.
+   - Later quantitative improvements exist.
+
+5. Maximum Sidon sets
+   - Maximum and maximal Sidon sets must be distinguished.
+   - OEIS A382395 directly studies the number M(n) of maximum-sized
+     Sidon subsets of [n].
+   - Therefore the claim that M(n) is essentially unstudied is outdated.
+
+6. Burning Number
+   - The BNC remains open.
+   - However, several recent results substantially shrink the unresolved
+     region.
+   - In particular, a 2026 preprint claims the conjecture for trees with
+     n_2 <= 2 ceil(sqrt(n)) - 3 degree-2 vertices.
+
+### Current candidate directions
+
+1. Burning Number:
+   n_2 = 2 ceil(sqrt(n)) - 2
+
+2. Burning Number:
+   threshold function kappa(n)
+
+3. Burning Number:
+   fixed-diameter extremal function B(d)
+
+4. Sidon:
+   M(q^2 + q + 1) along Singer lengths
+
+5. Van Eck:
+   first-occurrence function t(m)
+
+### Epistemic status
+
+No candidate is currently classified as a "new open problem".
+
+The strongest candidates are classified as:
+
+- potentially underexplored
+- apparently unresolved
+- novelty requires expert verification
+
+Primary-source verification is required before making any novelty claim.
