@@ -1,0 +1,83 @@
+Use the same validated burning-number algorithm and the same burning-number definition as in all previous experiments.
+
+Do NOT modify the burning-number algorithm.
+
+Do NOT perform all-tree enumeration.
+
+Do NOT scan arbitrary partitions.
+
+The previous run correctly stopped because the vertex-count validation formula was wrong. Correct that formula only.
+
+Define T_r as follows:
+
+* Start with K_{1,9}.
+* Subdivide exactly r-1 of its nine arms so that each selected arm has actual length r-1.
+* The remaining 10-r arms have actual length 1.
+
+Thus, for r = 6,7,8,9,10,
+
+n = 1 + (r-1)(r-1) + (10-r)
+= 10 + (r-1)(r-2)
+= r^2 - 3r + 12,
+
+and
+
+n_2 = (r-1)(r-2).
+
+These formulas are the correct validation formulas.
+
+Run ONLY:
+
+r = 6,7,8,9,10.
+
+Before computing any burning number, validate for each r:
+
+1. Number of vertices:
+   n = 10 + (r-1)(r-2)
+
+2. Number of degree-2 vertices:
+   n_2 = (r-1)(r-2)
+
+3. Diameter:
+   diam(T_r) = 2(r-1)
+
+4. Radius:
+   radius(T_r) = r-1
+
+If ANY validation fails, stop immediately and report the exact failure. Do not compute burning numbers for that failed r or later values.
+
+If all validation passes, compute the exact burning number using the SAME validated algorithm.
+
+For each r report:
+
+* r
+* n
+* n_2
+* diameter
+* radius
+* exact b(T_r)
+* whether b(T_r) = r
+* one shortest burning sequence, if the algorithm records one
+* maximum number of covered vertices after exactly r-1 rounds
+* number of maximal-coverage states after r-1 rounds
+
+The main question is ONLY:
+
+```
+Does b(T_r) = r for every r = 6,7,8,9,10?
+```
+
+Do not attempt to prove the general statement.
+
+Do not modify the tree construction.
+
+Do not perform arbitrary partition searches.
+
+Do not discuss novelty or literature.
+
+Save the results as:
+
+k19_critical_spider_family_corrected.json
+k19_critical_spider_family_corrected_report.txt
+
+Return the actual computational results only.
