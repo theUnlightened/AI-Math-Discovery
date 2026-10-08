@@ -1,0 +1,90 @@
+Your previous audit contains an important logical overstatement that must now be corrected.
+Do NOT perform a new computational experiment.
+Do NOT move to q=5.
+We need a corrected final audit of the already-executed q=4 experiment.
+
+Issue 1 — Incorrect use of the path graph
+You previously wrote, in effect:
+
+"path graphs maximize graph burning number among all connected graphs of order n, hence no tree on 16 vertices can have burning number 5."
+This is NOT an acceptable justification.
+The statement
+b(G)≤⌈n⌉b(G)\le\lceil\sqrt n\rceil
+for every connected graph G is the Burning Number Conjecture itself, and it must not be assumed.
+Therefore:
+
+DELETE this argument completely.
+Do not use the path graph as an upper bound for arbitrary trees.
+You may still use
+b(Pn)=⌈n⌉b(P_n)=\lceil\sqrt n\rceil
+only as a validation fact for the implementation.
+Issue 2 — Independent execution
+Your previous response used the phrase "independent validation."
+Review exactly what you actually did.
+If you did NOT execute an independent program or independently rerun the supplied program, explicitly state:
+
+"I did not independently execute the computation."
+Then distinguish:
+
+Code audit
+Whether the supplied program is logically correct.
+
+Execution evidence
+The fact that the computational runner reported an actual execution.
+
+Independent computational reproduction
+Whether you personally reran an equivalent computation.
+Do not claim independent computational reproduction unless you actually performed it.
+
+Issue 3 — Reassess the q=4 result
+The computational runner actually reported:
+1932019320
+non-isomorphic 16-vertex trees,
+28212821
+with exactly six degree-2 vertices,
+185185
+with b(T)=3b(T)=3,
+26362636
+with b(T)=4b(T)=4,
+and
+00
+with b(T)=5b(T)=5.
+Assess whether these results are logically sufficient to establish the finite statement
+∣V(T)∣=16, n2=6⟹b(T)≤4\boxed{ |V(T)|=16,\ n_2=6 \Longrightarrow b(T)\le4 }
+PROVIDED that:
+
+the computational runner actually executed the supplied code;
+the code is mathematically correct;
+the enumeration is exhaustive;
+the burning-number algorithm is exact.
+Do not add any unsupported theorem.
+
+Issue 4 — Burning process
+Keep your previous analysis of the transition
+B←B∪N(B)∪{v}B\leftarrow B\cup N(B)\cup\{v\}
+only if it remains correct under the standard graph-burning definition.
+In particular, recognize that a source is allowed to be "redundant": it may be selected when it will also burn by propagation in that round, provided it was not already burning at the end of the previous round.
+Do not incorrectly forbid such sources.
+
+Issue 5 — Final verdict
+Give a revised verdict using exactly one of:
+
+FULLY VERIFIED AS A FINITE COMPUTATIONAL CLAIM
+Meaning:
+the code and enumeration logic are correct, and the reported execution evidence is sufficient to accept the q=4 finite claim, although you did not independently rerun the computation.
+PLAUSIBLE BUT NOT FULLY VERIFIED
+Use this only if an actual mathematical or computational uncertainty remains.
+
+INVALID / REQUIRES RECOMPUTATION
+Use this only if you identify a genuine flaw in the code or exhaustive-search logic.
+Do NOT downgrade the result merely because you did not personally execute it.
+
+Required final structure
+A. Correction of previous audit
+B. Burning-number algorithm verdict
+C. Enumeration verdict
+D. Execution-evidence verdict
+E. q=4 finite mathematical conclusion
+F. Remaining limitations
+G. Exact next action
+The final response must NOT discuss q=5 except in the final "Exact next action" section, where simply state whether q=4 is ready to be archived.
