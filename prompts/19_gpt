@@ -1,0 +1,84 @@
+Continue from the successfully completed q=4 computation.
+
+Do NOT modify the burning-number definition or the previously validated exact burning-number algorithm.
+
+Do NOT enumerate all 16-vertex trees again.
+
+Your only task is to perform a focused structural experiment on the exceptional core identified in the previous analysis:
+
+H = K_{1,9}.
+
+The core has 9 edges incident to one center. Let s_i >= 0 be the subdivision length on the i-th core edge, meaning that s_i degree-2 vertices are inserted on that edge.
+
+Fix
+
+sum_i s_i = 6.
+
+Because all nine leaves of K_{1,9} are symmetric, two subdivision vectors that differ only by permutation of their coordinates represent isomorphic trees. Therefore enumerate only the integer partitions of 6 into at most 9 nonnegative parts, sorted in non-increasing order.
+
+For every distinct partition
+
+(s_1,...,s_9),
+
+construct the corresponding tree T from K_{1,9}, compute the exact burning number b(T), and calculate
+
+Delta_b = b(T) - b(H).
+
+Here b(H)=2.
+
+At minimum, include and explicitly report these patterns:
+
+(6,0,0,0,0,0,0,0,0)
+(5,1,0,0,0,0,0,0,0)
+(4,2,0,0,0,0,0,0,0)
+(4,1,1,0,0,0,0,0,0)
+(3,3,0,0,0,0,0,0,0)
+(3,2,1,0,0,0,0,0,0)
+(3,1,1,1,0,0,0,0,0)
+(2,2,2,0,0,0,0,0,0)
+(2,2,1,1,0,0,0,0,0)
+(2,1,1,1,1,0,0,0,0)
+(1,1,1,1,1,1,0,0,0)
+
+Also enumerate every other partition of 6 into at most 9 parts, so that the experiment is complete.
+
+For each pattern output:
+
+* subdivision vector
+* number of vertices of T
+* degree sequence of T
+* diameter
+* radius
+* b(T)
+* b(H)
+* Delta_b
+
+Then produce a compact summary table sorted by decreasing b(T), and identify:
+
+1. Which subdivision patterns give b(T)=4?
+2. Which give b(T)=3?
+3. Are any patterns giving b(T)>=5?
+4. Is (2,2,2,0,...,0) actually unique in producing Delta_b=2?
+5. Does concentration of subdivision vertices correlate with larger b(T)?
+6. Does the number of subdivided edges matter?
+7. Does the maximum subdivision length matter?
+
+Very important:
+
+* This is a computational experiment, not a proof.
+* Use the exact previously validated burning-number algorithm.
+* Do not claim any general theorem.
+* Do not perform literature review.
+* Do not infer general behavior beyond these K_{1,9}, sum(s_i)=6 cases.
+* Report the actual computed results.
+* If any expected pattern is absent, say so explicitly.
+
+Finally, state the single most interesting empirical observation from this experiment and recommend the next computational test.
+
+If the experiment completes successfully, save the complete machine-readable results as:
+
+k19_star_subdivision_sum6.json
+
+and save a human-readable report as:
+
+k19_star_subdivision_sum6_report.txt
