@@ -1,0 +1,89 @@
+## Execution status: FAILED — validation stopped as instructed
+
+I did **not** proceed to the \(b(T_r)\) computations because the requested pre-validation failed.
+
+The burning-number algorithm was **not modified**, and no all-tree enumeration was performed.
+
+### Exact validation failure
+
+For \(r=6\), the specified construction is:
+
+* \(r-1=5\) long arms, each of actual length \(r-1=5\);
+* the remaining \(9-5=4\) arms have length 1.
+
+Therefore the constructed tree has
+
+$$
+|V(T_6)|
+=
+1+5\cdot5+4\cdot1
+=
+30,
+$$
+
+and
+
+$$
+n_2=5(5-1)=20.
+$$
+
+The program obtained:
+
+```text
+r=6: n=30, n2=20, diam=10, radius=5
+VALIDATION FAILURE: formula mismatch
+```
+
+But the requested formula was
+
+$$
+n=(r-1)^2+7,
+$$
+
+which gives
+
+$$
+(6-1)^2+7=25+7=32.
+$$
+
+So the requested vertex-count formula is inconsistent with the stated construction.
+
+### The correct formula implied by the construction
+
+For \(T_r\), there are \(r-1\) arms of length \(r-1\) and \(10-r\) arms of length 1. Hence
+
+$$
+|V(T_r)|
+=
+1+(r-1)^2+(10-r)
+=
+10+(r-1)(r-2).
+$$
+
+Thus
+
+$$
+\boxed{|V(T_r)|=r^2-3r+12}
+$$
+
+and
+
+$$
+\boxed{n_2=(r-1)(r-2)}.
+$$
+
+The second requested formula is consistent; the first is not.
+
+For example:
+
+$$
+r=5:\quad |V(T_5)|=22,
+$$
+
+whereas \((r-1)^2+7=23\).
+
+Therefore I correctly **stopped before computing any burning numbers**, as your validation instructions required.
+
+No `k19_critical_spider_family.json` or `k19_critical_spider_family_report.txt` was generated, because the experiment was required to stop on validation failure.
+
+**COMPLETED AS A VALIDATION-FAILURE RUN**
