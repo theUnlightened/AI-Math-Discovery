@@ -1,0 +1,275 @@
+You are acting ONLY as a computational runner.
+
+Do not act as a mathematical research editor.
+Do not redesign the research problem.
+Do not discuss novelty or literature.
+Do not attempt to prove the conjecture.
+
+Your ONLY task is to execute the requested computational experiment and return the actual computational results.
+
+## Research Question
+
+For a tree T on n vertices, let n2(T) denote the number of degree-2 vertices, and let b(T) denote the exact burning number.
+
+We are investigating the conditional statement
+
+```
+n2(T) <= 2 ceil(sqrt(n)) - 2
+    implies
+b(T) <= ceil(sqrt(n)).
+```
+
+A genuine counterexample must satisfy ALL of the following for its own value of n:
+
+```
+q = ceil(sqrt(n))
+
+n2(T) <= 2q - 2
+
+b(T) >= q + 1
+```
+
+Equivalently, search for trees satisfying
+
+```
+n2(T) <= 2 ceil(sqrt(n)) - 2
+```
+
+and
+
+```
+b(T) > ceil(sqrt(n)).
+```
+
+IMPORTANT:
+
+q is NOT an independent parameter.
+
+For every tree, q MUST be computed from its actual order n:
+
+```
+q = ceil(sqrt(n)).
+```
+
+Do NOT classify a tree using a manually chosen q.
+
+## Burning Number Algorithm
+
+Use EXACTLY the same validated burning-number algorithm used in all previous experiments.
+
+DO NOT modify the algorithm.
+
+DO NOT replace it with another implementation.
+
+DO NOT change the burning-number definition.
+
+The burning process is:
+
+```
+B_0 = empty set.
+```
+
+At step t, choose a source vertex v_t not already burned, and update
+
+```
+B_t = B_{t-1} union N(B_{t-1}) union {v_t}.
+```
+
+The burning number b(T) is the minimum number of steps needed to burn all vertices.
+
+Use the same exact memoization/search procedure as in the validated program from the previous experiments.
+
+## Source Selection Rule
+
+Use EXACTLY the same source-selection rule as in the validated program.
+
+Do not introduce arbitrary partition scans.
+
+Do not restrict the source set based on heuristics.
+
+Do not use random sampling unless explicitly requested.
+
+Do not alter the branching rule for performance reasons.
+
+## Main Experiment
+
+Search non-isomorphic trees for increasing orders n.
+
+For each tree T:
+
+1. Compute
+
+   ```
+   q = ceil(sqrt(n)).
+   ```
+
+2. Compute
+
+   ```
+   n2 = number of degree-2 vertices.
+   ```
+
+3. Immediately discard the tree unless
+
+   ```
+   n2 <= 2q - 2.
+   ```
+
+4. Compute the exact burning number b(T).
+
+5. Flag the tree as a COUNTEREXAMPLE if
+
+   ```
+   b(T) >= q + 1.
+   ```
+
+A tree must satisfy both conditions simultaneously to be reported as a counterexample.
+
+## Required Order Range
+
+First run the exhaustive search for all non-isomorphic trees for
+
+```
+n = 17, 18, ..., 20
+```
+
+if these orders are computationally feasible with the exact validated algorithm.
+
+If all four orders finish successfully, continue to higher orders only if the computation remains practical.
+
+Do NOT silently skip an order.
+
+If an order cannot be completed, report exactly where the computation stopped and why.
+
+## For Every n
+
+Report:
+
+```
+n
+q = ceil(sqrt(n))
+total number of non-isomorphic trees
+number satisfying n2 <= 2q - 2
+minimum n2 among any tree with b(T) >= q+1
+number of trees with b(T) >= q+1
+whether a genuine counterexample exists
+```
+
+If no tree has b(T) >= q+1, report:
+
+```
+"No obstruction with b(T) > q was found at this order."
+```
+
+Do NOT treat this as evidence that the minimum n2 is zero or any other numerical value.
+
+## If a Counterexample Is Found
+
+STOP the search immediately after recording the first counterexample, unless the program has already been designed to collect all counterexamples at that order.
+
+For every counterexample report:
+
+```
+n
+q
+n2
+b(T)
+degree sequence
+diameter
+radius
+edge list or graph6 representation
+source-burning sequence achieving b(T), if available
+```
+
+Also explicitly verify:
+
+```
+n2 <= 2q - 2
+```
+
+and
+
+```
+b(T) >= q + 1.
+```
+
+## Important Logical Constraint
+
+Do NOT report a tree merely because
+
+```
+n2 < 2q - 1.
+```
+
+It is a counterexample ONLY if its exact burning number also satisfies
+
+```
+b(T) > q.
+```
+
+For example, a tree with n=14 has
+
+```
+q = ceil(sqrt(14)) = 4,
+```
+
+not q=3.
+
+Therefore a tree with n2=0 and b(T)=4 is NOT a counterexample.
+
+## Validation
+
+Before the main search, run the same validation tests used in the previous experiments.
+
+If any validation test fails:
+
+```
+STOP IMMEDIATELY.
+```
+
+Do not continue to the main experiment.
+
+Report the failed validation exactly.
+
+## No Mathematical Interpretation
+
+Do not claim:
+
+```
+"the conjecture is proved"
+```
+
+or
+
+```
+"the conjecture is disproved"
+```
+
+based on a finite computational search.
+
+Your task is only to report the computational evidence.
+
+Use precise language such as:
+
+```
+"No counterexample was found for n <= 20."
+```
+
+or
+
+```
+"A counterexample was found at n = ..."
+```
+
+## Final Output
+
+Return:
+
+1. Validation results.
+2. Exact computational environment.
+3. A table for every completed n.
+4. Counterexample details, if any.
+5. Total runtime.
+6. Any incomplete computation and the exact point where it stopped.
+
+Do not add mathematical speculation, literature discussion, novelty claims, or proposed proofs.
