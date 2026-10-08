@@ -1,0 +1,247 @@
+## 1. Data Availability
+
+[DIRECTLY FROM DATA]
+
+The available exact data are:
+
+* **Individual tree records:** all non-isomorphic trees for \(n\le16\), totaling 32,508 trees, in `all16_results.json`.
+* **Aggregate exact results:** \(n=17,18\), including the complete \(n_2\)-filtered burning-number distributions.
+* **Complete filtered exact result:** \(n=19\): all 288,198 trees with \(n_2\le8\) were exactly evaluated, with zero \(b\ge6\) obstructions. The saved n=19 result does not retain individual structural records or the full burning-number distribution. 
+
+The earlier fixed-\(q=3\) search was **not** used here as an obstruction population, because this analysis requires \(q=\lceil\sqrt n\rceil\) for each actual \(n\).
+
+---
+
+# 2. Extremal Burning Data
+
+[DIRECTLY FROM DATA]
+
+For the orders with individual records:
+
+| \(n\) | \(q\) | max \(b\) with \(n_2\le2q-2\) | # attaining max |
+| ----: | ----: | ----------------------------: | --------------: |
+|     5 |     3 |                             3 |               1 |
+|     6 |     3 |                             3 |               4 |
+|     7 |     3 |                             3 |               8 |
+|     8 |     3 |                             3 |              20 |
+|     9 |     3 |                             3 |              39 |
+|    10 |     4 |                             4 |               1 |
+|    11 |     4 |                             4 |               6 |
+|    12 |     4 |                             4 |              72 |
+|    13 |     4 |                             4 |             319 |
+|    14 |     4 |                             4 |            1260 |
+|    15 |     4 |                             4 |            3939 |
+|    16 |     4 |                             4 |           11477 |
+|    17 |     5 |                             4 |           38943 |
+|    18 |     5 |                             4 |          104320 |
+|    19 |     5 |                **not stored** |  **not stored** |
+
+For \(n=17,18\), the saved exact distributions give maximum \(b=4\), below \(q=5\). For \(n=19\), the saved completed search establishes no \(b\ge6\), but not the exact maximum among the filtered trees. 
+
+---
+
+# 3. Obstruction Data
+
+[DIRECTLY FROM DATA]
+
+For the actual \(q=\lceil\sqrt n\rceil\):
+
+| \(q\) | \(n\)-range available | min \(n_2\) with \(b\ge q+1\) | \(2q-1\) |       gap |
+| ----: | --------------------- | ----------------------------: | -------: | --------: |
+|     3 | 5–9                   |                      **NONE** |        5 | undefined |
+|     4 | 10–16                 |                      **NONE** |        7 | undefined |
+|     5 | 17–19                 |                      **NONE** |        9 | undefined |
+
+Thus:
+
+$$
+\boxed{\text{Population B is empty for every }q\text{ represented in the available data.}}
+$$
+
+So \(m_q\) is undefined for \(q=3,4,5\).
+
+This is the important distinction from the earlier fixed-\(q=3\) computation: trees at \(n=14,15,16\) with \(b=4\) are **not** \(q=3\) obstructions, because their actual \(q\) is 4.
+
+---
+
+# 4. Boundary Examples
+
+[DIRECTLY FROM DATA]
+
+Here are ten representative boundary extremals from the complete individual \(n\le16\) dataset. Each satisfies
+
+$$
+n_2\le2q-2,\qquad b=q.
+$$
+
+|    | \(n\) | \(q\) | \(n_2\) | \(b\) | diam | rad | core degree sequence | subdivision lengths |
+| -- | ----: | ----: | ------: | ----: | ---: | --: | -------------------- | ------------------- |
+| 1  |    16 |     4 |       6 |     4 |   11 |   6 | \((3,3,3,3,1^6)\)    | \((6,0^8)\)         |
+| 2  |    16 |     4 |       6 |     4 |   11 |   6 | \((3,3,3,3,1^6)\)    | \((6,0^8)\)         |
+| 3  |    16 |     4 |       6 |     4 |   11 |   6 | \((3,3,3,3,1^6)\)    | \((6,0^8)\)         |
+| 4  |    16 |     4 |       6 |     4 |   11 |   6 | \((3,3,3,3,1^6)\)    | \((5,1,0^7)\)       |
+| 5  |    16 |     4 |       6 |     4 |   11 |   6 | \((3,3,3,3,1^6)\)    | \((5,1,0^7)\)       |
+| 6  |    16 |     4 |       6 |     4 |   11 |   6 | \((3,3,3,3,1^6)\)    | \((5,1,0^7)\)       |
+| 7  |    16 |     4 |       6 |     4 |   11 |   6 | \((3,3,3,3,1^6)\)    | \((5,1,0^7)\)       |
+| 8  |    16 |     4 |       6 |     4 |   11 |   6 | \((3,3,3,3,1^6)\)    | \((5,1,0^7)\)       |
+| 9  |    16 |     4 |       6 |     4 |   11 |   6 | \((3,3,3,3,1^6)\)    | \((5,1,0^7)\)       |
+| 10 |    16 |     4 |       6 |     4 |   11 |   6 | \((3,3,3,3,1^6)\)    | \((5,1,0^7)\)       |
+
+The complete graph6 strings and edge lists for all ten are in the generated report.
+
+---
+
+# 5. Obstruction Examples
+
+[DIRECTLY FROM DATA]
+
+There are **no actual-q obstruction trees** in the available \(n\le19\) exact data.
+
+Therefore there are no 5–10 minimum-\(n_2\) obstruction examples to report.
+
+---
+
+# 6. Structural Comparison
+
+Since Population B is empty:
+
+$$
+\boxed{\text{a direct empirical boundary-vs-obstruction comparison is not possible.}}
+$$
+
+### Question 1 — Diameter
+
+[DIRECTLY FROM DATA]
+
+For \(n\le16\), there are 25 same-\((n,n_2)\) boundary groups containing more than one burning number.
+
+Comparing the largest diameter present in the higher-\(b\) and lower-\(b\) classes:
+
+* higher-\(b\) larger: **18**
+* equal: **5**
+* higher-\(b\) smaller: **2**
+
+Thus diameter is descriptively related to some boundary transitions, but is not a complete classifier.
+
+### Question 2 — Concentration of degree-2 vertices
+
+[DIRECTLY FROM DATA]
+
+Within those same 25 mixed \((n,n_2)\) groups, the maximum degree-2 path length in the higher-\(b\) class was:
+
+* larger in **0**
+* equal in **18**
+* smaller in **7**
+
+So a larger single degree-2 path is not systematically associated with the higher boundary burning number.
+
+[STRUCTURAL HYPOTHESIS]
+
+In this finite boundary dataset, distributing degree-2 vertices over several paths may be at least as important as concentrating them into one very long path.
+
+### Question 3 — Few branching vertices
+
+[DIRECTLY FROM DATA]
+
+There are no actual obstruction trees.
+
+**insufficient data.**
+
+### Question 4 — Multiple balanced long arms
+
+[DIRECTLY FROM DATA]
+
+The previously computed \(T_r\) family provides balanced-long-arm examples, but these are not actual-\(q\) obstruction trees in the available data.
+
+**insufficient data for Population B.**
+
+### Question 5 — Minimum obstruction \(n_2\)
+
+[DIRECTLY FROM DATA]
+
+No obstruction exists for \(q=3,4,5\), so no empirical minimum can be formed.
+
+### Question 6 — Degree-2 paths totaling at least \(2q-1\)
+
+**insufficient data**, because there is no obstruction population to analyze.
+
+---
+
+# 7. Core/Subdivision Analysis
+
+[DIRECTLY FROM DATA]
+
+For every individual tree with \(n\le16\), the degree-2 vertices were suppressed and the topological core was recovered.
+
+Among boundary trees with \(b=q\), the most common **core degree-sequence signatures** are:
+
+| Frequency | Core degree sequence |
+| --------: | -------------------- |
+|      1844 | \((4,3,3,3,1^7)\)    |
+|      1117 | \((4,4,3,3,1^8)\)    |
+|       920 | \((3,3,3,3,1^6)\)    |
+|       908 | \((4,3,3,3,3,1^8)\)  |
+|       796 | \((4,4,3,1^6)\)      |
+|       728 | \((5,3,3,1^7)\)      |
+|       701 | \((5,3,3,3,1^8)\)    |
+|       660 | \((5,4,3,1^7)\)      |
+|       571 | \((5,4,3,3,1^9)\)    |
+|       560 | \((3,3,3,3,3,1^7)\)  |
+
+For the particularly important \(n=16,n_2=6,b=4\) slice, the earlier exact profiling found **10 distinct core isomorphism classes** among the 2636 trees. 
+
+The boundary examples include subdivision patterns such as
+
+$$
+(6,0,\ldots,0),
+\quad
+(5,1,0,\ldots,0),
+$$
+
+as well as many more distributed patterns.
+
+[STRUCTURAL HYPOTHESIS]
+
+The boundary population is structurally diverse: high burning number at the boundary is not confined to one particular core or one subdivision pattern.
+
+---
+
+# 8. Candidate Structural Pattern
+
+[DIRECTLY FROM DATA]
+
+The strongest computational observations are:
+
+1. For every \(n=5,\ldots,18\), the boundary maximum is known exactly and never exceeds \(q\).
+2. For \(n=19\), all 288,198 boundary candidates were exactly evaluated and none had \(b\ge6\). 
+3. No actual-\(q\) obstruction tree exists anywhere in the currently available exact dataset.
+4. Therefore there is currently no obstruction population from which to extract a common structural signature.
+
+[STRUCTURAL HYPOTHESIS]
+
+Any structural explanation of the finite boundary behavior will likely need a combination of core structure and degree-2 path distribution rather than a single scalar descriptor.
+
+---
+
+# 9. Reproducibility
+
+[DIRECTLY FROM DATA]
+
+* Source individual dataset: `all16_results.json`
+* Exact aggregate source: `minimum_n2_obstruction_search.json`
+* Exact algorithm: the previously validated recursive memoization/state-search burning-number algorithm
+* Python: **3.13.5**
+* NetworkX: **3.6.1**
+* Platform: **Linux 6.18.44-x86_64-with-glibc2.41**
+* Individual-data source runtime: **26.03 s**
+* n=17 exact runtime: **23.30 s**
+* n=18 exact runtime: **~506.2 s**
+* n=19 exact filtered search: **288,198/288,198**, obstruction count 0. 
+
+Derived outputs:
+
+[Download structural-mining JSON](sandbox:/mnt/data/n2_boundary_obstruction_structural_mining.json)
+
+[Download structural-mining report](sandbox:/mnt/data/n2_boundary_obstruction_structural_mining_report.txt)
+
+**No proof or theorem is claimed.**
