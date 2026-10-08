@@ -1,0 +1,289 @@
+Continue from the already-generated dataset:
+
+```
+k19_star_subdivision_scan_S0_S10.json
+```
+
+Use exactly the same burning-number definition and exactly the same validated burning-number algorithm as in the previous experiments.
+
+Do NOT modify the burning-number definition or algorithm.
+
+Do NOT perform any all-tree enumeration.
+
+Do NOT use machine learning.
+
+Do NOT perform another large-scale, unguided statistic-mining search.
+
+The goal of this round is to identify the structural mechanism behind the first increases of the burning number in the subdivision family of K_{1,9}.
+
+Let
+
+```
+H = K_{1,9}
+```
+
+and let
+
+```
+T_lambda
+```
+
+denote the tree obtained by subdividing the nine edges of H according to a partition
+
+```
+lambda = (s_1,...,s_9),
+```
+
+where s_i >= 0 and permutations of the nine coordinates are identified.
+
+==================================================
+PART I — FIND THE FIRST OCCURRENCE OF b(T)=5
+============================================
+
+Starting from S=11, continue enumerating integer partitions
+
+```
+lambda = (s_1,...,s_9)
+```
+
+with
+
+```
+sum_i s_i = S
+```
+
+and at most 9 positive parts.
+
+For each partition, construct T_lambda and compute its exact burning number using the unchanged validated algorithm.
+
+Continue until the first S for which
+
+```
+b(T_lambda) = 5
+```
+
+appears.
+
+Record:
+
+* the first S at which b=5 occurs;
+* all partitions attaining b=5 at that S;
+* the complete burning-number distribution at that S;
+* the maximum burning number at each tested S.
+
+If b=5 does not appear within a reasonable computational range, explicitly report the largest S tested and the current maximum.
+
+Do NOT assume in advance where b=5 should occur.
+
+==================================================
+PART II — RECORD THE MAXIMIZING PARTITIONS
+==========================================
+
+For every tested S, define
+
+```
+M(S) = {lambda : b(T_lambda) = max_b(S)}.
+```
+
+Record ALL maximizing partitions, not just one representative.
+
+For every maximizer record:
+
+* lambda;
+* k = number of positive parts;
+* largest part;
+* number of parts >= 2;
+* number of parts >= 3;
+* number of parts >= 4;
+* number of parts >= 5;
+* number of parts equal to 1;
+* sum of squares;
+* sum of cubes.
+
+However, these statistics are NOT the primary research target.
+
+The main goal is to identify common combinatorial structure among the maximizing partitions themselves.
+
+==================================================
+PART III — INVESTIGATE THE CRITICAL S SEQUENCE
+==============================================
+
+The current exact data show:
+
+```
+first S with b=3: S=2
+first S with b=4: S=6
+```
+
+Therefore the currently observed critical sequence begins:
+
+```
+2, 6, ...
+```
+
+If the first occurrence of b=5 is S_5, record the sequence explicitly.
+
+Do NOT assume that this sequence follows any formula.
+
+You may check whether the observed values resemble simple expressions such as:
+
+* q(q-1);
+* triangular-number-type expressions;
+* other elementary formulas.
+
+But these must be reported only as observations, never as conjectures unless the data strongly support them.
+
+==================================================
+PART IV — STUDY THE STRUCTURE OF THE BURNING SEQUENCE
+=====================================================
+
+For every first occurrence of a new burning number, especially:
+
+```
+first b=4 case;
+first b=5 case, if found;
+```
+
+extract a shortest burning sequence whenever the implementation stores one.
+
+Compare:
+
+1. a partition with b=r-1;
+2. a partition with b=r.
+
+For the b=r example, investigate why all burning sequences of length r-1 fail.
+
+Do NOT output the entire exponential search tree.
+
+Instead, extract structural information such as:
+
+* locations of the burning sources;
+* distance of each source from the central vertex;
+* which arm contains each source;
+* how much of each arm is covered by each source;
+* how many arms can be simultaneously covered;
+* the structure of the remaining uncovered vertices after r-1 rounds.
+
+The purpose is to identify a potentially provable combinatorial obstruction.
+
+This is exploratory analysis, not a proof.
+
+==================================================
+PART V — COMPARE NEARBY CRITICAL PARTITIONS
+===========================================
+
+For every S at which the maximum burning number increases, compare partitions with:
+
+```
+b = r-1
+```
+
+against partitions with:
+
+```
+b = r.
+```
+
+Especially search for pairs
+
+```
+lambda_good
+lambda_bad
+```
+
+that differ by only a small partition modification but have different burning numbers.
+
+Prioritize local partition operations such as:
+
+* moving one subdivision from one arm to another;
+* splitting one long arm into two shorter arms;
+* merging two shorter arms into one longer arm;
+* transferring one unit between two parts.
+
+For every interesting pair, record:
+
+* the two partitions;
+* their burning numbers;
+* whether one majorizes the other;
+* the local partition move connecting them;
+* the change in the relevant arm structure.
+
+The purpose is to determine whether there is a simple local operation that can trigger an increase in burning number.
+
+==================================================
+PART VI — COMPARE THE FIRST b=4 AND b=5 OBSTRUCTIONS
+====================================================
+
+If b=5 is found, compare its first obstruction with the known first b=4 obstruction:
+
+```
+b=4 first appears at
+
+    S=6,
+
+with the unique partition
+
+    (2,2,2,0,...,0).
+```
+
+Determine whether the first b=5 obstruction has an analogous structural form.
+
+In particular, investigate whether the transition is related to:
+
+* several arms of comparable length;
+* a minimum number of sufficiently long arms;
+* symmetry among arms;
+* inability of one burning source to efficiently cover multiple arms;
+* a recurring pattern of uncovered vertices.
+
+Do not force an analogy if the data do not support one.
+
+==================================================
+PART VII — FINAL OUTPUT
+=======================
+
+Generate:
+
+```
+k19_star_critical_structure.json
+```
+
+and
+
+```
+k19_star_critical_structure_report.txt
+```
+
+The JSON should contain the machine-readable results.
+
+The report should clearly distinguish:
+
+[DIRECTLY FROM DATA]
+
+from
+
+[STRUCTURAL HYPOTHESIS]
+
+The final report must answer:
+
+Q1. Where does b=5 first occur?
+
+Q2. What is the currently observed sequence of critical S-values?
+
+Q3. What common structure, if any, do the maximizing partitions have?
+
+Q4. Is there a local partition move that can increase the burning number?
+
+Q5. Do the first b=4 and first b=5 obstructions exhibit analogous structures?
+
+Q6. Based on the computational evidence, what is the most specific mathematical lemma that should be attempted next?
+
+IMPORTANT:
+
+* Do not claim that any finite computational observation is a theorem.
+* Do not claim that an observed sequence is a general formula without proof.
+* Do not modify the original dataset.
+* Do not modify the burning-number algorithm.
+* Do not perform all-tree enumeration.
+* Do not discuss publication, novelty, or journal suitability.
+* Focus exclusively on structural computational analysis of the K_{1,9} subdivision family.
