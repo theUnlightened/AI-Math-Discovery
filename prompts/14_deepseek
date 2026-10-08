@@ -1,0 +1,454 @@
+We are now performing the final structural analysis of the already-verified q=4 computational experiment.
+
+This is NOT a new mathematical search.
+
+Do NOT investigate q=5.
+Do NOT attempt to prove the general conjecture.
+Do NOT perform a literature review.
+Do NOT invent structural conclusions.
+
+Your task is to write a complete executable program that profiles ALL extremal trees from the verified q=4 experiment.
+
+---
+
+# 1. Fixed q=4 dataset
+
+We have already completed an exhaustive computation for
+
+$$
+n=16,\qquad n_2=6.
+$$
+
+The verified result is:
+
+$$
+19320
+$$
+
+non-isomorphic trees on 16 vertices,
+
+$$
+2821
+$$
+
+with exactly 6 degree-2 vertices,
+
+and among these:
+
+$$
+185 \text{ with } b(T)=3,
+$$
+
+$$
+2636 \text{ with } b(T)=4,
+$$
+
+$$
+0 \text{ with } b(T)\ge5.
+$$
+
+Therefore the extremal set is exactly
+
+$$
+\mathcal E=\{T: |V(T)|=16,\ n_2=6,\ b(T)=4\},
+$$
+
+with
+
+$$
+|\mathcal E|=2636.
+$$
+
+Use the same exact enumeration and exact burning-number implementation that produced the verified q=4 result.
+
+Do not replace it with a heuristic.
+
+---
+
+# 2. Main objective
+
+The only objective is to understand the STRUCTURE of all 2636 extremal trees.
+
+For every extremal tree \(T\), compute and record:
+
+### Basic structure
+
+* degree sequence;
+* number of leaves;
+* maximum degree;
+* number of degree-3 vertices;
+* number of degree-4 vertices;
+* number of degree-5 vertices, etc.;
+* diameter;
+* radius;
+* center;
+* Wiener index if inexpensive;
+* eccentricity distribution if inexpensive.
+
+Do not add expensive statistics unless they are actually useful.
+
+---
+
+# 3. Suppressed core
+
+For every extremal tree \(T\), suppress all degree-2 vertices to obtain the homeomorphically irreducible core \(H\).
+
+For each \(H\), compute:
+
+* number of vertices;
+* number of edges;
+* degree sequence;
+* number of leaves;
+* maximum degree;
+* diameter;
+* radius;
+* center;
+* \(b(H)\).
+
+Verify for every extremal tree that
+
+$$
+|V(H)|=10,\qquad |E(H)|=9.
+$$
+
+---
+
+# 4. Canonical classification of core isomorphism classes
+
+This is one of the most important parts.
+
+Determine the number of distinct isomorphism classes of suppressed cores \(H\) among the 2636 extremal trees.
+
+Do NOT classify cores merely by degree sequence.
+
+Two trees with the same degree sequence may be non-isomorphic.
+
+Use an actual graph-isomorphism/canonical-labeling method.
+
+For every core isomorphism class, report:
+
+* canonical identifier;
+* number of extremal trees having this core;
+* degree sequence;
+* diameter;
+* radius;
+* \(b(H)\);
+* number of leaves.
+
+Then provide a summary table:
+
+| Core class | Number of extremal trees | Degree sequence | Diameter | Radius | b(H) |
+| ---------- | -----------------------: | --------------- | -------: | -----: | ---: |
+
+---
+
+# 5. Subdivision patterns
+
+For each extremal tree, determine the subdivision lengths
+
+$$
+s_e\ge0
+$$
+
+on the edges \(e\in E(H)\), satisfying
+
+$$
+\sum_e s_e=6.
+$$
+
+Important:
+
+The subdivision vector is attached to the EDGES of the specific core.
+
+Do NOT compare raw edge-order vectors across different core labelings without canonicalizing the core and its edge correspondence.
+
+For each core isomorphism class, classify all distinct subdivision patterns up to automorphisms of the core.
+
+This should answer:
+
+> For a fixed core, how many fundamentally different ways are the 6 degree-2 vertices distributed while still producing an extremal tree?
+
+Report:
+
+* number of subdivision-equivalence classes;
+* frequency of each class;
+* maximum subdivision length;
+* number of subdivided edges;
+* whether the subdivision lies on a diameter path;
+* whether it touches a leaf edge;
+* whether it lies between branching vertices.
+
+---
+
+# 6. Burning-number increase
+
+For every extremal tree calculate
+
+$$
+\Delta_b=b(T)-b(H).
+$$
+
+Since
+
+$$
+b(T)=4,
+$$
+
+record the distribution of \(b(H)\) and \(\Delta_b\).
+
+For example:
+
+| b(H) | Number of extremal trees | Delta_b |
+| ---: | -----------------------: | ------: |
+
+Do NOT assume \(\Delta_b\ge0\) unless the computation confirms it.
+
+Report every value actually observed.
+
+---
+
+# 7. Relationship between geometry and extremality
+
+Aggregate across ALL 2636 extremal trees.
+
+Compute frequency tables for:
+
+* diameter;
+* radius;
+* leaf count;
+* maximum degree;
+* number of branching vertices;
+* \(b(H)\);
+* \(\Delta_b\);
+* maximum subdivision length;
+* number of subdivided edges.
+
+For each metric report exact counts.
+
+For example:
+
+| Diameter | Number |
+| -------: | -----: |
+
+and similarly for the other metrics.
+
+Do not look only at the first 10 trees.
+
+---
+
+# 8. Detect recurring structural patterns
+
+Use the complete dataset to determine whether extremal trees are concentrated in a small number of structural families.
+
+Possible observations include:
+
+* one dominant core shape;
+* a small number of core isomorphism classes;
+* mostly cubic cores;
+* mostly diameter-5 cores;
+* subdivisions concentrated on one edge;
+* subdivisions concentrated on diameter paths;
+* subdivisions distributed over several edges.
+
+But these are only hypotheses.
+
+After computing the statistics, classify each observation as one of:
+
+### CONFIRMED EMPIRICALLY
+
+Directly established by the complete q=4 dataset.
+
+### NOT SUPPORTED
+
+The complete dataset does not show the proposed pattern.
+
+### UNRESOLVED
+
+The computation does not determine the relevant structural question.
+
+Do NOT call any empirical pattern a theorem.
+
+---
+
+# 9. Compare extremal trees with all 2821 target trees
+
+This is highly desirable.
+
+Where computationally reasonable, compare the 2636 extremal trees
+
+$$
+b(T)=4
+$$
+
+against the 185 trees with
+
+$$
+b(T)=3.
+$$
+
+For both groups aggregate:
+
+* leaf count;
+* maximum degree;
+* diameter;
+* radius;
+* core degree sequence;
+* core isomorphism class;
+* \(b(H)\);
+* \(\Delta_b\);
+* subdivision concentration.
+
+The goal is to identify structural features that distinguish \(b=4\) from \(b=3\).
+
+Do not infer causation from correlation.
+
+---
+
+# 10. Reproducibility
+
+Provide the COMPLETE executable Python program.
+
+It must:
+
+1. regenerate the 19320 trees;
+2. filter the 2821 target trees;
+3. compute exact burning numbers;
+4. identify all 2636 extremal trees;
+5. perform the complete structural profiling.
+
+Do not depend on manually copied tree lists.
+
+The script should reproduce the entire dataset from scratch.
+
+---
+
+# 11. Efficiency
+
+The computation should be practical for \(n=16\).
+
+You may improve efficiency using:
+
+* memoization;
+* canonical graph signatures;
+* cached burning numbers;
+* cached core computations.
+
+Do NOT change the exact mathematical computation into an approximation or heuristic.
+
+Clearly document any optimization.
+
+---
+
+# 12. Output requirements
+
+The program must output:
+
+### Global counts
+
+$$
+19320,\quad2821,\quad185,\quad2636,\quad0.
+$$
+
+### Core classification
+
+* number of distinct core isomorphism classes;
+* frequency of each class.
+
+### Extremal structural distributions
+
+Exact frequency tables for:
+
+* degree sequence;
+* leaf count;
+* maximum degree;
+* diameter;
+* radius;
+* \(b(H)\);
+* \(\Delta_b\);
+* maximum subdivision length;
+* number of subdivided edges.
+
+### Full comparison
+
+Where feasible, compare \(b=3\) and \(b=4\) groups.
+
+### Representative examples
+
+For each distinct core isomorphism class, output at least one representative extremal tree, including:
+
+* T edge list;
+* H edge list;
+* subdivision data;
+* \(b(T)\);
+* \(b(H)\);
+* \(\Delta_b\).
+
+---
+
+# 13. Important warning about canonicalization
+
+The core \(H\) may inherit arbitrary vertex labels from the original NetworkX tree.
+
+Do not use raw edge lists or raw node labels as the core identifier.
+
+Use graph isomorphism or canonical labeling.
+
+Similarly, subdivision patterns must be considered modulo automorphisms of the core.
+
+---
+
+# 14. Final interpretation
+
+At the end, provide ONLY an empirical summary.
+
+The final report should answer:
+
+1. How many different core types occur among the 2636 extremal trees?
+2. Which core types dominate?
+3. What values of \(b(H)\) occur?
+4. What values of \(\Delta_b\) occur?
+5. How are the six subdivision vertices distributed?
+6. What geometric properties are most common?
+7. What structural differences distinguish \(b=4\) from \(b=3\)?
+
+Do NOT propose a proof of the conjecture.
+
+Do NOT claim that an observed pattern extends to arbitrary q.
+
+---
+
+# 15. Execution honesty
+
+If you can execute the program, actually execute it and report the real output.
+
+If you cannot execute it, provide the complete executable program and clearly say:
+
+> "I did not execute the program."
+
+Never fabricate the structural statistics.
+
+---
+
+# Required response structure
+
+## A. Computational method
+
+## B. Complete executable code
+
+## C. Execution status
+
+## D. Global q=4 checks
+
+## E. Core isomorphism classification
+
+## F. Extremal structural distributions
+
+## G. Comparison between b=3 and b=4
+
+## H. Empirical structural conclusions
+
+## I. Limitations
+
+Stop after this report.
+
+Do not discuss q=5.
