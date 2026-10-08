@@ -1,0 +1,232 @@
+You are acting ONLY as a computational runner.
+
+Do not act as a mathematical research editor.
+Do not redesign the research problem.
+Do not discuss novelty or literature.
+Do not attempt to prove the theorem.
+
+Your ONLY task is to execute the requested computational experiment and return the actual results.
+
+Use EXACTLY the same validated burning-number algorithm and the same burning-number definition used in all previous experiments.
+
+DO NOT modify the burning-number algorithm.
+
+DO NOT change the source-selection rule.
+
+DO NOT perform arbitrary partition scans.
+
+DO NOT use the previously studied K_{1,9} subdivision family as the only search space.
+
+The research target is:
+
+```
+If b(T) >= q+1,
+how small can n_2(T) be?
+```
+
+Here n_2(T) denotes the number of vertices of degree exactly 2.
+
+The structural implication we ultimately want to investigate is:
+
+```
+b(T) >= q+1  ==>  n_2(T) >= 2q-1.
+```
+
+This computational experiment is ONLY intended to test the numerical pattern.
+
+==================================================
+PART 1 — TARGET VALUES
+======================
+
+Run the experiment for:
+
+```
+q = 3, 4, 5, 6
+```
+
+For each q, search for trees T satisfying:
+
+```
+b(T) >= q+1
+```
+
+and determine the smallest observed value of:
+
+```
+n_2(T).
+```
+
+The primary output for each q is:
+
+```
+min n_2(T) among all searched trees with b(T) >= q+1.
+```
+
+Compare this value with:
+
+```
+2q-1.
+```
+
+==================================================
+PART 2 — SEARCH SCOPE
+=====================
+
+Use exhaustive enumeration of non-isomorphic trees whenever computationally feasible.
+
+Do NOT enumerate all trees beyond a reasonable vertex limit if the computation becomes impractical.
+
+Instead, clearly report:
+
+```
+maximum n searched,
+number of non-isomorphic trees examined,
+number satisfying b(T) >= q+1,
+smallest n_2 found.
+```
+
+The search should prioritize finding LOW n_2 examples.
+
+Do not assume in advance that the extremal tree is:
+
+* a spider,
+* a subdivided star,
+* a path,
+* a caterpillar,
+* or any previously observed construction.
+
+==================================================
+PART 3 — IMPORTANT SEARCH CONDITION
+===================================
+
+For each q, a tree is a candidate obstruction if:
+
+```
+b(T) >= q+1.
+```
+
+A tree with:
+
+```
+b(T) <= q
+```
+
+must NOT be counted as an obstruction.
+
+The goal is NOT to maximize b(T).
+
+The goal is to MINIMIZE n_2 among trees whose burning number is at least q+1.
+
+==================================================
+PART 4 — RECORD ALL EXTREMAL EXAMPLES
+=====================================
+
+For every q, after finding the smallest observed n_2, record ALL non-isomorphic extremal trees found within the searched range having:
+
+```
+b(T) >= q+1
+```
+
+and
+
+```
+n_2(T) = minimum observed n_2.
+```
+
+For each extremal tree report:
+
+* n
+* n_2
+* exact b(T)
+* degree sequence
+* number of leaves
+* maximum degree
+* diameter
+* radius
+* maximum length of a maximal degree-2 path
+* whether the tree is a spider
+* a graph6 representation or edge list if available
+
+Do not omit extremal examples merely because they have the same n_2.
+
+==================================================
+PART 5 — SEARCH FOR THE FIRST POSSIBLE VALUE
+============================================
+
+For each q, distinguish carefully between:
+
+1. no obstruction found;
+2. obstruction found with n_2 = 2q-1;
+3. obstruction found with n_2 < 2q-1;
+4. obstruction found only with n_2 > 2q-1.
+
+This distinction is essential.
+
+If ANY tree is found satisfying
+
+```
+b(T) >= q+1
+```
+
+and
+
+```
+n_2(T) <= 2q-2,
+```
+
+flag it prominently as:
+
+```
+POTENTIAL COUNTEREXAMPLE TO THE TARGET IMPLICATION
+```
+
+Do not call it a proof or a confirmed counterexample to the general theorem unless the computation has actually exhaustively covered the relevant search space.
+
+==================================================
+PART 6 — VALIDATION
+===================
+
+Before the main search, run the previously validated burning-number tests.
+
+Do not proceed if those validation tests fail.
+
+The burning-number algorithm must remain byte-for-byte unchanged from the validated version, except for surrounding search code if necessary.
+
+==================================================
+PART 7 — OUTPUT SUMMARY
+=======================
+
+Produce a table:
+
+q | target 2q-1 | max n searched | trees examined | obstruction trees | minimum observed n_2
+
+Then provide:
+
+* all extremal examples,
+* their structural data,
+* whether the observed minimum equals 2q-1,
+* whether any value below 2q-1 was found.
+
+Do NOT infer a theorem from finite computation.
+
+Do NOT attempt a mathematical proof.
+
+==================================================
+PART 8 — FILES
+==============
+
+Save:
+
+minimum_n2_obstruction_search.json
+
+minimum_n2_obstruction_search_report.txt
+
+Return the actual computational results and the exact search limits.
+
+The most important quantity is:
+
+```
+min n_2(T) subject to b(T) >= q+1.
+```
+
+Do not replace this objective with maximum burning number or any other statistic.
