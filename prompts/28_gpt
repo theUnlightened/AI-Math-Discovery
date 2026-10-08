@@ -1,0 +1,320 @@
+You are acting ONLY as a computational runner.
+
+Do not act as a mathematical research editor.
+Do not discuss novelty or literature.
+Do not attempt to prove the conjecture.
+Do not redesign the burning-number definition.
+Do not modify the validated exact burning-number algorithm.
+
+Your task is to continue the n=19 counterexample search using the remaining unevaluated candidates.
+
+# Research Problem
+
+For n = 19,
+
+$$
+q=\lceil\sqrt{19}\rceil=5.
+$$
+
+A genuine counterexample must satisfy
+
+$$
+n_2(T)\le 8
+$$
+
+and
+
+$$
+b(T)\ge6.
+$$
+
+The exact burning-number algorithm has already been validated and MUST remain unchanged.
+
+# Existing Search State
+
+There are exactly
+
+$$
+288198
+$$
+
+non-isomorphic trees on 19 vertices satisfying
+
+$$
+n_2(T)\le8.
+$$
+
+Previously exact-evaluated unique candidates:
+
+$$
+117164.
+$$
+
+Therefore the current unevaluated set contains:
+
+$$
+\boxed{171034}
+$$
+
+candidates.
+
+Previously evaluated candidates MUST NOT be counted or recomputed unnecessarily.
+
+Already fully evaluated structural layers include:
+
+* diameter 10: 30,164 candidates, all b=4;
+* diameter 9: 17,000 candidates, all b=4;
+* diameter 8: 10,000 candidates, all b<=4;
+* plus the original 60,000 candidates from the initial search.
+
+# Phase 1 — Structural Census
+
+Before performing a large number of new exact burning-number evaluations, analyze the remaining 171,034 candidates.
+
+For every remaining candidate, compute cheap structural statistics only.
+
+At minimum collect:
+
+1. n2
+2. degree sequence
+3. number of leaves
+4. maximum degree
+5. diameter
+6. radius
+7. number of vertices of degree >= 3
+8. number of branching vertices
+9. lengths of maximal degree-2 paths
+10. maximum degree-2 path length
+11. sorted multiset of degree-2 path lengths
+12. number of leaves attached through each maximal path, when naturally definable
+
+Do NOT compute exact burning number during this census.
+
+The purpose is to understand what the remaining search space actually looks like.
+
+# Phase 2 — Identify Structurally Extreme Candidates
+
+Rank the remaining candidates using cheap structural features that could plausibly correlate with large burning number.
+
+Give priority to trees with combinations such as:
+
+* n2 close to the maximum allowed value 8;
+* long degree-2 paths;
+* large diameter;
+* large radius;
+* few branching vertices;
+* spider-like structures;
+* balanced long arms;
+* multiple long arms;
+* concentrated degree-2 structure;
+* structures resembling previously observed high-burning-number examples.
+
+Do NOT assume any individual statistic is sufficient.
+
+Do NOT assume the ranking is mathematically valid.
+
+This is only a computational prioritization heuristic.
+
+# Phase 3 — Exact Search
+
+Run the unchanged exact burning-number algorithm on the highest-priority candidates.
+
+The ONLY valid counterexample criterion is:
+
+$$
+n_2(T)\le8
+$$
+
+AND
+
+$$
+b(T)\ge6.
+$$
+
+If such a tree is found:
+
+STOP IMMEDIATELY and report it in full.
+
+# Important
+
+A heuristic score MUST NEVER be used to declare a counterexample.
+
+A candidate becomes a counterexample only after exact evaluation with the validated algorithm.
+
+Do not use approximate burning number.
+
+Do not use a lower bound as the final answer.
+
+Do not alter the recursive search.
+
+# Suggested Search Batches
+
+Use batches of approximately 5,000–20,000 candidates.
+
+After every batch report:
+
+```text
+batch size
+cumulative unique candidates evaluated
+remaining candidates
+b=3 count
+b=4 count
+b>=5 count
+b>=6 count
+```
+
+If b>=6 occurs, stop immediately.
+
+If no b>=6 occurs, continue with the next highest-priority batch.
+
+# Important Distinction
+
+The previously observed obstruction family
+
+$$
+T_r
+$$
+
+and related subdivided-star examples may be useful as structural references, but DO NOT assume that all counterexamples must be spiders.
+
+The search must still include structurally diverse trees.
+
+# Phase 4 — Structural Summary
+
+After each major batch, summarize which structural profiles produced the largest observed burning numbers.
+
+For example:
+
+```text
+maximum observed b = 4
+
+profiles attaining b=4:
+- n2 distribution
+- diameter distribution
+- radius distribution
+- degree sequence distribution
+- maximal degree-2 path distribution
+```
+
+Do not infer a theorem from these observations.
+
+# Full-Search Condition
+
+Do NOT claim that n=19 is fully searched unless every one of the
+
+$$
+288198
+$$
+
+filtered candidates has been exact-evaluated.
+
+If all remaining candidates are eventually evaluated, report:
+
+```text
+n=19 FULLY COMPLETED — NO COUNTEREXAMPLE
+```
+
+If the search stops before that, report:
+
+```text
+n=19 PARTIALLY SEARCHED — NO COUNTEREXAMPLE FOUND IN THE EVALUATED SET
+```
+
+# Validation
+
+Before continuing, rerun the same validation tests:
+
+```text
+P_1 ... P_12
+K_{1,2} ... K_{1,6}
+```
+
+If any validation fails:
+
+STOP IMMEDIATELY.
+
+# Required Final Report
+
+## Validation
+
+Report all validation results.
+
+## Remaining Search Space
+
+```text
+total filtered n=19 candidates = 288198
+previously evaluated = 117164
+remaining = 171034
+```
+
+## Structural Census
+
+Report the distributions of:
+
+* n2
+* diameter
+* radius
+* maximum degree
+* leaf count
+* number of branching vertices
+* maximal degree-2 path length
+
+for the remaining candidates.
+
+## Exact Search
+
+Report:
+
+```text
+new unique candidates evaluated = ...
+cumulative unique candidates evaluated = ...
+remaining = ...
+b=3 = ...
+b=4 = ...
+b>=5 = ...
+b>=6 = ...
+```
+
+## Counterexample
+
+If one is found, report:
+
+```text
+n = 19
+q = 5
+n2 = ...
+b(T) = ...
+degree sequence = ...
+diameter = ...
+radius = ...
+maximum degree = ...
+leaf count = ...
+edge list = ...
+burning sequence = ...
+```
+
+and explicitly verify:
+
+$$
+n_2\le8,\qquad b(T)\ge6.
+$$
+
+## Computational Status
+
+Use exactly one of:
+
+```text
+COUNTEREXAMPLE FOUND
+```
+
+```text
+n=19 FULLY COMPLETED — NO COUNTEREXAMPLE
+```
+
+or
+
+```text
+n=19 PARTIALLY SEARCHED — NO COUNTEREXAMPLE FOUND IN THE EVALUATED SET
+```
+
+Do not add mathematical proof, literature discussion, or novelty claims.
