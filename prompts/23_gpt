@@ -1,0 +1,110 @@
+Use the same validated burning-number algorithm and the same burning-number definition as in all previous experiments.
+
+Do NOT modify the algorithm.
+
+Do NOT perform all-tree enumeration.
+
+Do NOT scan arbitrary partitions.
+
+The purpose of this experiment is only to test the structural family suggested by the previous computation.
+
+Define T_r to be the tree obtained from K_{1,9} by subdividing exactly r-1 of its nine arms so that each of those arms has actual length r-1.
+
+Equivalently, the subdivision partition is
+
+```
+(r-2, r-2, ..., r-2, 0, ..., 0)
+```
+
+with exactly r-1 positive parts.
+
+The previously verified cases are:
+
+```
+r=3: (2),              b=3
+r=4: (2,2,2),          b=4
+r=5: (3,3,3,3),        b=5
+```
+
+Now compute ONLY:
+
+```
+r=6:  (4,4,4,4,4)
+r=7:  (5,5,5,5,5,5)
+r=8:  (6,6,6,6,6,6,6)
+r=9:  (7,7,7,7,7,7,7,7)
+r=10: (8,8,8,8,8,8,8,8,8)
+```
+
+For each case compute:
+
+1. n = number of vertices
+2. n_2 = number of degree-2 vertices
+3. diameter
+4. radius
+5. exact burning number
+6. one shortest burning sequence, if available
+7. for r-1 rounds, the maximum number of vertices that can be covered
+8. the number of maximal-coverage states after r-1 rounds, if available
+
+The main question is:
+
+```
+Does b(T_r) = r hold for every r=6,...,10?
+```
+
+Also verify the formulas:
+
+```
+n = (r-1)^2 + 7
+```
+
+and
+
+```
+n_2 = (r-1)(r-2).
+```
+
+If b(T_r)=r holds for all tested cases, report:
+
+[DIRECTLY FROM DATA]
+
+the exact values.
+
+Then state the following only as a hypothesis:
+
+[STRUCTURAL HYPOTHESIS]
+
+For this spider family,
+
+```
+b(T_r)=r
+```
+
+may hold generally.
+
+Do NOT attempt to prove the conjecture computationally.
+
+Do NOT claim the general statement is established.
+
+Finally, identify the precise computational obstruction for the lower bound:
+
+```
+Why does every burning sequence of length r-1 fail?
+```
+
+Focus especially on whether every maximal r-1-round configuration leaves a terminal vertex on one of the long arms uncovered.
+
+Output:
+
+```
+k19_critical_spider_family.json
+```
+
+and
+
+```
+k19_critical_spider_family_report.txt
+```
+
+Keep the report concise and distinguish [DIRECTLY FROM DATA] from [STRUCTURAL HYPOTHESIS].
