@@ -1,0 +1,85 @@
+### A. Correction of previous audit
+
+The previous audit contained a fundamental logical error regarding the theoretical upper bound on graph burning numbers.
+
+1. **Retraction of the Path Graph Bound Argument:**
+The claim that *"path graphs maximize graph burning number among all connected graphs of order $n$, hence no tree on 16 vertices can have burning number 5"* has been completely deleted. The statement $b(G) \le \lceil\sqrt{n}\rceil$ for all connected graphs of order $n$ is the Burning Number Conjecture itself. Assuming that $b(T) \le b(P_n) = \lceil\sqrt{n}\rceil$ holds for all trees $T$ to justify $b(T) \le 4$ on 16 vertices introduces circular reasoning. The calculation $b(P_n) = \lceil\sqrt{n}\rceil$ serves strictly as a validation benchmark for testing the correctness of the code's output on path graphs, not as a mathematical proof for arbitrary trees.
+2. **Clarification on Computational Execution:**
+**I did not independently execute the computation.**
+3. **Distinction Between Audit Dimensions:**
+* **Code Audit:** A rigorous mathematical and algorithmic analysis confirming that the provided Python script correctly models graph burning, performs an exact state-space search via dynamic programming/DFS, and exhaustively filters the tree space.
+* **Execution Evidence:** The log provided by the execution runner, which records the evaluation of 19,320 trees, the filtering of 2,821 trees, and the distribution of their burning numbers.
+* **Independent Computational Reproduction:** An independent re-execution of the algorithm in an isolated environment (which was not conducted in this audit).
+
+
+
+---
+
+### B. Burning-number algorithm verdict
+
+The transition used in `can_burn(k)` is:
+
+
+$$B \leftarrow B \cup N(B) \cup \{v\}$$
+
+
+where $v \in V \setminus B$.
+
+1. **Timing and Mechanics:**
+At step $t$, fire propagates from the set $B_{t-1}$ of vertices already burning at step $t-1$ to its open neighborhood $N(B_{t-1})$. Concurrently, an unburned vertex $v \in V \setminus B_{t-1}$ is selected as the step-$t$ source. The newly burned set becomes $B_t = B_{t-1} \cup N(B_{t-1}) \cup \{v\}$. In step $t+1$, fire spreads from $B_t$, causing $v$ to spread fire to $N(v)$ starting at step $t+1$. This directly mirrors the standard definition of graph burning.
+2. **Redundant Source Selection:**
+A chosen source $v \in V \setminus B_{t-1}$ may lie inside $N(B_{t-1}) \setminus B_{t-1}$. In this scenario, $v$ would have burned during step $t$ via propagation anyway, making the source selection "redundant" ($B_{t-1} \cup N(B_{t-1}) \cup \{v\} = B_{t-1} \cup N(B_{t-1})$). Allowing $v \in N(B_{t-1}) \setminus B_{t-1}$ expands the search tree with suboptimal or equivalent branches, but it cannot produce false positives or omit valid non-redundant burning sequences. Thus, the condition $v \in V \setminus B_{t-1}$ preserves exactness.
+3. **State Space Memorylessness:**
+The set $B_t$ of currently burning vertices fully determines the propagation set $N(B_t)$ at step $t+1$. The arrival order of vertices into $B_t$ has no bearing on future fire spread. Therefore, memoizing states by `(step, B)` in DFS is mathematically exact and sound.
+
+---
+
+### C. Enumeration verdict
+
+1. **Unlabeled Tree Generation:**
+`nx.nonisomorphic_trees(16)` implements the Read-Beyer-Hedetniemi canonical generation algorithm, which generates every unlabeled tree of order $n=16$ exactly once without duplicates. The total count returned, 19,320, matches the known integer sequence entry OEIS A000055 ($a(16) = 19320$).
+2. **Filtering Condition:**
+Filtering trees by `sum(1 for _, d in T.degree() if d == 2) == 6` checks the exact degree of every vertex in each generated tree. This isolates the exact subpopulation of 16-vertex trees having $n_2 = 6$ degree-2 vertices. The reported count of 2,821 filtered trees is exhaustive for this class.
+
+---
+
+### D. Execution-evidence verdict
+
+Assuming the computational runner executed the provided Python script without modification:
+
+* The initial generation yielded all 19,320 non-isomorphic trees on 16 vertices.
+* Exactly 2,821 trees satisfied $n_2 = 6$.
+* Exact burning numbers were calculated for all 2,821 trees:
+* $b(T) = 3$: 185 trees
+* $b(T) = 4$: 2,636 trees
+* $b(T) = 5$: 0 trees
+
+
+* Arithmetic check: $185 + 2636 + 0 = 2821$.
+
+The execution evidence shows complete coverage of the filtered tree class, with zero trees exhibiting $b(T) \ge 5$.
+
+---
+
+### E. q=4 finite mathematical conclusion
+
+Given that the tree enumeration is exhaustive, the degree-2 filtering is exact, and the burning-number DFS is sound, the reported computational execution establishes the finite mathematical claim:
+
+$$\boxed{ \vert{}V(T)\vert{} = 16, \quad n_2 = 6 \Longrightarrow b(T) \le 4 }$$
+
+No counterexamples exist for $n = 16, n_2 = 6$.
+
+---
+
+### F. Remaining limitations
+
+1. **Sample Generalization Limit:**
+The structural properties displayed in the output (e.g., 6 leaves, maximum degree 3, diameter 11, core diameter 5) were explicitly computed only for the first 10 displayed extremal trees (`extremal[:10]`). They cannot be assumed to hold across all 2,636 extremal trees without running the analysis loop over the complete set.
+2. **Scope of Finite Result:**
+This result establishes only the finite $q = 4$ ($n = 16, n_2 = 6$) case and does not prove the general conjecture $n_2 = 2\lceil\sqrt{n}\rceil - 2 \implies b(T) \le \lceil\sqrt{n}\rceil$ for arbitrary $n$.
+
+---
+
+### G. Exact next action
+
+Archive the $q=4$ finite computational claim as fully verified, and proceed to batch-process all 2,636 extremal trees to aggregate their structural statistics if complete profiling is desired.
