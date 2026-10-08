@@ -1,0 +1,836 @@
+You are acting ONLY as a computational runner.
+
+Do not act as a mathematical research editor.
+Do not redesign the research problem.
+Do not perform a literature review.
+Do not attempt to prove the general conjecture.
+Do not interpret the structural patterns mathematically.
+
+Your only task is to EXECUTE the exact Python program provided below and return the actual results.
+
+# Experiment
+
+We have already completed and independently audited the q=4 exhaustive experiment:
+
+```math
+n=16,\qquad n_2=6.
+```
+
+The established execution record is:
+
+```math
+19320
+```
+
+non-isomorphic trees on 16 vertices,
+
+```math
+2821
+```
+
+with `n_2=6`,
+
+```math
+185
+```
+
+with `b(T)=3`,
+
+```math
+2636
+```
+
+with `b(T)=4`,
+
+and
+
+```math
+0
+```
+
+with `b(T)\ge5`.
+
+The current program extends this experiment by profiling all 2636 extremal `b(T)=4` trees and all 185 `b(T)=3` trees.
+
+# IMPORTANT
+
+Actually execute the complete program.
+
+Do NOT:
+
+- merely inspect the code;
+- estimate results;
+- reuse previously expected structural statistics;
+- fabricate output;
+- skip expensive sections;
+- replace exact computation with heuristics.
+
+If execution fails, report the exact error and stop.
+
+Do not silently modify the mathematical algorithm.
+
+If a purely technical runtime issue occurs, you may make a minimal execution-related fix, but report the exact modification before rerunning.
+
+# Required outputs
+
+Return the ACTUAL values produced by execution for:
+
+## 1. Global consistency
+
+Verify:
+
+```math
+19320,\qquad2821,\qquad185,\qquad2636,\qquad0.
+```
+
+Report all five.
+
+## 2. Complete extremal profiling
+
+The program must profile all
+
+```math
+2636
+```
+
+trees with `b(T)=4`.
+
+Confirm the actual number successfully profiled.
+
+For every profile, the program checks:
+
+```math
+|V(H)|=10,
+```
+
+```math
+|E(H)|=9,
+```
+
+and
+
+```math
+\sum_e s_e=6.
+```
+
+Report whether all such checks passed.
+
+## 3. Core classification
+
+Report the actual number of suppressed-core isomorphism classes among the 2636 extremal trees.
+
+Report the complete core-class frequency table, not just the first few classes.
+
+The frequencies must sum to:
+
+```math
+2636.
+```
+
+## 4. Subdivision-pattern classification
+
+For each core isomorphism class, report the actual number of subdivision-pattern classes modulo
+
+```math
+\operatorname{Aut}(H).
+```
+
+Report the complete table of:
+
+- core class;
+- subdivision class;
+- frequency;
+- canonical subdivision pattern.
+
+The total frequencies must sum to 2636.
+
+## 5. Aggregate structural distributions
+
+Report the COMPLETE frequency tables actually produced for the 2636 extremal trees:
+
+- degree sequence;
+- leaf count;
+- maximum degree;
+- diameter;
+- radius;
+- `b(H)`;
+- `\Delta_b=b(T)-b(H)`;
+- maximum subdivision length;
+- number of subdivided edges.
+
+## 6. b=3 comparison
+
+Report the corresponding complete aggregate statistics for the 185 trees with
+
+```math
+b(T)=3.
+```
+
+Do not interpret the differences.
+
+Just provide the actual computed distributions.
+
+## 7. Representative data
+
+For every distinct pair
+
+```math
+(\text{core class},\text{subdivision class}),
+```
+
+report the representative data produced by the program:
+
+- representative tree edges;
+- representative core edges;
+- subdivision assignment;
+- `b(T)`;
+- `b(H)`;
+- `\Delta_b`.
+
+## 8. JSON output
+
+Confirm whether
+
+```text
+q4_structural_profiles.json
+
+```
+
+was successfully created.
+
+Report its exact file size if available.
+
+# Runtime information
+
+Report:
+
+- Python version;
+- NetworkX version;
+- operating system/environment if available;
+- start time and end time if available;
+- total runtime if measurable.
+
+# Raw console output
+
+Provide the important raw console output.
+
+Do not summarize away numerical information.
+
+At minimum include all lines containing:
+
+- total tree count;
+- filtered tree count;
+- burning-number distribution;
+- extremal set size;
+- profile count;
+- b=3 profile count;
+- core class count;
+- core-class frequency information;
+- subdivision-class information;
+- JSON output confirmation;
+- final "Done" message.
+
+# Execution integrity
+
+Separate the result into:
+
+### ACTUALLY EXECUTED
+
+Only values and observations obtained from the current execution.
+
+### NOT EXECUTED
+
+Anything that could not be obtained.
+
+Never present expected values as executed results.
+
+# Do not interpret
+
+Do NOT answer questions such as:
+
+- why a structure is extremal;
+- whether a pattern suggests a theorem;
+- whether the conjecture is true;
+- whether the result is novel;
+- whether q=5 should be searched.
+
+Those are for another model.
+
+Your job ends after reporting the computation.
+
+# Final format
+
+## A. Environment
+
+## B. Global consistency checks
+
+## C. Full extremal profiling results
+
+## D. Core isomorphism classes
+
+## E. Subdivision-pattern classes
+
+## F. b=4 aggregate statistics
+
+## G. b=3 aggregate statistics
+
+## H. Representative structures
+
+## I. JSON output
+
+## J. Raw console output
+
+## K. Execution status
+
+Use exactly one:
+
+- COMPLETED
+- PARTIALLY COMPLETED
+- FAILED
+
+Do not make mathematical conclusions beyond reporting what the program actually computed.
+
+# Program
+
+import json
+import sys
+from collections import Counter, defaultdict
+
+import networkx as nx
+
+
+# -----------------------------
+# Exact burning number
+# -----------------------------
+
+def burning_number(G):
+    """Exact burning number of G. Relabels nodes internally."""
+    G = nx.convert_node_labels_to_integers(G)
+    n = len(G)
+    if n == 0:
+        return 0
+
+    adj_mask = [0] * n
+    for i in range(n):
+        for j in G.neighbors(i):
+            adj_mask[i] |= (1 << j)
+
+    all_mask = (1 << n) - 1
+
+    def can_burn(k):
+        memo = {}
+
+        def dfs(step, B):
+            if B == all_mask:
+                return True
+            if step > k:
+                return False
+            key = (step, B)
+            if key in memo:
+                return memo[key]
+
+            not_B = all_mask ^ B
+
+            # Fire spreads from currently burning vertices only.
+            NB = 0
+            t = B
+            while t:
+                i_bit = t & -t
+                i = i_bit.bit_length() - 1
+                NB |= adj_mask[i]
+                t ^= i_bit
+
+            # New source must be unburned before selection.
+            temp = not_B
+            while temp:
+                v_bit = temp & -temp
+                v = v_bit.bit_length() - 1
+                new_B = B | NB | v_bit
+                if dfs(step + 1, new_B):
+                    memo[key] = True
+                    return True
+                temp ^= v_bit
+
+            memo[key] = False
+            return False
+
+        return dfs(1, 0)
+
+    for k in range(1, n + 1):
+        if can_burn(k):
+            return k
+    return n
+
+
+def find_burning_sequence(G, k):
+    """Return a valid burning sequence of length k, or None."""
+    G = nx.convert_node_labels_to_integers(G)
+    n = len(G)
+    if n == 0:
+        return []
+
+    adj_mask = [0] * n
+    for i in range(n):
+        for j in G.neighbors(i):
+            adj_mask[i] |= (1 << j)
+
+    all_mask = (1 << n) - 1
+
+    def dfs(step, B, seq):
+        if B == all_mask:
+            return seq
+        if step > k:
+            return None
+
+        not_B = all_mask ^ B
+        NB = 0
+        t = B
+        while t:
+            i_bit = t & -t
+            i = i_bit.bit_length() - 1
+            NB |= adj_mask[i]
+            t ^= i_bit
+
+        temp = not_B
+        while temp:
+            v_bit = temp & -temp
+            v = v_bit.bit_length() - 1
+            new_B = B | NB | v_bit
+            res = dfs(step + 1, new_B, seq + [v])
+            if res is not None:
+                return res
+            temp ^= v_bit
+        return None
+
+    return dfs(1, 0, [])
+
+
+# -----------------------------
+# Suppress degree-2 vertices
+# -----------------------------
+
+def suppress_degree2(G):
+    """Suppress all degree-2 vertices. Labels are preserved."""
+    H = G.copy()
+    changed = True
+    while changed:
+        changed = False
+        for v in list(H.nodes()):
+            if H.degree(v) == 2:
+                neighbors = list(H.neighbors(v))
+                if len(neighbors) == 2:
+                    u, w = neighbors
+                    H.remove_node(v)
+                    if not H.has_edge(u, w):
+                        H.add_edge(u, w)
+                    changed = True
+                    break
+    return H
+
+
+def subdivision_lengths_edges(T, H):
+    """For each edge of H, return (u, v, s_e) where s_e is the number of
+    degree-2 vertices inserted on the corresponding path in T."""
+    data = []
+    for u, v in H.edges():
+        path = nx.shortest_path(T, u, v)
+        s = len(path) - 2
+        data.append((u, v, s))
+    return data
+
+
+# -----------------------------
+# Validation
+# -----------------------------
+
+def validate():
+    print("Validation tests:")
+
+    for n in range(1, 13):
+        P = nx.path_graph(n)
+        b = burning_number(P)
+        expected = int(n ** 0.5)
+        if expected * expected < n:
+            expected += 1
+        ok = (b == expected)
+        print(f"P_{n}: b={b}, expected={expected}, ok={ok}")
+        if not ok:
+            print("Validation failed on paths.")
+            sys.exit(1)
+
+    for m in range(2, 7):
+        K = nx.star_graph(m)
+        b = burning_number(K)
+        ok = (b == 2)
+        print(f"K_{{1,{m}}}: b={b}, expected=2, ok={ok}")
+        if not ok:
+            print("Validation failed on stars.")
+            sys.exit(1)
+
+    print("Validation passed.\n")
+
+
+# -----------------------------
+# Profiling a single tree
+# -----------------------------
+
+def profile_tree(T, b):
+    T_int = nx.convert_node_labels_to_integers(T)
+
+    deg_seq = sorted([d for _, d in T_int.degree()], reverse=True)
+    leaves = sum(1 for d in deg_seq if d == 1)
+    max_deg = max(deg_seq) if deg_seq else 0
+    deg_counts = Counter(deg_seq)
+
+    diameter = nx.diameter(T_int)
+    radius = nx.radius(T_int)
+    centers = sorted(nx.center(T_int))
+
+    # Suppress degree-2 vertices. H keeps original labels from T_int.
+    H = suppress_degree2(T_int)
+
+    # Compute edge-associated subdivision data using original labels.
+    sub_edges = subdivision_lengths_edges(T_int, H)
+    sum_s = sum(s for _, _, s in sub_edges)
+    max_s = max((s for _, _, s in sub_edges), default=0)
+    num_sub_edges = sum(1 for _, _, s in sub_edges if s > 0)
+
+    # Relabel core only after subdivision data are computed.
+    H_int = nx.convert_node_labels_to_integers(H)
+
+    bH = burning_number(H_int)
+    delta_b = b - bH
+
+    profile = {
+        "b": b,
+        "degree_sequence": deg_seq,
+        "leaves": leaves,
+        "max_degree": max_deg,
+        "degree_counts": {int(k): int(v) for k, v in deg_counts.items()},
+        "diameter": diameter,
+        "radius": radius,
+        "centers": centers,
+        "core_edges": [list(e) for e in H_int.edges()],
+        "core_degree_sequence": sorted([d for _, d in H_int.degree()], reverse=True),
+        "core_leaves": sum(1 for _, d in H_int.degree() if d == 1),
+        "core_max_degree": max([d for _, d in H_int.degree()], default=0),
+        "core_diameter": nx.diameter(H_int),
+        "core_radius": nx.radius(H_int),
+        "core_centers": sorted(nx.center(H_int)),
+        "b_H": bH,
+        "delta_b": delta_b,
+        "subdivision_edges": [[u, v, s] for u, v, s in sub_edges],
+        "subdivision_sum": sum_s,
+        "max_subdivision_length": max_s,
+        "num_subdivided_edges": num_sub_edges,
+    }
+
+    if b == 4:
+        profile["burning_sequence"] = find_burning_sequence(T_int, 4)
+
+    return profile, H_int, H
+
+
+# -----------------------------
+# Canonical subdivision pattern modulo Aut(H)
+# -----------------------------
+
+def canonical_subdivision_pattern(H_rep, weight_dict):
+    """
+    H_rep: graph with vertices 0..n-1
+    weight_dict: dict mapping (min(u,v), max(u,v)) -> weight
+    Returns canonical tuple of weights under Aut(H_rep).
+    """
+    edges = sorted(H_rep.edges())
+    edge_index = {e: i for i, e in enumerate(edges)}
+    m = len(edges)
+
+    w = [0] * m
+    for e in edges:
+        u, v = e
+        key = (min(u, v), max(u, v))
+        w[edge_index[e]] = weight_dict.get(key, 0)
+
+    GM = nx.algorithms.isomorphism.GraphMatcher(H_rep, H_rep)
+    best = None
+    for phi in GM.isomorphisms_iter():
+        w_phi = [0] * m
+        for e in edges:
+            u, v = e
+            new_u, new_v = phi[u], phi[v]
+            new_e = (min(new_u, new_v), max(new_u, new_v))
+            w_phi[edge_index[new_e]] = w[edge_index[e]]
+        w_phi_tuple = tuple(w_phi)
+        if best is None or w_phi_tuple < best:
+            best = w_phi_tuple
+    return best
+
+
+# -----------------------------
+# Core isomorphism classes
+# -----------------------------
+
+def classify_cores(cores):
+    unique = []
+    members = []
+    deg_to_indices = defaultdict(list)
+
+    for idx, H in enumerate(cores):
+        deg = tuple(sorted([d for _, d in H.degree()], reverse=True))
+        deg_to_indices[deg].append(idx)
+
+    for deg, indices in deg_to_indices.items():
+        reps = []
+        for idx in indices:
+            H = cores[idx]
+            found = False
+            for u_idx, rep in reps:
+                if nx.is_isomorphic(H, rep):
+                    members[u_idx].append(idx)
+                    found = True
+                    break
+            if not found:
+                unique.append(H)
+                members.append([idx])
+                reps.append((len(unique) - 1, H))
+
+    return unique, members
+
+
+# -----------------------------
+# Aggregate statistics
+# -----------------------------
+
+def aggregate(profiles):
+    stats = {}
+    keys = [
+        "degree_sequence", "leaves", "max_degree", "diameter", "radius",
+        "b_H", "delta_b", "max_subdivision_length", "num_subdivided_edges",
+    ]
+    for key in keys:
+        c = Counter()
+        for p in profiles:
+            val = p[key]
+            if isinstance(val, list):
+                val = tuple(val)
+            c[val] += 1
+        stats[key] = {str(k): v for k, v in c.items()}
+    return stats
+
+
+# -----------------------------
+# Main experiment
+# -----------------------------
+
+def main():
+    n = 16
+    q = 4
+    target_n2 = 2 * q - 2  # 6
+
+    print(f"q={q}, n={n}, target n2={target_n2}")
+    print("Expected verified counts: 19320 total trees, 2821 with n2=6,")
+    print("185 with b=3, 2636 with b=4, 0 with b>=5.\n")
+
+    validate()
+
+    trees = list(nx.nonisomorphic_trees(n))
+    print(f"Total non-isomorphic trees on {n} vertices: {len(trees)}")
+    if len(trees) != 19320:
+        print(f"ERROR: expected 19320, got {len(trees)}")
+        sys.exit(1)
+
+    filtered = []
+    for T in trees:
+        n2 = sum(1 for _, d in T.degree() if d == 2)
+        if n2 == target_n2:
+            filtered.append(T)
+
+    print(f"Trees with n2 = {target_n2}: {len(filtered)}")
+    if len(filtered) != 2821:
+        print(f"ERROR: expected 2821, got {len(filtered)}")
+        sys.exit(1)
+
+    b_counts = Counter()
+    b3_trees = []
+    b4_trees = []
+
+    for T in filtered:
+        b = burning_number(T)
+        b_counts[b] += 1
+        if b == 3:
+            b3_trees.append(T)
+        elif b == 4:
+            b4_trees.append(T)
+
+    print(f"\nBurning number distribution: {dict(b_counts)}")
+    print(f"Maximum burning number: {max(b_counts)}")
+    print(f"Number with b=3: {len(b3_trees)}")
+    print(f"Number with b=4: {len(b4_trees)}")
+    print(f"Number with b>=5: {sum(v for k, v in b_counts.items() if k >= 5)}")
+
+    if b_counts.get(5, 0) != 0:
+        print("COUNTEREXAMPLE FOUND: some tree has b(T) >= 5.")
+        sys.exit(0)
+
+    if len(b4_trees) != 2636:
+        print(f"ERROR: expected 2636 extremal trees with b=4, got {len(b4_trees)}")
+        sys.exit(1)
+
+    print(f"\nExtremal set size |E| = {len(b4_trees)}")
+
+    # Profile all b=4 extremal trees.
+    b4_profiles = []
+    b4_cores = []
+    b4_original_cores = []
+    b4_Ts = []
+
+    for T in b4_trees:
+        prof, H_int, H_orig = profile_tree(T, 4)
+
+        if prof["subdivision_sum"] != 6:
+            print(f"ERROR: subdivision sum = {prof['subdivision_sum']}, expected 6")
+            sys.exit(1)
+        if len(H_int) != 10 or H_int.number_of_edges() != 9:
+            print(f"ERROR: core H has |V|={len(H_int)}, |E|={H_int.number_of_edges()}")
+            sys.exit(1)
+
+        b4_profiles.append(prof)
+        b4_cores.append(H_int)
+        b4_original_cores.append(H_orig)
+        b4_Ts.append(T)
+
+    print(f"Profiled b=4 trees: {len(b4_profiles)}")
+
+    # Profile b=3 trees for comparison.
+    b3_profiles = []
+    for T in b3_trees:
+        prof, _, _ = profile_tree(T, 3)
+        b3_profiles.append(prof)
+
+    print(f"Profiled b=3 trees: {len(b3_profiles)}")
+
+    # Core isomorphism classes among b=4 extremal trees.
+    unique_cores, members = classify_cores(b4_cores)
+    print(f"\nNumber of distinct core isomorphism classes among b=4 extremal trees: {len(unique_cores)}")
+
+    # For each core class, fix a representative H_rep (relabeled).
+    # Then classify subdivision patterns within each class.
+    core_class_info = []
+
+    for i, H_rep in enumerate(unique_cores):
+        H_rep = nx.convert_node_labels_to_integers(H_rep)
+        member_indices = members[i]
+        count = len(member_indices)
+
+        deg = sorted([d for _, d in H_rep.degree()], reverse=True)
+        b_H_rep = burning_number(H_rep)
+
+        # For each member tree, map its subdivision data to H_rep.
+        subdivision_patterns = defaultdict(list)
+
+        for idx in member_indices:
+            T = b4_Ts[idx]
+            T_int = nx.convert_node_labels_to_integers(T)
+            H_orig = b4_original_cores[idx]
+
+            # Find an isomorphism phi: H_orig -> H_rep
+            GM = nx.algorithms.isomorphism.GraphMatcher(H_orig, H_rep)
+            phi = None
+            for mapping in GM.isomorphisms_iter():
+                phi = mapping
+                break
+            if phi is None:
+                print(f"ERROR: no isomorphism found for core class {i}")
+                sys.exit(1)
+
+            # Build weight dict on H_rep
+            weight_dict = {}
+            for u, v, s in b4_profiles[idx]["subdivision_edges"]:
+                new_u, new_v = phi[u], phi[v]
+                key = (min(new_u, new_v), max(new_u, new_v))
+                weight_dict[key] = s
+
+            # Canonical pattern under Aut(H_rep)
+            canon = canonical_subdivision_pattern(H_rep, weight_dict)
+            subdivision_patterns[canon].append(idx)
+
+        # Build subdivision class info
+        sub_class_info = []
+
+        for j, (canon, idx_list) in enumerate(subdivision_patterns.items()):
+            rep_idx = idx_list[0]
+            rep_T = b4_Ts[rep_idx]
+            rep_T_int = nx.convert_node_labels_to_integers(rep_T)
+            rep_H_orig = b4_original_cores[rep_idx]
+
+            # Find phi for the representative
+            GM = nx.algorithms.isomorphism.GraphMatcher(rep_H_orig, H_rep)
+            phi = None
+            for mapping in GM.isomorphisms_iter():
+                phi = mapping
+                break
+
+            rep_weight_dict = {}
+            for u, v, s in b4_profiles[rep_idx]["subdivision_edges"]:
+                new_u, new_v = phi[u], phi[v]
+                key = (min(new_u, new_v), max(new_u, new_v))
+                rep_weight_dict[key] = s
+
+            sub_class_info.append({
+                "subdivision_class_id": j,
+                "count": len(idx_list),
+                "canonical_pattern": list(canon),
+                "representative_T_edges": [list(e) for e in rep_T_int.edges()],
+                "representative_H_edges": [list(e) for e in H_rep.edges()],
+                "representative_subdivision_assignment": [
+                    [u, v, rep_weight_dict.get((min(u, v), max(u, v)), 0)]
+                    for u, v in sorted(H_rep.edges())
+                ],
+                "b_T": 4,
+                "delta_b": 4 - b_H_rep,
+            })
+
+        core_class_info.append({
+            "class_id": i,
+            "count": count,
+            "core_degree_sequence": deg,
+            "core_diameter": nx.diameter(H_rep),
+            "core_radius": nx.radius(H_rep),
+            "b_H": b_H_rep,
+            "num_subdivision_classes": len(sub_class_info),
+            "subdivision_classes": sub_class_info,
+        })
+
+    total = sum(info["count"] for info in core_class_info)
+    print(f"Sum of core class counts: {total} (should be {len(b4_trees)})")
+
+    # Aggregate statistics.
+    stats_b4 = aggregate(b4_profiles)
+    stats_b3 = aggregate(b3_profiles)
+
+    out = {
+        "n": n,
+        "q": q,
+        "target_n2": target_n2,
+        "total_trees": len(trees),
+        "filtered_n2": len(filtered),
+        "burning_distribution": {int(k): int(v) for k, v in b_counts.items()},
+        "num_b3": len(b3_trees),
+        "num_b4": len(b4_trees),
+        "num_b5plus": sum(v for k, v in b_counts.items() if k >= 5),
+        "b4_profiles": b4_profiles,
+        "b3_profiles": b3_profiles,
+        "b4_aggregate": stats_b4,
+        "b3_aggregate": stats_b3,
+        "core_classes": core_class_info,
+    }
+
+    with open("q4_structural_profiles.json", "w") as f:
+        json.dump(out, f, indent=2, default=str)
+
+    print("\nWrote q4_structural_profiles.json")
+    print("Done.")
+
+
+if __name__ == "__main__":
+    main()
