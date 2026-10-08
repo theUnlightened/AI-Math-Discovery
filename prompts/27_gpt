@@ -1,0 +1,314 @@
+You are acting ONLY as a computational runner.
+
+Do not act as a mathematical research editor.
+Do not discuss novelty or literature.
+Do not attempt to prove the conjecture.
+Do not redesign the burning-number definition.
+
+Your ONLY task is to perform a targeted computational search for a counterexample at n = 19.
+
+# Research Question
+
+For a tree T on n vertices, define
+
+```math
+q=\lceil\sqrt n\rceil.
+```
+
+Let n2(T) be the number of degree-2 vertices and b(T) the exact burning number.
+
+The conjecture is
+
+```math
+n_2(T)\le 2q-2 \quad\Longrightarrow\quad b(T)\le q.
+```
+
+At n = 19,
+
+```math
+q=\lceil\sqrt{19}\rceil=5,
+```
+
+so a genuine counterexample must satisfy
+
+```math
+n_2(T)\le8
+```
+
+and
+
+```math
+b(T)\ge6.
+```
+
+Therefore the ONLY target is:
+
+```math
+\boxed{n=19,\qquad n_2(T)\le8,\qquad b(T)\ge6.}
+```
+
+# Existing Computational State
+
+The following has already been completed and MUST NOT be repeated unnecessarily:
+
+- All 317,955 non-isomorphic trees on 19 vertices have been generated.
+- 288,198 satisfy n2 <= 8.
+- Exact burning-number evaluation has already been completed for the first 60,000 filtered candidates.
+- No tree with b >= 6 was found among those 60,000.
+
+The tree generation and filtering stage therefore does NOT need to be repeated from scratch if the existing generated data can be reused.
+
+# Critical Requirement
+
+Use EXACTLY the same validated exact burning-number algorithm as in all previous experiments.
+
+Do not modify:
+
+- the burning-number definition;
+- the source-selection rule;
+- the state representation;
+- the exact search;
+- the stopping condition.
+
+Any candidate reported as a counterexample MUST be verified using the unchanged exact algorithm.
+
+# Goal
+
+The primary goal is NOT to compute the burning number of every remaining tree.
+
+The primary goal is:
+
+```math
+\boxed{\text{Find one genuine counterexample if one exists.}}
+```
+
+A candidate is a genuine counterexample ONLY if exact verification confirms:
+
+```math
+n_2(T)\le8
+```
+
+and
+
+```math
+b(T)\ge6.
+```
+
+# Targeted Search Strategy
+
+You may use computationally cheap structural filters or heuristics to prioritize promising candidates.
+
+Examples of potentially useful quantities include:
+
+- diameter;
+- radius;
+- number of leaves;
+- maximum degree;
+- degree sequence;
+- number and lengths of degree-2 paths;
+- subdivision structure;
+- distances between branching vertices;
+- long arms;
+- approximate lower bounds on burning number.
+
+However:
+
+IMPORTANT:
+
+Any heuristic or lower bound may ONLY be used for prioritization.
+
+It may NOT be used to declare a counterexample.
+
+Only the unchanged exact burning-number algorithm can certify
+
+```math
+b(T)\ge6.
+```
+
+# Suggested Priority
+
+Prioritize trees that are structurally most likely to have large burning number.
+
+In particular, investigate trees with:
+
+1. large diameter;
+2. long degree-2 paths;
+3. small numbers of branching vertices;
+4. spider-like structures;
+5. multiple long arms;
+6. balanced long arms;
+7. structures resembling previously observed burning obstructions.
+
+Do NOT assume any of these conditions is necessary or sufficient.
+
+They are only search priorities.
+
+# Important Negative Evidence
+
+Do not assume that a tree with large diameter has b >= 6.
+
+Do not assume that a tree resembling the previously observed T_r family is a counterexample.
+
+Do not assume that n2 = 8 implies anything about b(T).
+
+Every final candidate must be checked exactly.
+
+# Search Order
+
+Prefer the following workflow:
+
+1. Load/reuse the already generated n=19 trees if possible.
+2. Restrict to the 288,198 trees satisfying n2 <= 8.
+3. Rank or prioritize candidates using cheap structural quantities.
+4. Run the exact burning-number algorithm on promising candidates.
+5. If a tree with b >= 6 is found, STOP and report it immediately.
+6. If no counterexample is found within the computational budget, report exactly how many additional candidates were evaluated.
+
+Do not claim that the entire n=19 search is complete unless all 288,198 filtered candidates have been evaluated exactly.
+
+# Required Counterexample Output
+
+If a counterexample is found, report:
+
+```text
+n = 19
+q = 5
+n2 = ...
+b(T) = ...
+degree sequence = ...
+diameter = ...
+radius = ...
+maximum degree = ...
+leaf count = ...
+edge list = ...
+
+```
+
+Also explicitly verify:
+
+```text
+n2 <= 8
+b(T) >= 6
+
+```
+
+If the exact algorithm produces a shortest burning sequence, report one such sequence.
+
+# If No Counterexample Is Found
+
+Report:
+
+```text
+No counterexample was found among X additional candidates.
+
+```
+
+where X is the exact number of candidates actually evaluated.
+
+Do NOT say:
+
+```text
+The conjecture holds for n=19.
+
+```
+
+unless all 288,198 filtered trees have been exactly evaluated.
+
+If the full order is completed, then and only then report:
+
+```text
+No counterexample was found for n=19.
+
+```
+
+# Validation
+
+Before running the targeted search, confirm that the same validation tests still pass:
+
+```text
+P_1 ... P_12
+K_{1,2} ... K_{1,6}
+
+```
+
+If any validation fails:
+
+STOP immediately.
+
+# Runtime
+
+Record:
+
+- Python version;
+- NetworkX version;
+- CPU count;
+- start time;
+- end time;
+- total runtime;
+- number of candidates evaluated;
+- number of candidates remaining.
+
+# Final Report
+
+Use exactly this structure:
+
+## Validation
+
+Report all validation results.
+
+## Search Parameters
+
+```text
+n = 19
+q = 5
+n2 threshold = 8
+required burning number = >= 6
+
+```
+
+## Search Results
+
+Report:
+
+```text
+previously evaluated = 60000
+newly evaluated = ...
+total evaluated = ...
+remaining = ...
+counterexamples found = ...
+
+```
+
+## Counterexample
+
+If found, give the complete graph data.
+
+If none is found, state:
+
+```text
+No counterexample was found in the candidates actually evaluated.
+
+```
+
+## Computational Status
+
+One of:
+
+```text
+COUNTEREXAMPLE FOUND
+
+```
+
+```text
+n=19 FULLY COMPLETED — NO COUNTEREXAMPLE
+
+```
+
+or
+
+```text
+n=19 PARTIALLY SEARCHED — NO COUNTEREXAMPLE FOUND IN THE EVALUATED SET
+
+```
+
+Do not add mathematical speculation or proof attempts.
