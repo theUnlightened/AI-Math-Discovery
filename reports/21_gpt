@@ -1,0 +1,243 @@
+## Computational Structural Analysis — q=4
+
+The requested structural data mining on the **already-generated 138-record dataset** is complete.
+
+No all-tree enumeration was performed, and the burning-number algorithm was not modified.
+
+### Core results
+
+[DIRECTLY FROM DATA]
+
+There are:
+
+$$
+\boxed{138}
+$$
+
+partition patterns for \(S=0,\ldots,10\), comprising
+
+$$
+2\text{ with }b(T)=2,\qquad
+58\text{ with }b(T)=3,\qquad
+78\text{ with }b(T)=4.
+$$
+
+The validation stored in the source JSON passed:
+
+* \(S=0\) is exactly \(K_{1,9}\);
+* \(b(K_{1,9})=2\);
+* the complete \(S=6\) slice reproduces the previous 11-pattern experiment;
+* \((2,2,2,0,\ldots,0)\) is the unique \(S=6\) pattern with \(b(T)=4\).
+
+### One-variable threshold search
+
+[DIRECTLY FROM DATA]
+
+None of the requested 22 statistics gives a perfect separator of \(b=3\) and \(b=4\) using a rule
+
+$$
+F(s)\ge C.
+$$
+
+None gives a perfect separator using \(F(s)\le C\) either.
+
+The strongest individual thresholds among the tested statistics are:
+
+| Statistic      |          Best threshold |       Errors |
+| -------------- | ----------------------: | -----------: |
+| top-3 sum      |                \(\ge7\) | **17 / 136** |
+| excess above 1 |                \(\ge5\) | **17 / 136** |
+| sum of squares |               \(\ge19\) |           26 |
+| sum of cubes   | \(\ge40,41,\) or \(43\) |           29 |
+| max part       |                \(\ge3\) |           43 |
+
+The complete counterexample lists for every failed threshold rule are in the report and JSON.
+
+### Partition length
+
+[DIRECTLY FROM DATA]
+
+The \(b=4\) region first appears at \(S=6\).
+
+The numbers of \(b=4\) patterns by \(S\) are:
+
+$$
+\boxed{
+1,7,14,22,34
+}
+$$
+
+for \(S=6,7,8,9,10\), respectively.
+
+By number \(k\) of positive parts, \(b=4\) occurs for
+
+$$
+k=1,2,3,4,5,6,7,
+$$
+
+so \(k\) alone does not separate the classes.
+
+### Majorization
+
+[DIRECTLY FROM DATA]
+
+There are
+
+$$
+\boxed{1540}
+$$
+
+comparable same-\(S\) partition pairs.
+
+Both possible monotonicity directions fail.
+
+For
+
+$$
+a\succeq b,
+$$
+
+the proposed implication
+
+$$
+b(T_a)\ge b(T_b)
+$$
+
+has
+
+$$
+\boxed{44}
+$$
+
+counterexamples.
+
+The opposite implication
+
+$$
+b(T_a)\le b(T_b)
+$$
+
+has
+
+$$
+\boxed{482}
+$$
+
+counterexamples.
+
+A particularly simple \(S=6\) counterexample to the first direction is
+
+$$
+(6,0,\ldots,0)\succeq(2,2,2,0,\ldots,0),
+$$
+
+but
+
+$$
+3<4.
+$$
+
+The converse direction also fails because
+
+$$
+(2,2,2,0,\ldots,0)
+$$
+
+dominates both
+
+$$
+(2,2,1,1,0,\ldots,0)
+$$
+
+and
+
+$$
+(2,1,1,1,1,0,\ldots,0),
+$$
+
+while their burning number drops from \(4\) to \(3\).
+
+The **complete 526-counterexample list** is included in the report.
+
+### Two-variable rules
+
+[DIRECTLY FROM DATA]
+
+None of the seven requested pairs admits a perfect axis-aligned AND/OR threshold rule.
+
+Best errors:
+
+| Pair                    | Best errors |
+| ----------------------- | ----------: |
+| \((m_1,k)\)             |          36 |
+| \((\#\ge2,\#\ge3)\)     |          25 |
+| \((\#=2,\#=3)\)         |          53 |
+| \((m_1,\#\ge2)\)        |      **18** |
+| \((\sum s_i^2,k)\)      |          24 |
+| \((m_1,m_2)\)           |          20 |
+| \((\text{top3 sum},k)\) |          17 |
+
+The nominal 17-error rule for `(top3 sum, k)` is actually degenerate because the best rule does not use \(k\) substantively; the best genuinely two-coordinate rule among the tested pairs has 18 errors:
+
+$$
+m_1\ge5
+\quad\text{OR}\quad
+\#\{i:s_i\ge2\}\ge3.
+$$
+
+It is still not exact.
+
+### Strongest finite-data description
+
+[DIRECTLY FROM DATA]
+
+The strongest exact statement supported by this dataset is:
+
+$$
+\boxed{
+\begin{array}{c}
+S\le5 \implies b(T)\ne4,\\[2mm]
+S=6\text{ has exactly one }b=4\text{ partition},\\[2mm]
+S=7,8,9,10\text{ contain increasingly many }b=4\text{ partitions},\\[2mm]
+\text{no tested scalar threshold, specified 2D threshold rule,}\\
+\text{or either majorization monotonicity direction exactly classifies }b(T).
+\end{array}}
+$$
+
+Thus the finite \(b=4\) region is best represented by its **explicit partition set**, rather than by a single concentration statistic.
+
+[STRUCTURAL HYPOTHESIS]
+
+The data suggest that the **full partition shape** matters substantially: neither concentration, maximum arm subdivision, number of subdivided edges, nor the requested simple combinations captures the transition exactly.
+
+That is only a hypothesis about this finite \(K_{1,9}\), \(S\le10\) dataset.
+
+### Direct answers
+
+**Q1. Is there a single simple statistic that separates \(b=3\) and \(b=4\)?**
+
+[DIRECTLY FROM DATA] **No.**
+
+**Q2. Is burning number monotone under partition majorization?**
+
+[DIRECTLY FROM DATA] **No in either direction.**
+
+**Q3. Is there a simple two-variable structural rule?**
+
+[DIRECTLY FROM DATA] **No among the seven specified pairs and tested axis-aligned threshold forms.**
+
+**Q4. What is the strongest empirically supported description of the \(b=4\) region?**
+
+[DIRECTLY FROM DATA] It begins at \(S=6\), expands rapidly for \(S=7,\ldots,10\), and cannot be exactly characterized by any of the tested one- or two-statistic threshold rules.
+
+**Q5. What is the most mathematically promising next experiment?**
+
+[STRUCTURAL HYPOTHESIS] Continue the same \(K_{1,9}\) partition scan to larger \(S\), retaining the full partition shape and testing where \(b(T)=5\) first appears. This would directly probe whether the finite \(S\le10\) behavior is part of a larger pattern.
+
+### Files
+
+[Complete machine-readable analysis](sandbox:/mnt/data/k19_partition_structure_mining.json)
+
+[Complete human-readable report](sandbox:/mnt/data/k19_partition_structure_mining_report.txt)
+
+The JSON contains the **138 derived partition records**, all one-variable threshold analyses, all majorization counterexamples, all two-variable rule searches, and the complete \(b=4\) family data.
