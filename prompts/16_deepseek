@@ -1,0 +1,79 @@
+The q=4 exhaustive computation is already completed and archived.
+
+Your current task is ONLY to make the structural-profiling program mathematically complete and executable.
+
+Do NOT investigate q=5.
+Do NOT perform a literature search.
+Do NOT attempt to prove the conjecture.
+
+The current program is mostly correct, but two requested structural features are still missing.
+
+# 1. Missing feature: canonical subdivision-pattern classification
+
+The current program records subdivision data as
+
+(u, v, s_e)
+
+for edges of the original suppressed core H.
+
+This is not yet a canonical structural classification.
+
+For a fixed core H, two subdivision assignments should be regarded as equivalent if they are related by an automorphism of H.
+
+You must implement an EXACT classification of subdivision assignments modulo graph automorphisms of the core.
+
+For every extremal tree T:
+
+1. construct its suppressed core H;
+2. enumerate the automorphisms of H;
+3. represent the subdivision assignment as edge weights s_e;
+4. compute a canonical representative of the weighted edge assignment under Aut(H).
+
+Two assignments are in the same subdivision class if and only if their canonical weighted-edge representations agree.
+
+Do NOT use raw NetworkX edge ordering as the invariant.
+
+Do NOT classify weighted subdivisions merely by the multiset of subdivision lengths.
+
+The location of the subdivision on H matters.
+
+# 2. Representative extremal tree for every core class
+
+For every suppressed-core isomorphism class, output at least one representative extremal tree.
+
+The representative record must include:
+
+* core isomorphism class;
+* T edge list;
+* H edge list;
+* degree sequence of H;
+* b(H);
+* b(T)=4;
+* Delta_b;
+* subdivision assignment;
+* canonical subdivision-pattern identifier.
+
+If several subdivision-pattern classes occur for the same core, report at least one representative for EACH distinct subdivision-pattern class.
+
+# 3. Preserve the current correct parts
+
+Keep:
+
+* exact burning-number computation;
+* exhaustive enumeration of all 19320 trees;
+* filtering to 2821 trees with n2=6;
+* identification of 185 trees with b=3;
+* identification of 2636 trees with b=4;
+* verification that no tree has b>=5;
+* profiling of all 2636 extremal trees;
+* comparison with the 185 b=3 trees.
+
+Do not replace exact computation by heuristics.
+
+# 4. Important implementation requirement
+
+When constructing subdivision assignments, first use the original labels of H to measure the paths in T.
+
+Only after the subdivision data are obtained may H be relabeled for presentation or isomorphism testing.
+
+Do not reintroduc
