@@ -1,0 +1,456 @@
+The focused critical-structure experiment is complete.
+
+The computation used the already-generated \(S=0,\ldots,10\) dataset and newly evaluated only \(S=11,12\), stopping at the first occurrence of \(b(T)=5\). The exact burning-number definition and validated algorithm were unchanged.
+
+## Key result
+
+[DIRECTLY FROM DATA]
+
+The first occurrence of \(b(T)=5\) is:
+
+$$
+\boxed{S=12}
+$$
+
+and it occurs for exactly one partition:
+
+$$
+\boxed{(3,3,3,3,0,0,0,0,0)}.
+$$
+
+At \(S=12\):
+
+$$
+\boxed{b=3:4,\qquad b=4:68,\qquad b=5:1}.
+$$
+
+Thus
+
+$$
+\boxed{\Delta_b=b(T)-b(H)=5-2=3}.
+$$
+
+No \(S=11\) partition has \(b=5\):
+
+$$
+S=11:\qquad b=3:6,\quad b=4:48.
+$$
+
+---
+
+## Critical sequence
+
+[DIRECTLY FROM DATA]
+
+The first observed \(S\)-values for new burning numbers are
+
+$$
+\boxed{2,\ 6,\ 12}
+$$
+
+for \(b=3,4,5\), respectively.
+
+The corresponding first-obstruction partitions are:
+
+$$
+b=3:\quad (2),
+$$
+
+$$
+b=4:\quad (2,2,2),
+$$
+
+$$
+b=5:\quad (3,3,3,3).
+$$
+
+[STRUCTURAL HYPOTHESIS]
+
+The three observed values satisfy
+
+$$
+2=(3-1)(3-2),\qquad
+6=(4-1)(4-2),\qquad
+12=(5-1)(5-2),
+$$
+
+equivalently they fit \(q(q-1)\) for \(q=2,3,4\).
+
+This is only a finite-data pattern; no general formula has been established.
+
+---
+
+## Maximum burning number by \(S\)
+
+[DIRECTLY FROM DATA]
+
+| \(S\) | # patterns | max \(b(T)\) |
+| ----: | ---------: | -----------: |
+|     0 |          1 |            2 |
+|     1 |          1 |            2 |
+|     2 |          2 |            3 |
+|     3 |          3 |            3 |
+|     4 |          5 |            3 |
+|     5 |          7 |            3 |
+|     6 |         11 |            4 |
+|     7 |         15 |            4 |
+|     8 |         22 |            4 |
+|     9 |         30 |            4 |
+|    10 |         41 |            4 |
+|    11 |         54 |            4 |
+|    12 |         73 |        **5** |
+
+---
+
+## First \(b=4\) obstruction
+
+[DIRECTLY FROM DATA]
+
+Partition:
+
+$$
+\boxed{(2,2,2,0,\ldots,0)}.
+$$
+
+The three subdivided arms have actual lengths
+
+$$
+3,3,3,
+$$
+
+while the other six arms have length \(1\).
+
+One exact shortest burning sequence is
+
+$$
+\boxed{(0,1,2,3)}.
+$$
+
+After four rounds all 16 vertices are covered.
+
+With only three rounds, the exhaustive state search found:
+
+$$
+\boxed{\text{maximum covered}=15}
+$$
+
+so at least one vertex remains uncovered.
+
+There are 6 maximal-coverage states after three rounds, and each leaves exactly one terminal vertex of one of the three long arms uncovered.
+
+This gives the computational obstruction:
+
+[STRUCTURAL HYPOTHESIS]
+
+The three comparable long arms compete for the limited number of sources available after accounting for the central region.
+
+---
+
+## First \(b=5\) obstruction
+
+[DIRECTLY FROM DATA]
+
+Partition:
+
+$$
+\boxed{(3,3,3,3,0,\ldots,0)}.
+$$
+
+The four subdivided arms have actual lengths
+
+$$
+4,4,4,4,
+$$
+
+while the remaining five arms have length \(1\).
+
+One exact shortest burning sequence is
+
+$$
+\boxed{(0,1,2,3,4)}.
+$$
+
+The stored coverage evolution is:
+
+* Round 1: source \(0\), covered 1 vertex.
+* Round 2: source \(1\), covered 10 vertices.
+* Round 3: source \(2\), covered 14 vertices.
+* Round 4: source \(3\), covered 18 vertices.
+* Round 5: source \(4\), covered all 22 vertices.
+
+With only four rounds:
+
+$$
+\boxed{\text{maximum covered}=21}
+$$
+
+out of 22.
+
+There are 8 maximal-coverage states after four rounds; every one leaves exactly one terminal vertex of one of the four long arms uncovered.
+
+[STRUCTURAL HYPOTHESIS]
+
+This is strongly analogous to the first \(b=4\) case: a balanced collection of long arms produces a configuration where, after the central region is efficiently handled, there are insufficient remaining source slots to finish every long arm.
+
+---
+
+## Local partition moves
+
+[DIRECTLY FROM DATA]
+
+At \(S=6\), there are direct one-unit transfers changing \(b=3\) into \(b=4\):
+
+$$
+(3,2,1)\longrightarrow(2,2,2),
+$$
+
+and
+
+$$
+(2,2,1,1)\longrightarrow(2,2,2).
+$$
+
+Both endpoints on the left have \(b=3\), while
+
+$$
+b(2,2,2)=4.
+$$
+
+At \(S=12\), the unique \(b=5\) configuration has direct one-unit neighbors with \(b=4\):
+
+$$
+(4,3,3,2)\longrightarrow(3,3,3,3),
+$$
+
+and
+
+$$
+(3,3,3,2,1)\longrightarrow(3,3,3,3).
+$$
+
+In both cases the more balanced partition has the larger burning number.
+
+An especially useful majorization observation is:
+
+[DIRECTLY FROM DATA]
+
+$$
+(4,3,3,2)\succeq(3,3,3,3),
+$$
+
+but
+
+$$
+4<5.
+$$
+
+Meanwhile,
+
+$$
+(3,3,3,3)\succeq(3,3,3,2,1),
+$$
+
+but
+
+$$
+5>4.
+$$
+
+So the critical local transition itself already demonstrates that simple majorization monotonicity cannot explain the phenomenon.
+
+---
+
+## Structure of the first two obstructions
+
+[DIRECTLY FROM DATA]
+
+The two first new maxima have the following form:
+
+$$
+b=4:
+\qquad
+(2,2,2),
+$$
+
+meaning **3 equal long arms of length 3**.
+
+$$
+b=5:
+\qquad
+(3,3,3,3),
+$$
+
+meaning **4 equal long arms of length 4**.
+
+In both cases:
+
+$$
+\text{number of equal long arms}=b(T)-1,
+$$
+
+and
+
+$$
+\text{actual long-arm length}=b(T)-1.
+$$
+
+[STRUCTURAL HYPOTHESIS]
+
+This is the clearest common structural feature currently visible in the computation: the first appearance of the next burning number occurs at a balanced multi-arm configuration whose number and length of long arms increase together.
+
+This should be treated as a candidate mechanism, not a theorem.
+
+---
+
+## Answers to the requested questions
+
+### Q1. Where does \(b=5\) first occur?
+
+[DIRECTLY FROM DATA]
+
+$$
+\boxed{S=12}
+$$
+
+uniquely at
+
+$$
+\boxed{(3,3,3,3,0,0,0,0,0)}.
+$$
+
+### Q2. What is the observed critical sequence?
+
+[DIRECTLY FROM DATA]
+
+$$
+\boxed{2,6,12}.
+$$
+
+[STRUCTURAL HYPOTHESIS]
+
+It is consistent with \(q(q-1)\) for the three observed transitions, but this is not established beyond the tested range.
+
+### Q3. What common structure do the maximizing partitions have?
+
+[DIRECTLY FROM DATA]
+
+At the **first occurrence** of each new burning number:
+
+$$
+(2,2,2)
+\quad\text{and}\quad
+(3,3,3,3)
+$$
+
+are balanced collections of equal long arms.
+
+[STRUCTURAL HYPOTHESIS]
+
+Balanced multi-arm configurations may be the relevant obstruction mechanism.
+
+This is not true as a description of every maximizer once \(S\) becomes larger: many other partitions also attain \(b=4\).
+
+### Q4. Is there a local partition move that increases \(b(T)\)?
+
+[DIRECTLY FROM DATA]
+
+Yes.
+
+The strongest examples are:
+
+$$
+(3,2,1)\to(2,2,2):\quad 3\to4,
+$$
+
+$$
+(2,2,1,1)\to(2,2,2):\quad 3\to4,
+$$
+
+and
+
+$$
+(4,3,3,2)\to(3,3,3,3):\quad 4\to5,
+$$
+
+$$
+(3,3,3,2,1)\to(3,3,3,3):\quad 4\to5.
+$$
+
+### Q5. Are the first \(b=4\) and \(b=5\) obstructions analogous?
+
+[STRUCTURAL HYPOTHESIS]
+
+Yes, at the finite computational level.
+
+They have the forms
+
+$$
+3\text{ arms}\times\text{length }3
+$$
+
+and
+
+$$
+4\text{ arms}\times\text{length }4,
+$$
+
+respectively, with the same type of maximal-\((r-1)\)-round obstruction: one terminal vertex remains on one of the equal long arms.
+
+### Q6. What mathematical lemma should be attempted next?
+
+[STRUCTURAL HYPOTHESIS]
+
+The most specific next lemma to investigate is:
+
+> For a subdivided \(K_{1,9}\), characterize when a collection of \(r-1\) equal long arms of a given length forces at least one terminal arm vertex to remain uncovered after \(r-1\) burning rounds.
+
+The first two concrete cases are
+
+$$
+(2,2,2)
+$$
+
+for \(b=4\) and
+
+$$
+(3,3,3,3)
+$$
+
+for \(b=5\).
+
+The useful proof target is therefore a **local arm-covering obstruction**, not a global theorem about arbitrary trees.
+
+---
+
+## Scope
+
+[DIRECTLY FROM DATA]
+
+Only \(S=11,12\) were newly computed. The \(S=0,\ldots,10\) results were taken from the existing machine-readable dataset.
+
+The computation stopped immediately after the first \(b=5\) occurrence.
+
+[NOT EXECUTED]
+
+No \(S>12\) scan was performed.
+
+No all-tree enumeration was performed.
+
+No machine learning was used.
+
+---
+
+## Output files
+
+[Complete machine-readable results](sandbox:/mnt/data/k19_star_critical_structure.json)
+
+[Complete human-readable report](sandbox:/mnt/data/k19_star_critical_structure_report.txt)
+
+File sizes:
+
+* `k19_star_critical_structure.json`: **274,941 bytes**
+* `k19_star_critical_structure_report.txt`: **23,879 bytes**
+
+### Final computational status
+
+**COMPLETED**
