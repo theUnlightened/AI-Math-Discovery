@@ -1,0 +1,831 @@
+# Adversarial Assessment of the Persistent-Corridor Mechanism
+
+The previous mechanism is **not valid in its original unrestricted form**. Two of its key steps fail on a very small tree. However, those failures occur outside the regime \(q=\lceil\sqrt n\rceil\) relevant to the target statement, so they do not by themselves refute a suitably restricted version.
+
+The correct verdict is therefore **Outcome C — Inconclusive**, with a much more precise lemma suggested below.
+
+---
+
+# Part I — Branching-Compensation Claim
+
+## Claim A
+
+A natural rigorous interpretation is:
+
+> Given a \(q\)-round burning strategy maximizing the coverage profile, if a final unburned component has a boundary vertex of degree at least \(3\), then there is an equally good strategy whose final obstruction is no longer attached through a branching vertex.
+
+This claim is **false in general**.
+
+### [DIRECTLY FROM DATA] Smallest counterexample found
+
+Take the 6-vertex double star
+
+$$
+T:
+\qquad
+u-v,
+$$
+
+with two leaves attached to \(u\) and two leaves attached to \(v\).
+
+Thus
+
+$$
+\deg(u)=\deg(v)=3,
+$$
+
+and all four remaining vertices are leaves.
+
+Its edge set can be written
+
+$$
+\{uv,ua,ub,vc,vd\}.
+$$
+
+The exact burning number is
+
+$$
+\boxed{b(T)=3}.
+$$
+
+Consider \(q=2\). After two rounds the maximum possible coverage is
+
+$$
+\boxed{5}
+$$
+
+of the six vertices.
+
+Every maximum-coverage sequence is, up to symmetry, of the form
+
+$$
+(u,c)
+$$
+
+or
+
+$$
+(v,a),
+$$
+
+where the second source is a leaf attached to the *other* branching vertex.
+
+For example, with sources
+
+$$
+(u,c),
+$$
+
+after two rounds the burned set is
+
+$$
+\{u,v,a,b,c\},
+$$
+
+leaving \(d\) unburned.
+
+The unique boundary vertex of the remaining component is \(v\), and
+
+$$
+\deg(v)=3.
+$$
+
+There is no maximum-coverage two-round sequence whose final unburned component has only degree-\(\le2\) boundary.
+
+### Why source rerouting fails
+
+[DIRECTLY FROM DATA]
+
+If the first source is \(u\), the second-round spread from \(u\) already burns
+
+$$
+v,a,b.
+$$
+
+The second source can add at most one additional vertex, so to achieve coverage 5 it must be placed on a leaf of the \(v\)-side.
+
+But then the other \(v\)-leaf necessarily remains unburned.
+
+Moving the second source to \(v\) is impossible because \(v\) is already burned at the beginning of round 2.
+
+Moving it to \(a\) or \(b\) produces no additional gain, because those vertices are reached by the round-2 spread anyway.
+
+Thus the branching vertex is not a dispensable boundary artifact. It is part of the timing obstruction.
+
+### Important qualification
+
+[DIRECTLY FROM DATA]
+
+This double star has
+
+$$
+n=6,\qquad \lceil\sqrt6\rceil=3,
+$$
+
+while the failed strategy above uses only \(q=2\).
+
+Therefore it is **not a counterexample to the original target statement**.
+
+It is a counterexample to the unrestricted branching-compensation claim.
+
+[STRUCTURAL HYPOTHESIS]
+
+The relevant version may still become true after imposing the actual-counterexample conditions
+
+$$
+q=\lceil\sqrt n\rceil,\qquad b(T)\ge q+1.
+$$
+
+The existing \(n\le19\) computation contains no such counterexample, so that restricted claim cannot currently be tested against an actual obstruction.
+
+---
+
+# Part II — Two-Degree-2-Vertices-per-Layer
+
+The statement
+
+> each additional persistence layer requires two previously unused degree-2 vertices
+
+is not yet mathematically defined.
+
+The phrase "persistence layer" needs a formal object before the claim can be proved or disproved.
+
+A natural interpretation is:
+
+> one persistence layer = one additional round during which a particular residual unburned component survives.
+
+Under that interpretation the double star is again fatal to an unrestricted statement.
+
+### [DIRECTLY FROM DATA]
+
+The double star has
+
+$$
+n_2=0,
+$$
+
+yet a one-step residual obstruction remains after an optimally covered two-round attempt.
+
+Thus a rule of the form
+
+$$
+\text{persistence depth }k
+\Longrightarrow
+n_2\ge2k-1
+$$
+
+already fails at \(k=1\), under the natural interpretation.
+
+The failure mechanism is exactly that the surviving region can be attached through a branching vertex rather than a degree-2 corridor.
+
+### A second problem: charging overlap
+
+[STRUCTURAL HYPOTHESIS]
+
+Even if one restricts attention to degree-2 corridors, a naive temporal charging argument can double-count:
+
+* the same degree-2 vertex may lie on the obstruction trace for more than one round;
+* two residual components may be separated only after a common degree-2 path;
+* a source placement can change the future obstruction trace.
+
+Therefore the correct charging object must be **disjoint as a combinatorial object**, not merely "associated with" a round.
+
+This is a major weakness in the original mechanism.
+
+---
+
+# Part III — Geometry Versus Timing
+
+There really is a distinction that must not be erased.
+
+## A concrete example
+
+Consider the star \(K_{1,3}\) with center \(c\).
+
+For \(q=2\), the static balls
+
+$$
+B(c,1),\qquad B(c,0)
+$$
+
+already cover the whole graph.
+
+But the corresponding ordered source choice
+
+$$
+(c,c)
+$$
+
+is not a valid burning sequence: after round 1, \(c\) is already burned, so it cannot be selected as the second source.
+
+A valid sequence is instead
+
+$$
+(c,\ell)
+$$
+
+for a leaf \(\ell\).
+
+So:
+
+[DIRECTLY FROM DATA]
+
+> A particular static ball-cover certificate does not automatically encode a valid burning sequence.
+
+The temporal source condition cannot simply be discarded.
+
+### Does existence-level temporal incompatibility occur for trees?
+
+[DIRECTLY FROM DATA]
+
+A small direct check through \(n=6\) found no tree for which:
+
+* a cover by balls of radii
+
+  $$
+  k-1,k-2,\ldots,0
+  $$
+
+  exists with distinct centers,
+
+but
+
+* no valid \(k\)-round burning sequence exists.
+
+Thus there is currently no small-tree example showing that the **existence** of such a ball cover is strictly weaker than the burning-number condition.
+
+[STRUCTURAL HYPOTHESIS]
+
+This suggests that the static ball-cover formulation may still be usable, but only after establishing a separate ordering/source-admissibility lemma.
+
+The safe formulation is:
+
+$$
+\boxed{\text{ball covering}+\text{source feasibility}}
+$$
+
+rather than ball covering alone.
+
+---
+
+# Part IV — A Better Potential Function
+
+The original "number of degree-2 vertices consumed per round" is too coarse.
+
+A more promising direction is a **dynamic active-tip path-packing potential**.
+
+## Candidate potential
+
+At time \(t\), let \(U_t\) be the unburned forest, and let the remaining radius budget be
+
+$$
+r=q-t.
+$$
+
+Identify "active tips" as residual leaves that cannot be reached from the already burned boundary within the remaining radius without using a new source.
+
+For a family \(\mathcal P\) of vertex-disjoint paths joining active tips, define
+
+$$
+\Phi_t
+=
+\max_{\mathcal P}
+\sum_{P\in\mathcal P}
+|V(P)\cap V_2(T)|.
+$$
+
+Because the paths are vertex-disjoint,
+
+$$
+\boxed{\Phi_t\le n_2(T)}.
+$$
+
+This is the useful feature missing from the naive layer-counting argument.
+
+### [STRUCTURAL HYPOTHESIS]
+
+A possible obstruction mechanism would then be:
+
+$$
+b(T)>q
+$$
+
+forces a sequence of residual states for which the active-tip packing potential stays positive for many rounds.
+
+If one could establish that a \(q\)-round obstruction necessarily creates
+
+$$
+2q-1
+$$
+
+units of disjoint degree-2 path material, then the desired bound would follow.
+
+This is still only a candidate mechanism.
+
+### Why this is better than the original potential
+
+It solves one specific defect:
+
+> **No degree-2 vertex can be charged twice**, because the final charge is based on vertex-disjoint paths.
+
+The remaining issue is much sharper:
+
+> Why should a failed \(q\)-round sequence force a packing of total degree-2 size \(2q-1\)?
+
+That is now a concrete question.
+
+---
+
+# Part V — Working With the Suppressed Core
+
+Let
+
+$$
+T=(H,\{s_e\}_{e\in E(H)}),
+$$
+
+where
+
+$$
+n_2(T)=\sum_{e\in E(H)}s_e.
+$$
+
+The core viewpoint suggests another candidate.
+
+## Candidate Lemma 2 — Critical Thread Reduction
+
+[STRUCTURAL HYPOTHESIS]
+
+For a minimum-order counterexample, there should exist a critical set of core edges
+
+$$
+F\subseteq E(H)
+$$
+
+such that all unavoidable burning obstruction is carried by the subdivided threads corresponding to \(F\).
+
+Furthermore, those critical threads should admit a disjoint decomposition whose total subdivision load is at least
+
+$$
+2q-1.
+$$
+
+The intended statement is stronger than merely saying "some core edge is long."
+
+It says the obstruction must be distributed across a collection of **disjoint critical threads**.
+
+### Stress tests
+
+**Paths.**
+
+A path is entirely one long thread and therefore fits naturally into a thread-based description.
+
+**Stars.**
+
+There are no degree-2 vertices, so there is no thread load. The star is easy to burn.
+
+**Double stars.**
+
+This exposes the danger: there can be a temporal obstruction supported entirely by branching vertices.
+
+Therefore this lemma needs the minimum-counterexample / actual-\(q\) restriction.
+
+**Balanced subdivided stars.**
+
+The previously computed
+
+$$
+(2,2,2)
+$$
+
+and
+
+$$
+(3,3,3,3)
+$$
+
+patterns fit very naturally into the critical-thread picture. They provide evidence for the mechanism, but not proof.
+
+---
+
+# Part VI — Candidate Lemma 3: Ball-Overlap / Packing Lemma
+
+This is a substantially different formulation.
+
+### [STRUCTURAL HYPOTHESIS]
+
+Suppose \(T\) is a minimum-order tree with
+
+$$
+b(T)\ge q+1.
+$$
+
+Consider every possible \(q\)-ball covering with radii
+
+$$
+q-1,q-2,\ldots,0.
+$$
+
+The hypothesis is:
+
+> Every such attempted covering has an unavoidable overlap/deficit region whose supporting tree paths contain at least \(2q-1\) degree-2 vertices.
+
+The key point would be that the obstruction is not simply "a long path."
+
+Rather,
+
+$$
+\boxed{
+\text{too much unavoidable overlap}
+\Longrightarrow
+\text{too little independent coverage}
+\Longrightarrow
+\text{critical degree-2 path packing}.
+}
+$$
+
+### Stress tests
+
+**Paths.**
+
+For a path, the balls can be positioned almost without waste, so no obstruction appears before the square threshold.
+
+**Stars.**
+
+Balls overlap heavily at the center, but branching creates huge simultaneous coverage, so overlap alone cannot explain failure.
+
+**Balanced spiders.**
+
+The long arms create competing coverage requirements and therefore give the strongest positive evidence.
+
+### Weakness
+
+The phrase "unavoidable overlap" still needs a quantitative definition.
+
+Until there is a numerical deficit that can be bounded by \(n_2\), this remains a framework rather than a lemma.
+
+---
+
+# Part VII — Why \(2q-1\) May Still Be Important
+
+There is one numerical observation worth taking seriously.
+
+### [DIRECTLY FROM DATA]
+
+$$
+2q-1=q^2-(q-1)^2.
+$$
+
+It is exactly the gap between consecutive squares.
+
+This is also the number of vertices added when a path grows from
+
+$$
+(q-1)^2
+$$
+
+vertices to
+
+$$
+q^2
+$$
+
+vertices.
+
+[STRUCTURAL HYPOTHESIS]
+
+This may indicate that the threshold is tied to a **square-capacity argument** for burning rather than to a purely local corridor count.
+
+That is potentially important because the original corridor mechanism tried to derive
+
+$$
+2q-1
+$$
+
+only as
+
+$$
+2(q-1)+1.
+$$
+
+The latter is numerically convenient, but there is currently no proof that nature should organize the obstruction into exactly \(q-1\) two-vertex charges plus one.
+
+The square-gap interpretation may therefore be more fundamental.
+
+However, there is not enough evidence to decide between these explanations.
+
+---
+
+# Part VIII — What the Existing Data Say About the Proposed Mechanism
+
+### [DIRECTLY FROM DATA]
+
+The following claims are **false without additional hypotheses**:
+
+$$
+\boxed{\text{Every persistent obstruction can be pushed away from branching vertices.}}
+$$
+
+and
+
+$$
+\boxed{\text{Every persistence layer automatically costs two degree-2 vertices.}}
+$$
+
+The 6-vertex double star disproves both unrestricted ideas.
+
+### [DIRECTLY FROM DATA]
+
+The existing \(n\le19\) computation does not contain a genuine actual-\(q\) obstruction.
+
+Therefore it cannot confirm or refute the restricted versions that would be needed for the target theorem.
+
+### [STRUCTURAL HYPOTHESIS]
+
+The most plausible repair is therefore:
+
+$$
+\boxed{
+\text{first isolate a minimal actual-}q\text{ counterexample,}
+}
+$$
+
+then prove that its critical obstruction can be represented by **disjoint critical threads**.
+
+This is materially stronger than saying "branching is harmless."
+
+---
+
+# Part IX — Ranking the Possible Mechanisms
+
+## 1. Leaf-to-leaf path packing
+
+### [STRUCTURAL HYPOTHESIS]
+
+**Mathematical reason:** degree-2 vertices naturally occur as internal vertices of leaf-to-leaf/core-to-leaf paths, and disjoint path packing gives a clean non-overcounting charge.
+
+**Supporting evidence:** balanced subdivided stars exhibit exactly this kind of multi-arm obstruction.
+
+**Counterargument:** branching-only obstructions such as the double star show that path packing does not describe arbitrary failed burning sequences.
+
+**Next theorem to prove:** a minimum actual-\(q\) counterexample admits a critical obstruction represented by disjoint thread paths carrying all essential temporal deficit.
+
+---
+
+## 2. Burning-ball overlap/packing
+
+### [STRUCTURAL HYPOTHESIS]
+
+**Mathematical reason:** burning is fundamentally an ordered ball-covering problem, so a quantitative coverage-deficit invariant is conceptually direct.
+
+**Supporting evidence:** the path-square phenomenon and balanced spider examples.
+
+**Counterargument:** overlap at branching vertices does not necessarily indicate difficulty.
+
+**Next theorem to prove:** characterize the minimum unavoidable overlap between a \(q\)-ball family and convert that overlap into a degree-2 path charge.
+
+---
+
+## 3. Topological-core reduction
+
+### [STRUCTURAL HYPOTHESIS]
+
+**Mathematical reason:** every degree-2 vertex is represented explicitly by the subdivision load \(s_e\), making \(n_2=\sum s_e\) exact.
+
+**Supporting evidence:** the \(K_{1,9}\) experiments show that subdivision placement can change \(b(T)\) while keeping the core fixed.
+
+**Counterargument:** the boundary dataset has many different core isomorphism types.
+
+**Next theorem to prove:** characterize which subdivision loads on a fixed core can actually increase the burning number.
+
+---
+
+## 4. Persistent-corridor charging
+
+### [STRUCTURAL HYPOTHESIS]
+
+**Mathematical reason:** long-lived residual components do naturally propagate along degree-2 paths.
+
+**Supporting evidence:** the critical spider family.
+
+**Counterargument:** the double star shows that persistence can be supported by branching.
+
+**Next theorem to prove:** a restricted "thread-dominance" statement for minimum actual-\(q\) counterexamples.
+
+---
+
+## 5. Branching compensation
+
+### [DIRECTLY FROM DATA]
+
+The unrestricted version is false.
+
+### [STRUCTURAL HYPOTHESIS]
+
+A restricted version may survive only after imposing the actual-\(q\) minimal-counterexample conditions.
+
+**Next theorem:** a source-rerouting lemma under those restrictions.
+
+---
+
+## 6. Diameter/radius argument
+
+### [DIRECTLY FROM DATA]
+
+Diameter and radius vary substantially among the \(b=q\) boundary trees, and neither alone separates the observed finite classes.
+
+### [STRUCTURAL HYPOTHESIS]
+
+Diameter may still be useful as a secondary quantity, but it is unlikely to supply the sharp \(2q-1\) degree-2 threshold by itself.
+
+---
+
+## 7. Completely different invariant
+
+### [STRUCTURAL HYPOTHESIS]
+
+Still worth keeping open.
+
+The main candidate would have to combine the square-scale parameter \(q^2-n\) with the topological subdivision structure.
+
+---
+
+# Part X — The Most Promising Precise Lemma
+
+The original corridor lemma should therefore be replaced by the following sharper candidate.
+
+## Critical Thread Packing Lemma
+
+### [STRUCTURAL HYPOTHESIS]
+
+Let \(T\) be a **minimum-order counterexample** to the target statement, with
+
+$$
+q=\lceil\sqrt n\rceil
+$$
+
+and
+
+$$
+b(T)\ge q+1.
+$$
+
+Then there exists a failed \(q\)-round burning sequence and a collection of pairwise vertex-disjoint paths
+
+$$
+P_1,\ldots,P_q
+$$
+
+such that:
+
+$$
+|V(P_i)\cap V_2(T)|\ge2
+\qquad
+(i=1,\ldots,q-1),
+$$
+
+and
+
+$$
+|V(P_q)\cap V_2(T)|\ge1.
+$$
+
+Consequently,
+
+$$
+n_2(T)\ge
+\sum_{i=1}^q |V(P_i)\cap V_2(T)|
+\ge2(q-1)+1
+=
+2q-1.
+$$
+
+This is the cleanest candidate because the final counting step is completely rigorous **if the structural lemma itself is established**.
+
+The unresolved mathematical content is entirely concentrated in:
+
+$$
+\boxed{\text{Why must a minimum actual-}q\text{ counterexample contain these disjoint critical paths?}}
+$$
+
+That is much sharper than the vague statement "branching can be pushed away."
+
+---
+
+# Part XI — Proposed Proof Architecture
+
+### [STRUCTURAL HYPOTHESIS]
+
+A plausible architecture is:
+
+$$
+b(T)\ge q+1
+$$
+
+$$
+\Downarrow
+$$
+
+choose a minimum-order counterexample
+
+$$
+\Downarrow
+$$
+
+choose a lexicographically maximal failed \(q\)-round sequence
+
+$$
+\Downarrow
+$$
+
+extract the final unresolved tips/components
+
+$$
+\Downarrow
+$$
+
+prove that their critical connections can be represented by thread paths
+
+$$
+\Downarrow
+$$
+
+remove overlaps using minimality / exchange arguments
+
+$$
+\Downarrow
+$$
+
+obtain \(q-1\) disjoint paths carrying at least two degree-2 vertices each
+
+$$
++\ 1\text{ terminal degree-2 vertex}
+$$
+
+$$
+\Downarrow
+$$
+
+$$
+n_2\ge2q-1.
+$$
+
+The crucial improvement is that the proof no longer requires the false statement
+
+$$
+\text{branching is always removable}.
+$$
+
+Instead, branching would have to be shown either:
+
+1. removable **in a minimum actual-\(q\) counterexample**, or
+2. incapable of participating in the critical path packing.
+
+---
+
+# Part XII — Potential Failure Modes
+
+### [STRUCTURAL HYPOTHESIS]
+
+The critical-thread approach would fail if one can construct a minimum actual-\(q\) counterexample where:
+
+* the obstruction is genuinely supported by branching vertices;
+* no suitable disjoint collection of degree-2 paths exists;
+* one degree-2 vertex is intrinsically reused by several temporal obstruction stages;
+* the obstruction is created primarily by source-order incompatibility rather than geometric separation.
+
+The most dangerous of these is the first: the double star proves that branching can matter in temporal burning.
+
+---
+
+# Final Assessment
+
+### [DIRECTLY FROM DATA]
+
+The original persistent-corridor mechanism is **too strong as stated**.
+
+The branching-compensation claim is false in general, and the two-degree-2-per-layer rule is unsupported and false under its natural unrestricted interpretation.
+
+### [STRUCTURAL HYPOTHESIS]
+
+However, those counterexamples do not live in the actual regime of a counterexample to the target statement:
+
+$$
+q=\lceil\sqrt n\rceil,
+\qquad
+n\le q^2,
+\qquad
+b(T)\ge q+1.
+$$
+
+Therefore the mechanism has **not** been decisively killed for the target problem.
+
+The best next formulation is not "persistent corridors" in isolation, but:
+
+$$
+\boxed{\textbf{critical thread packing in a minimum actual-}q\textbf{ counterexample}.}
+$$
+
+This gives an exact combinatorial object, prevents double-counting, and makes the desired \(2q-1\) count transparent once the structural extraction lemma is proved.
+
+**Outcome C — Inconclusive**
