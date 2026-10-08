@@ -1,0 +1,134 @@
+Continue from the successfully completed q=4 structural experiment.
+
+Do NOT modify the burning-number definition or the previously validated exact burning-number algorithm.
+
+Do NOT enumerate all 16-vertex trees.
+
+Your only task is the following focused structural experiment.
+
+## Fixed core
+
+Let
+
+```
+H = K_{1,9}.
+```
+
+The nine core edges are symmetric.
+
+For a subdivision vector
+
+```
+s = (s_1,...,s_9),
+```
+
+construct the subdivided tree T by inserting s_i degree-2 vertices into the i-th core edge.
+
+Then
+
+```
+|V(T)| = 10 + sum_i s_i.
+```
+
+Since H = K_{1,9},
+
+```
+b(H) = 2.
+```
+
+## Experiment
+
+For every total subdivision sum
+
+```
+S = 0,1,2,...,10,
+```
+
+enumerate ALL integer partitions of S into at most 9 nonnegative parts.
+
+Because the nine leaves of K_{1,9} are symmetric, do NOT enumerate ordered 9-tuples. Treat vectors that differ only by permutation as the same pattern.
+
+For every partition pattern, construct the corresponding subdivided tree T and compute its exact burning number using the SAME previously validated algorithm.
+
+## Required output
+
+For every S, report:
+
+1. S
+2. number of partition patterns
+3. every subdivision pattern
+4. b(T)
+5. delta_b = b(T) - b(H)
+6. diameter
+7. radius
+8. maximum subdivision length
+9. number of subdivided edges
+
+Then summarize:
+
+* maximum b(T) for each S
+* maximum delta_b for each S
+* all patterns achieving the maximum
+* all patterns with delta_b >= 2
+* whether (2,2,2) remains exceptional
+* whether any pattern with delta_b >= 2 occurs for S < 6
+* whether delta_b >= 2 occurs again for S > 6
+
+## Important structural analysis
+
+After the computation, explicitly compare the patterns according to:
+
+A. maximum subdivision length
+
+B. number of subdivided edges
+
+C. concentration versus balance of subdivision mass
+
+D. number of branches carrying subdivision length at least 2
+
+E. number of branches carrying subdivision length at least 3
+
+Do NOT claim any general theorem from these finite computations.
+
+Distinguish clearly between:
+
+[DIRECTLY FROM DATA]
+
+and
+
+[STRUCTURAL HYPOTHESIS].
+
+## Validation
+
+Before the main experiment, verify:
+
+* S=0 gives exactly K_{1,9}
+* b(K_{1,9}) = 2
+* the S=6 results reproduce the previously obtained 11-pattern table
+* in particular, S=6 must have exactly one pattern with b(T)=4:
+
+  (2,2,2,0,0,0,0,0,0)
+
+If validation fails, STOP and report the failure. Do not continue.
+
+## Files
+
+Save the complete machine-readable results as:
+
+```
+k19_star_subdivision_scan_S0_S10.json
+```
+
+Save a human-readable report as:
+
+```
+k19_star_subdivision_scan_S0_S10_report.txt
+```
+
+Also print a compact summary table:
+
+```
+S | #patterns | max b(T) | max delta_b | patterns attaining max
+```
+
+Finally, state clearly whether the experiment found any new pattern with delta_b = 2 beyond the previously known (2,2,2) pattern.
