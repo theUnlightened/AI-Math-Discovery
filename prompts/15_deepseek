@@ -1,0 +1,225 @@
+The q=4 exhaustive burning-number experiment is already completed and archived.
+
+Your current task is ONLY to fix and finalize the structural-profiling program for the 2636 extremal trees.
+
+Do NOT investigate q=5.
+Do NOT redesign the burning-number experiment.
+Do NOT perform a literature search.
+Do NOT claim new mathematical results.
+
+## 1. Critical bug to fix
+
+The current code contains the following problematic sequence:
+
+```python
+H = suppress_degree2(T_int)
+H_int = nx.convert_node_labels_to_integers(H)
+
+s_list = subdivision_lengths(T_int, H_int)
+```
+
+After `H` is relabeled to `H_int`, its vertex labels may no longer correspond to the vertex labels in `T_int`.
+
+Therefore `subdivision_lengths(T_int, H_int)` may attempt to call:
+
+```python
+nx.shortest_path(T_int, u, v)
+```
+
+for vertices `u,v` that are not labels in `T_int`.
+
+Fix this correctly.
+
+The simplest safe approach is:
+
+1. Compute subdivision lengths using the ORIGINAL suppressed core `H`, whose labels are inherited from `T_int`.
+2. Only then create a relabeled copy `H_int` for canonical display and burning-number calculations.
+
+For example:
+
+```python
+H = suppress_degree2(T_int)
+
+s_list = subdivision_lengths(T_int, H)
+
+H_int = nx.convert_node_labels_to_integers(H)
+```
+
+Do NOT assume this exact patch is sufficient without checking the rest of the code.
+
+## 2. Audit the entire profiling program
+
+Inspect the complete program for any other label-dependent or logical problems.
+
+Pay special attention to:
+
+* `subdivision_lengths`;
+* suppressed-core construction;
+* core relabeling;
+* core isomorphism classification;
+* canonical comparison;
+* burning-number calculation on relabeled cores;
+* stored edge lists;
+* burning sequences;
+* JSON serialization.
+
+Distinguish:
+
+* FATAL BUG;
+* SIGNIFICANT BUG;
+* MINOR ISSUE;
+* NONE.
+
+## 3. Important requirement: edge-associated subdivision data
+
+The current code stores only:
+
+```python
+s_list
+```
+
+which depends on NetworkX edge ordering.
+
+That is not a canonical structural invariant.
+
+Improve the representation so that the subdivision data are explicitly associated with the corresponding core edges.
+
+For example, store records of the form:
+
+```text
+(u, v, s_e)
+```
+
+where `(u,v)` is an edge of the ORIGINAL suppressed core H and `s_e` is the number of degree-2 vertices on the corresponding path in T.
+
+Do not compare raw subdivision vectors from unrelated edge orderings.
+
+## 4. Core isomorphism classification
+
+The current `classify_cores()` uses pairwise `nx.is_isomorphic()`.
+
+This is acceptable for 2636 objects if practical, but make sure it is mathematically correct.
+
+Do NOT use degree sequence alone as an isomorphism invariant.
+
+If you introduce a faster canonical signature, verify that it is actually isomorphism-safe.
+
+## 5. Profile ALL 2636 extremal trees
+
+The corrected program must regenerate the q=4 dataset and then profile every tree satisfying:
+
+$$
+n=16,\qquad n_2=6,\qquad b(T)=4.
+$$
+
+For each extremal tree compute:
+
+* degree sequence;
+* leaf count;
+* maximum degree;
+* number of vertices of each degree;
+* diameter;
+* radius;
+* center;
+* \(b(T)\);
+* suppressed core H;
+* \(b(H)\);
+* \(\Delta_b=4-b(H)\);
+* subdivision data.
+
+The program must verify:
+
+$$
+|V(H)|=10,\qquad |E(H)|=9,
+$$
+
+and
+
+$$
+\sum_e s_e=6.
+$$
+
+## 6. Aggregate statistics over ALL extremal trees
+
+Produce exact frequency tables for:
+
+* degree sequence;
+* leaf count;
+* maximum degree;
+* diameter;
+* radius;
+* \(b(H)\);
+* \(\Delta_b\);
+* maximum subdivision length;
+* number of subdivided edges.
+
+Do NOT profile only the first ten examples.
+
+## 7. Core isomorphism classes
+
+Determine the exact number of suppressed-core isomorphism classes among all 2636 extremal trees.
+
+For each class record:
+
+* class identifier;
+* number of extremal trees;
+* core degree sequence;
+* core diameter;
+* core radius;
+* \(b(H)\).
+
+The class counts must sum to:
+
+$$
+2636.
+$$
+
+## 8. Compare b=3 and b=4
+
+Where practical, also profile the 185 trees satisfying
+
+$$
+b(T)=3
+$$
+
+using the same structural metrics.
+
+The goal is empirical comparison only.
+
+Do NOT claim causation.
+
+## 9. Executable program
+
+Provide the COMPLETE executable program.
+
+Do not provide pseudocode.
+
+The program should regenerate the dataset from scratch rather than relying on manually copied tree lists.
+
+## 10. Execution honesty
+
+You are not required to execute the program.
+
+If you cannot execute it, explicitly state:
+
+> "I did not execute this program."
+
+Do NOT fabricate any structural statistics.
+
+## Required response structure
+
+### A. Bugs found in the previous program
+
+### B. Corrected executable code
+
+### C. Mathematical correctness of the profiling logic
+
+### D. Expected output structure
+
+### E. Execution status
+
+### F. What will be established once executed
+
+Do NOT discuss q=5.
+
+Stop after this response.
