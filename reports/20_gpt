@@ -1,0 +1,462 @@
+# Computational Structural Analysis — q=4
+
+## Experiment: \(H=K_{1,9}\), subdivision sums \(S=0,\dots,10\)
+
+The focused experiment was completed successfully.
+
+The **same exact burning-number algorithm used in the validated q=4 computation** was executed unchanged. No 16-vertex tree enumeration was repeated.
+
+There are **138** partition patterns in total across \(S=0,\ldots,10\).
+
+### Validation
+
+[DIRECTLY FROM DATA]
+
+* \(S=0\): exactly \(K_{1,9}\), with 10 vertices and 9 edges.
+* \(b(K_{1,9})=2\).
+* \(S=6\): exactly 11 patterns.
+* The complete \(S=6\) table reproduced the previously obtained 11-pattern results exactly.
+* The unique \(S=6\) pattern with \(b(T)=4\) is
+
+  $$
+  (2,2,2,0,0,0,0,0,0).
+  $$
+
+Validation passed, so the full \(S=0,\ldots,10\) scan was performed.
+
+---
+
+## Compact summary
+
+| \(S\) | # patterns | max \(b(T)\) | max \(\Delta_b\) | patterns attaining max              |
+| ----: | ---------: | -----------: | ---------------: | ----------------------------------- |
+|     0 |          1 |            2 |                0 | \((0,0,0,0,0,0,0,0,0)\)             |
+|     1 |          1 |            2 |                0 | \((1,0,0,0,0,0,0,0,0)\)             |
+|     2 |          2 |            3 |                1 | \((2,0,\ldots,0),(1,1,0,\ldots,0)\) |
+|     3 |          3 |            3 |                1 | all 3 patterns                      |
+|     4 |          5 |            3 |                1 | all 5 patterns                      |
+|     5 |          7 |            3 |                1 | all 7 patterns                      |
+|     6 |         11 |        **4** |            **2** | \((2,2,2,0,\ldots,0)\)              |
+|     7 |         15 |        **4** |            **2** | 7 patterns                          |
+|     8 |         22 |        **4** |            **2** | 14 patterns                         |
+|     9 |         30 |        **4** |            **2** | 22 patterns                         |
+|    10 |         41 |        **4** |            **2** | 34 patterns                         |
+
+Thus the complete counts are:
+
+$$
+1+1+2+3+5+7+11+15+22+30+41=\boxed{138}.
+$$
+
+---
+
+## Complete pattern results
+
+Every \(T\) has
+
+$$
+|V(T)|=10+S
+$$
+
+and degree sequence
+
+$$
+\boxed{(9,\underbrace{2,\ldots,2}_{S},
+\underbrace{1,\ldots,1}_{9})}.
+$$
+
+The complete machine-readable result contains all 138 records with:
+
+* subdivision vector;
+* number of vertices;
+* degree sequence;
+* diameter;
+* radius;
+* \(b(T)\);
+* \(b(H)=2\);
+* \(\Delta_b\);
+* maximum subdivision length;
+* number of subdivided edges.
+
+[Download complete JSON](sandbox:/mnt/data/k19_star_subdivision_scan_S0_S10.json)
+
+[Download complete human-readable report](sandbox:/mnt/data/k19_star_subdivision_scan_S0_S10_report.txt)
+
+The human-readable report contains the **complete table of all 138 patterns**, not merely the summary above.
+
+---
+
+## Patterns with \(\Delta_b\ge2\)
+
+[DIRECTLY FROM DATA]
+
+This is the main correction relative to the earlier \(S=6\)-only experiment.
+
+### \(S<6\)
+
+No pattern has \(\Delta_b\ge2\):
+
+$$
+\boxed{0}.
+$$
+
+### \(S=6\)
+
+Exactly one:
+
+$$
+\boxed{(2,2,2,0,0,0,0,0,0)}.
+$$
+
+### \(S=7\)
+
+Exactly 7:
+
+$$
+\begin{aligned}
+&(7),\\
+&(6,1),\\
+&(5,2),\\
+&(4,3),\\
+&(3,3,1),\\
+&(3,2,2),\\
+&(2,2,2,1).
+\end{aligned}
+$$
+
+### \(S=8\)
+
+Exactly 14:
+
+$$
+\begin{aligned}
+&(8),(7,1),(6,2),(6,1,1),(5,3),(5,2,1),\\
+&(4,4),(4,3,1),(4,2,2),(3,3,2),(3,3,1,1),\\
+&(3,2,2,1),(2,2,2,2),(2,2,2,1,1).
+\end{aligned}
+$$
+
+### \(S=9\)
+
+Exactly 22:
+
+$$
+\begin{aligned}
+&(9),(8,1),(7,2),(7,1,1),(6,3),(6,2,1),(6,1,1,1),\\
+&(5,4),(5,3,1),(5,2,2),(5,2,1,1),\\
+&(4,4,1),(4,3,2),(4,3,1,1),(4,2,2,1),\\
+&(3,3,3),(3,3,2,1),(3,3,1,1,1),\\
+&(3,2,2,2),(3,2,2,1,1),\\
+&(2,2,2,2,1),(2,2,2,1,1,1).
+\end{aligned}
+$$
+
+### \(S=10\)
+
+Exactly 34:
+
+$$
+\begin{aligned}
+&(10),(9,1),(8,2),(8,1,1),(7,3),(7,2,1),(7,1,1,1),\\
+&(6,4),(6,3,1),(6,2,2),(6,2,1,1),(6,1,1,1,1),\\
+&(5,5),(5,4,1),(5,3,2),(5,3,1,1),(5,2,2,1),(5,2,1,1,1),\\
+&(4,4,2),(4,4,1,1),(4,3,3),(4,3,2,1),(4,3,1,1,1),\\
+&(4,2,2,2),(4,2,2,1,1),\\
+&(3,3,3,1),(3,3,2,2),(3,3,2,1,1),(3,3,1,1,1,1),\\
+&(3,2,2,2,1),(3,2,2,1,1,1),\\
+&(2,2,2,2,2),(2,2,2,2,1,1),(2,2,2,1,1,1,1).
+\end{aligned}
+$$
+
+Therefore there are
+
+$$
+1+7+14+22+34=\boxed{78}
+$$
+
+patterns with \(\Delta_b=2\) across the full \(S=0,\ldots,10\) scan.
+
+Of these, **77 are new relative to the previously known \(S=6\) case**.
+
+---
+
+# Structural analysis
+
+## A. Maximum subdivision length
+
+[DIRECTLY FROM DATA]
+
+Maximum subdivision length is **not sufficient to determine \(b(T)\)**.
+
+At \(S=6\):
+
+* \((6,0,\ldots,0)\): \(b(T)=3\);
+* \((2,2,2,0,\ldots,0)\): \(b(T)=4\).
+
+So both maximum subdivision lengths 6 and 2 occur at the same total \(S\), with different burning numbers.
+
+For \(S=7,\ldots,10\), the overlap is even stronger: \(b(T)=4\) occurs for both very large maximum lengths and relatively small ones.
+
+For example, at \(S=10\):
+
+$$
+(10,0,\ldots,0)
+$$
+
+has \(b(T)=4\), while
+
+$$
+(2,2,2,2,2,0,\ldots,0)
+$$
+
+also has \(b(T)=4\).
+
+[STRUCTURAL HYPOTHESIS]
+
+Maximum arm length by itself is therefore unlikely to be the only useful structural descriptor.
+
+---
+
+## B. Number of subdivided edges
+
+[DIRECTLY FROM DATA]
+
+The number of affected edges is also not sufficient.
+
+At \(S=6\), all three patterns
+
+$$
+(4,1,1),\quad(3,2,1),\quad(2,2,2)
+$$
+
+have exactly three subdivided edges, but only
+
+$$
+(2,2,2)
+$$
+
+has \(b(T)=4\).
+
+At larger \(S\), the same number of subdivided edges can also correspond to both \(b=3\) and \(b=4\).
+
+[STRUCTURAL HYPOTHESIS]
+
+The individual subdivision lengths and their distribution matter jointly.
+
+---
+
+## C. Concentration versus balance
+
+[DIRECTLY FROM DATA]
+
+There is **no simple monotone concentration rule**.
+
+At \(S=6\):
+
+* highly concentrated \((6)\): \(b=3\);
+* moderately concentrated \((4,2)\): \(b=3\);
+* balanced \((2,2,2)\): \(b=4\);
+* more spread-out \((2,2,1,1)\): \(b=3\);
+* completely uniform over six branches \((1,1,1,1,1,1)\): \(b=3\).
+
+At \(S=7\), both extremes already occur among the \(b=4\) cases:
+
+$$
+(7)
+$$
+
+and
+
+$$
+(2,2,2,1).
+$$
+
+[STRUCTURAL HYPOTHESIS]
+
+The full partition shape appears more informative than a single scalar measure of "concentration."
+
+---
+
+## D. Number of branches with \(s_i\ge2\)
+
+[DIRECTLY FROM DATA]
+
+This statistic also does not uniquely determine \(b(T)\).
+
+For example, at \(S=6\):
+
+* \((2,2,2)\): three branches have \(s_i\ge2\), \(b=4\);
+* \((4,1,1)\): one branch has \(s_i\ge2\), \(b=3\);
+* \((3,2,1)\): two branches have \(s_i\ge2\), \(b=3\);
+* \((2,2,1,1)\): two branches have \(s_i\ge2\), \(b=3\).
+
+Thus the same number of branches meeting \(s_i\ge2\) can produce different burning numbers.
+
+---
+
+## E. Number of branches with \(s_i\ge3\)
+
+[DIRECTLY FROM DATA]
+
+Likewise this is not decisive.
+
+At \(S=6\):
+
+* \((6)\): one branch has \(s_i\ge3\), \(b=3\);
+* \((4,1,1)\): one branch has \(s_i\ge3\), \(b=3\);
+* \((3,1,1,1)\): one branch has \(s_i\ge3\), \(b=3\);
+* \((3,3)\): two branches have \(s_i\ge3\), \(b=3\);
+* \((2,2,2)\): zero branches have \(s_i\ge3\), yet \(b=4\).
+
+This makes the \(S=6\) exception particularly clear.
+
+[STRUCTURAL HYPOTHESIS]
+
+The exceptional behavior at \(S=6\) is not naturally explained by merely counting "long" branches.
+
+---
+
+# Key finite-scan findings
+
+[DIRECTLY FROM DATA]
+
+### 1. Is \((2,2,2)\) still exceptional?
+
+Only at \(S=6\).
+
+Within the **\(S=6\) slice**, yes:
+
+$$
+\boxed{(2,2,2)\text{ is the unique }b=4\text{ pattern}.}
+$$
+
+Across the **full \(S=0,\ldots,10\) scan**, no:
+
+$$
+\boxed{\text{77 additional }\Delta_b=2\text{ patterns occur for }S=7,\ldots,10.}
+$$
+
+### 2. Any \(\Delta_b\ge2\) for \(S<6\)?
+
+$$
+\boxed{\text{No}.}
+$$
+
+### 3. Does \(\Delta_b\ge2\) occur again for \(S>6\)?
+
+$$
+\boxed{\text{Yes.}}
+$$
+
+The counts are:
+
+$$
+S=7:7,\quad
+S=8:14,\quad
+S=9:22,\quad
+S=10:34.
+$$
+
+### 4. Any \(b(T)\ge5\)?
+
+$$
+\boxed{\text{No pattern for }S=0,\ldots,10\text{ has }b(T)\ge5.}
+$$
+
+The largest observed value is
+
+$$
+\boxed{b(T)=4}.
+$$
+
+---
+
+# Most interesting empirical observation
+
+[DIRECTLY FROM DATA]
+
+The most important result is that the earlier \(S=6\) exceptional behavior **does not remain isolated when the total subdivision sum is increased**.
+
+At \(S\le5\):
+
+$$
+\Delta_b\le1.
+$$
+
+At \(S=6\):
+
+$$
+\text{exactly one pattern has }\Delta_b=2.
+$$
+
+For \(S=7,8,9,10\), the number of \(\Delta_b=2\) patterns becomes:
+
+$$
+7,\;14,\;22,\;34.
+$$
+
+Thus the \(S=6\) pattern
+
+$$
+(2,2,2)
+$$
+
+is unique within its slice, but **not unique globally across the star-subdivision family**.
+
+[STRUCTURAL HYPOTHESIS]
+
+This suggests that \(S=6\) is a threshold within this particular \(K_{1,9}\) family, rather than \((2,2,2)\) representing the only possible mechanism for \(\Delta_b=2\).
+
+That is a hypothesis about this finite computational family, not a theorem.
+
+---
+
+# Recommended next computational test
+
+The single most valuable next experiment is:
+
+> **Continue the same exact \(K_{1,9}\) partition scan for \(S=11,12,\ldots\), recording the first occurrence of \(b(T)=5\) and the complete partition shapes producing each burning number.**
+
+In particular, track
+
+$$
+\max b(T)
+$$
+
+and
+
+$$
+\max\Delta_b
+$$
+
+as functions of \(S\), together with:
+
+* maximum \(s_i\);
+* number of \(s_i>0\);
+* number of \(s_i\ge2\);
+* number of \(s_i\ge3\);
+* full partition shape.
+
+[NOT EXECUTED]
+
+No \(S>10\) computation was performed in this run.
+
+---
+
+# Output files
+
+[DIRECTLY FROM DATA]
+
+Complete machine-readable file:
+
+[k19_star_subdivision_scan_S0_S10.json](sandbox:/mnt/data/k19_star_subdivision_scan_S0_S10.json)
+
+Human-readable complete report:
+
+[k19_star_subdivision_scan_S0_S10_report.txt](sandbox:/mnt/data/k19_star_subdivision_scan_S0_S10_report.txt)
+
+The JSON contains **138 complete records** and the report contains the complete tables for every \(S=0,\ldots,10\).
+
+## Final execution status
+
+**COMPLETED**
