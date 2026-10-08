@@ -1,0 +1,594 @@
+# Candidate Structural Lemmas for the \(n_2\) Threshold
+
+The discussion below uses only the existing finite computational evidence. No candidate is treated as an established theorem.
+
+## 1. Mathematical Reformulation
+
+Let
+
+$$
+q=\lceil\sqrt n\rceil.
+$$
+
+Using the ball-covering interpretation of burning, \(b(T)\le q\) is equivalent to the existence of vertices \(v_1,\ldots,v_q\) such that
+
+$$
+V(T)\subseteq
+B(v_1,q-1)\cup B(v_2,q-2)\cup\cdots\cup B(v_q,0).
+$$
+
+Thus the target can be written contrapositively as
+
+$$
+b(T)\ge q+1
+\quad\Longrightarrow\quad
+n_2(T)\ge2q-1.
+$$
+
+Suppress all degree-2 vertices of \(T\), obtaining the topological core \(H\). Each edge \(e\in E(H)\) corresponds to a path in \(T\), with \(s_e\ge0\) degree-2 vertices inserted along that edge. Then
+
+$$
+n_2(T)=\sum_{e\in E(H)}s_e.
+$$
+
+The central problem is therefore:
+
+> If a \(q\)-ball covering fails, why must the subdivision loads \(s_e\) contain at least \(2q-1\) degree-2 vertices?
+
+---
+
+# 2. Structural Observations
+
+### [DIRECTLY FROM DATA]
+
+The exact computations currently available give:
+
+* all non-isomorphic trees for \(n\le16\);
+* complete exact filtered searches for \(n=17,18\);
+* complete exact evaluation of all 288,198 trees with \(n=19\) and \(n_2\le8\);
+* no tree satisfying both
+
+  $$
+  n_2(T)\le2q-2
+  $$
+
+  and
+
+  $$
+  b(T)\ge q+1
+  $$
+
+  for its actual \(q=\lceil\sqrt n\rceil\).
+
+Thus the available data contain no actual obstruction population from which a common obstruction structure can be statistically inferred.
+
+### [DIRECTLY FROM DATA]
+
+The boundary population is structurally diverse.
+
+For example, among the 2636 trees with \(n=16\), \(n_2=6\), and \(b(T)=4\), there are 10 distinct suppressed-core isomorphism classes.
+
+Therefore the data do not support the claim that all extremal boundary trees are spiders or share one particular core structure.
+
+### [DIRECTLY FROM DATA]
+
+The focused \(K_{1,9}\) subdivision experiment nevertheless revealed a useful local mechanism.
+
+At total subdivision \(S=6\), the unique \(b=4\) pattern is
+
+$$
+(2,2,2,0,\ldots,0),
+$$
+
+while at \(S=12\), the first \(b=5\) pattern is
+
+$$
+(3,3,3,3,0,\ldots,0).
+$$
+
+Both are balanced collections of long arms.
+
+This shows computationally that balanced multi-arm structures can create new burning-number obstructions, although these examples do not violate the target \(n_2\) bound.
+
+### [DIRECTLY FROM DATA]
+
+The family \(T_r\), with \(r-1\) long arms of actual length \(r-1\), satisfies computationally
+
+$$
+b(T_r)=r
+$$
+
+for the tested values \(r=4,\ldots,10\), while
+
+$$
+n_2(T_r)=(r-1)(r-2).
+$$
+
+Thus this family demonstrates one mechanism for large burning number, but its \(n_2\) is much larger than \(2r-1\), so it does not by itself explain the sharp threshold.
+
+---
+
+# 3. Candidate Lemma 1 — Persistent-Corridor Charging Lemma
+
+This is currently the most promising candidate.
+
+## Candidate Lemma 1
+
+Suppose \(T\) cannot be burned in \(q\) rounds.
+
+Choose a failed \(q\)-round burning sequence that is maximal in some natural sense, for example lexicographically maximizing the number of covered vertices after each round.
+
+Then conjecturally there is a sequence of persistent obstruction corridors
+
+$$
+C_1,\ldots,C_q
+$$
+
+such that:
+
+* the first \(q-1\) persistent corridors each contain at least two degree-2 vertices;
+* the final obstruction requires at least one additional degree-2 vertex;
+* the relevant degree-2 vertices can be charged disjointly.
+
+This would give
+
+$$
+n_2(T)\ge
+2(q-1)+1
+=
+2q-1.
+$$
+
+### Why this might imply the target
+
+If
+
+$$
+n_2(T)\le2q-2,
+$$
+
+then there would not be enough degree-2 vertices to sustain \(q\) layers of persistent obstruction.
+
+Hence a \(q\)-round covering would have to exist.
+
+### [STRUCTURAL HYPOTHESIS]
+
+The intended mechanism is that a genuinely persistent unburned region needs a degree-2 corridor to shield it from branching.
+
+A branching vertex exposes several directions simultaneously to a burning ball, whereas a degree-2 corridor behaves like a one-dimensional bottleneck.
+
+Thus one might hope that each additional round of persistence consumes two fresh degree-2 vertices, with a final terminal obstruction requiring one more.
+
+This naturally produces
+
+$$
+2(q-1)+1=2q-1.
+$$
+
+### Stress tests
+
+**Paths.**
+
+Paths contain many degree-2 vertices, so they are compatible with the corridor picture. Their burning number is nevertheless only \(\lceil\sqrt n\rceil\), so the existence of corridors is clearly not sufficient for being an obstruction.
+
+**Stars.**
+
+Stars have \(n_2=0\) and very small burning number. This is consistent with the idea that branching makes persistent obstruction difficult.
+
+**Double stars and highly branched trees.**
+
+[STRUCTURAL HYPOTHESIS]
+
+The abundance of branching should make it easier to reroute or place burning sources effectively, again favoring the proposed mechanism.
+
+**Balanced subdivided stars.**
+
+The \(K_{1,9}\) experiments show that sufficiently long balanced arms can eventually produce large burning numbers. This is consistent with the need for persistent corridors.
+
+### Weakness
+
+The crucial statement
+
+$$
+\text{one additional persistent round}
+\Longrightarrow
+\text{two new degree-2 vertices}
+$$
+
+is completely unproved.
+
+Possible failures include:
+
+* the same degree-2 vertex being useful in several rounds;
+* different obstruction corridors overlapping;
+* branching vertices participating in a genuine timing obstruction;
+* source timing creating a global obstruction that cannot be localized to one corridor.
+
+---
+
+# 4. Candidate Lemma 2 — Branching-Compensation Lemma
+
+A substantially different approach is to first prove that branching cannot sustain a minimal obstruction.
+
+## Candidate Lemma 2
+
+Consider a minimal failed \(q\)-round burning strategy.
+
+Suppose a persistent unburned component has a boundary containing a branching vertex \(v\).
+
+Then conjecturally one can move some later burning source to \(v\), or otherwise reroute the source sequence, without decreasing the eventual number of covered vertices.
+
+Therefore a minimal persistent obstruction should have its active boundary inside degree-2 paths rather than at branching vertices.
+
+Symbolically:
+
+$$
+\boxed{
+\text{persistent obstruction}
+\Rightarrow
+\text{degree-2 corridor boundary}.
+}
+$$
+
+### Why it is attractive
+
+This reduces the global tree to a much simpler local object:
+
+$$
+\text{branching structure}
+\longrightarrow
+\text{source rerouting}
+\longrightarrow
+\text{degree-2 corridor}
+\longrightarrow
+\text{charging argument}.
+$$
+
+In other words, Candidate 2 could provide the missing first step needed for Candidate 1.
+
+### Stress tests
+
+**Stars.**
+
+The center is obviously the highest-value source, so the proposed compensation mechanism is compatible with the simplest branching example.
+
+**Subdivided stars.**
+
+The center provides efficient access to many arms, while the genuine difficulty occurs farther along the subdivided branches.
+
+**Highly branched trees.**
+
+[STRUCTURAL HYPOTHESIS]
+
+More branching should provide more opportunities for source replacement, making persistent obstructions harder to sustain.
+
+### Main weakness
+
+A local source move might preserve the current round's coverage but destroy an optimal future schedule.
+
+Thus
+
+$$
+\text{local improvement}
+\not\Rightarrow
+\text{global preservation}
+$$
+
+without an additional argument.
+
+---
+
+# 5. Candidate Lemma 3 — Small Topological Witness Lemma
+
+A third approach is to work directly with the suppressed core.
+
+## Candidate Lemma 3
+
+Let \(H\) be the degree-2-suppressed core of a minimal \(q\)-obstruction.
+
+Conjecturally there exists a connected core subtree \(K\subseteq H\) that carries all of the essential obstruction and satisfies
+
+$$
+\sum_{e\in E(K)}s_e\ge2q-1.
+$$
+
+Then automatically
+
+$$
+n_2(T)
+=
+\sum_{e\in E(H)}s_e
+\ge2q-1.
+$$
+
+### Why it may be useful
+
+This converts the problem into finding a small topological witness carrying enough subdivision mass.
+
+The \(K_{1,9}\) computations suggest that a relatively small set of core edges can control the increase in burning number. For example, the first \(b=4\) and \(b=5\) examples use balanced groups of only three and four long arms.
+
+### Weakness
+
+The boundary data show substantial diversity in the suppressed cores.
+
+Therefore there is no evidence that the witness must be a star, or even that its core must have a particularly simple form.
+
+The safe version is therefore:
+
+> a small obstruction witness may exist,
+
+not
+
+> every obstruction is a subdivided star.
+
+---
+
+# 6. Best Current Candidate
+
+The strongest candidate is a combination of Candidates 2 and 1.
+
+## Proposed research target
+
+### [STRUCTURAL HYPOTHESIS]
+
+**Step A — Branching compensation.**
+
+In a minimal failed \(q\)-round strategy, persistent unburned components can be arranged so that their relevant boundaries do not contain branching vertices.
+
+### [STRUCTURAL HYPOTHESIS]
+
+**Step B — Corridor persistence.**
+
+Once the obstruction is confined to degree-2 paths, every additional round of persistence requires at least two fresh degree-2 vertices.
+
+### [STRUCTURAL HYPOTHESIS]
+
+**Step C — Terminal charge.**
+
+After \(q-1\) such persistence transitions, the final unresolved component requires at least one additional degree-2 vertex.
+
+Hence
+
+$$
+n_2(T)\ge
+2(q-1)+1
+=
+2q-1.
+$$
+
+This is precise enough that the individual steps can be attacked separately.
+
+---
+
+# 7. Why \(2q-1\) Appears Naturally
+
+### [STRUCTURAL HYPOTHESIS]
+
+The most appealing feature of this approach is that the number \(2q-1\) arises as
+
+$$
+\boxed{2(q-1)+1}.
+$$
+
+A possible interpretation is:
+
+$$
+\underbrace{2+2+\cdots+2}_{q-1\text{ persistence layers}}
++\underbrace{1}_{\text{final terminal obstruction}}.
+$$
+
+Thus the threshold is not being inserted artificially; it emerges from a possible temporal charging process.
+
+This is presently only a proposed mechanism.
+
+---
+
+# 8. Proof Architecture
+
+A possible proof program is:
+
+$$
+b(T)\ge q+1
+$$
+
+$$
+\Downarrow
+$$
+
+Choose a suitable maximal failed \(q\)-round burning sequence.
+
+$$
+\Downarrow
+$$
+
+Study the last unburned component.
+
+$$
+\Downarrow
+$$
+
+Prove a **branching-compensation lemma** showing that a persistent obstruction can be pushed away from branching vertices.
+
+$$
+\Downarrow
+$$
+
+The obstruction must propagate through degree-2 corridors.
+
+$$
+\Downarrow
+$$
+
+Track the obstruction backward through the previous rounds.
+
+$$
+\Downarrow
+$$
+
+Show that each additional persistence layer requires two previously unused degree-2 vertices.
+
+$$
+\Downarrow
+$$
+
+Obtain
+
+$$
+2(q-1)
+$$
+
+vertices.
+
+$$
+\Downarrow
+$$
+
+Show that the final surviving obstruction requires one additional degree-2 vertex.
+
+$$
+\Downarrow
+$$
+
+$$
+n_2(T)\ge2q-1.
+$$
+
+### Explicitly unproved steps
+
+The two essential gaps are:
+
+$$
+\boxed{
+\text{branching-compensation/source-rerouting}
+}
+$$
+
+and
+
+$$
+\boxed{
+\text{two-new-degree-2-vertices-per-persistence-layer}.
+}
+$$
+
+Neither is established.
+
+---
+
+# 9. Potential Failure Modes
+
+A serious attempt should actively try to break the proposed mechanism.
+
+### Failure mode 1
+
+A branching vertex may be part of a genuinely optimal timing obstruction.
+
+Then Candidate 2 is false.
+
+### Failure mode 2
+
+A single degree-2 vertex may serve as a witness for several persistence layers.
+
+Then the simple \(2(q-1)\) charging bound fails.
+
+### Failure mode 3
+
+Different persistent regions may share the same degree-2 corridor.
+
+Then a naive charging argument double-counts degree-2 vertices.
+
+### Failure mode 4
+
+There may exist a highly branched obstruction with very few degree-2 vertices but a complicated global source-timing constraint.
+
+Then the corridor mechanism is incomplete.
+
+These failure modes should be treated as targets for counterexample searches, not ignored.
+
+---
+
+# 10. What the Existing Computations Actually Support
+
+### [DIRECTLY FROM DATA]
+
+The existing computation supports the following finite observations:
+
+1. No actual-\(q\) obstruction was found for \(n\le19\).
+2. Boundary trees with \(b=q\) have many different topological cores.
+3. Balanced long-arm structures can produce increases in burning number in the \(K_{1,9}\) subdivision family.
+4. The known balanced-arm family \(T_r\) has
+
+   $$
+   n_2=(r-1)(r-2),
+   $$
+
+   which is much larger than \(2r-1\).
+
+Therefore the \(T_r\) family illustrates a **local obstruction mechanism**, but not the sharp global threshold.
+
+---
+
+# 11. Most Promising Next Computational Experiment
+
+A focused experiment should test the central mechanism rather than simply search for more trees.
+
+### [STRUCTURAL HYPOTHESIS]
+
+For \(q=5\), examine trees at the sharp degree-2 boundary
+
+$$
+n_2=2q-1=9
+$$
+
+and inspect failed \(q\)-round burning configurations.
+
+For each candidate, record:
+
+* the final unburned component;
+* its boundary vertices;
+* whether a boundary vertex has degree at least 3;
+* the maximal degree-2 corridor containing the boundary;
+* the number of degree-2 vertices in that corridor;
+* whether moving a later source to a branching vertex preserves final coverage;
+* whether distinct persistence layers can be assigned disjoint degree-2 vertices.
+
+This directly tests Candidates 1 and 2.
+
+No new general theorem should be inferred from that experiment alone.
+
+---
+
+# Bottom Line
+
+### [STRUCTURAL HYPOTHESIS]
+
+The most promising current direction is not:
+
+> “every obstruction is a spider.”
+
+Nor is it:
+
+> “large diameter causes the obstruction.”
+
+Instead, the strongest candidate is:
+
+$$
+\boxed{
+\text{A genuine }q\text{-round burning obstruction must contain a persistent corridor structure.}
+}
+$$
+
+The intended charging mechanism is
+
+$$
+\boxed{
+2(q-1)+1=2q-1.
+}
+$$
+
+The proof problem is then reduced to two concrete questions:
+
+1. Can branching boundaries always be eliminated by source rerouting?
+2. Does each additional persistence layer necessarily consume two fresh degree-2 vertices?
+
+If both statements can eventually be proved, the desired threshold would follow immediately. At present, both remain unproved structural hypotheses.
