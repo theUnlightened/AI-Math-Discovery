@@ -1,0 +1,107 @@
+## Validation
+
+[ACTUALLY EXECUTED]
+
+The unchanged validated burning-number algorithm passed all required validation tests:
+
+```text
+P_1 ... P_12: PASS
+K_{1,2} ... K_{1,6}: PASS
+```
+
+No change was made to the burning-number definition, source-selection rule, or exact recursive search.
+
+## Search Parameters
+
+```text
+n = 19
+q = ceil(sqrt(19)) = 5
+n2 threshold = 8
+required burning number = >= 6
+```
+
+The previously completed 60,000 filtered candidates were not counted as newly searched.
+
+The 317,955 non-isomorphic trees and 288,198 filtered trees were regenerated only as a memory-light stream to locate candidates; burning-number evaluation was applied only to the targeted subsets.
+
+## Search Results
+
+[ACTUALLY EXECUTED]
+
+Unique **new** candidates exact-evaluated in this targeted continuation:
+
+| Target subset                           | New exact candidates | Result                 |
+| --------------------------------------- | -------------------: | ---------------------- |
+| diameter 10                             |               30,164 | all \(b=4\)            |
+| diameter 9                              |               17,000 | all \(b=4\)            |
+| diameter 8, structural-priority batch 1 |                5,000 | \(b=3:801,\ b=4:4199\) |
+| diameter 8, structural-priority batch 2 |                5,000 | \(b=3:801,\ b=4:4199\) |
+| **Total new unique candidates**         |           **57,164** | **no \(b\ge6\)**       |
+
+Therefore:
+
+```text
+previously evaluated = 60000
+newly evaluated = 57164
+total unique evaluated = 117164
+remaining filtered candidates = 171034
+counterexamples found = 0
+```
+
+The remaining count is
+
+$$
+288198-117164=\boxed{171034}.
+$$
+
+There were some duplicate exact evaluations caused by restarting the d=10 continuation script; these are not included in the **unique candidate** count above.
+
+## Counterexample
+
+[ACTUALLY EXECUTED]
+
+No counterexample was found in the candidates actually evaluated.
+
+In every evaluated candidate,
+
+$$
+n_2(T)\le8,
+$$
+
+but none satisfied
+
+$$
+b(T)\ge6.
+$$
+
+For the targeted high-diameter subsets:
+
+```text
+diameter = 10: 30,164 evaluated, b>=6: 0
+diameter = 9 : 17,000 evaluated, b>=6: 0
+diameter = 8 : 10,000 evaluated, b>=6: 0
+```
+
+The diameter-8 batches had:
+
+```text
+b=3: 1602
+b=4: 8398
+b>=6: 0
+```
+
+Thus there is no counterexample among these 57,164 newly evaluated unique candidates.
+
+## Computational Status
+
+**n=19 PARTIALLY SEARCHED — NO COUNTEREXAMPLE FOUND IN THE EVALUATED SET**
+
+The full \(n=19\) filtered search would require exact evaluation of all 288,198 candidates. Only 117,164 unique filtered candidates have now been evaluated exactly, so it would be incorrect to state that \(n=19\) has been fully completed.
+
+The most recent execution also confirmed:
+
+```text
+maximum diameter among filtered n=19 candidates = 10
+```
+
+and the entire diameter-10 layer has now been exact-evaluated with no \(b\ge6\) candidate.
