@@ -1,0 +1,159 @@
+## 1. Validation results
+
+**[ACTUALLY EXECUTED]**
+
+The unchanged validated burning-number algorithm passed all validation tests before searching:
+
+```text
+P_1 ... P_12: all passed
+K_{1,2} ... K_{1,6}: all passed
+
+Validation passed.
+```
+
+Environment:
+
+```text
+Python 3.13.5
+NetworkX 3.6.1
+Linux 6.18.44-x86_64-with-glibc2.41
+3 CPUs
+```
+
+## 2. Exact completed results
+
+For q determined from the actual order \(q=\lceil\sqrt n\rceil\):
+
+|  n |  q | total non-isomorphic trees | trees with \(n_2\le2q-2\) | trees with \(b(T)\ge q+1\) | minimum \(n_2\) among obstructions | status      |
+| -: | -: | -------------------------: | ------------------------: | -------------------------: | ---------------------------------: | ----------- |
+|  5 |  3 |                          3 |                         3 |                          0 |                                  — | COMPLETED   |
+|  6 |  3 |                          6 |                         6 |                          0 |                                  — | COMPLETED   |
+|  7 |  3 |                         11 |                        10 |                          0 |                                  — | COMPLETED   |
+|  8 |  3 |                         23 |                        22 |                          0 |                                  — | COMPLETED   |
+|  9 |  3 |                         47 |                        41 |                          0 |                                  — | COMPLETED   |
+| 10 |  4 |                        106 |                       105 |                          0 |                                  — | COMPLETED   |
+| 11 |  4 |                        235 |                       226 |                          0 |                                  — | COMPLETED   |
+| 12 |  4 |                        551 |                       529 |                          0 |                                  — | COMPLETED   |
+| 13 |  4 |                       1301 |                      1197 |                          0 |                                  — | COMPLETED   |
+| 14 |  4 |                       3159 |                      2849 |                          0 |                                  — | COMPLETED   |
+| 15 |  4 |                       7741 |                      6655 |                          0 |                                  — | COMPLETED   |
+| 16 |  4 |                      19320 |                     15941 |                          0 |                                  — | COMPLETED   |
+| 17 |  5 |                      48629 |                     46147 |                          0 |                                  — | COMPLETED   |
+| 18 |  5 |                     123867 |                    115421 |                          0 |                                  — | COMPLETED   |
+| 19 |  5 |           317955 generated |                    288198 | 0 in first 60000 evaluated |                                  — | INCOMPLETE  |
+| 20 |  5 |               not searched |              not searched |               not searched |                                  — | NOT STARTED |
+
+For \(n=17\), the exact distribution among filtered trees was:
+
+```text
+b=2: 2
+b=3: 7202
+b=4: 38943
+```
+
+For \(n=18\):
+
+```text
+b=2: 2
+b=3: 11099
+b=4: 104320
+```
+
+For the first **60,000** filtered \(n=19\) candidates actually evaluated:
+
+```text
+b=4: 60000
+```
+
+No \(b\ge6\) tree occurred in that evaluated subset.
+
+Therefore, for the completed exhaustive orders \(n\le18\):
+
+```text
+No obstruction with b(T) > q was found at this order.
+```
+
+## 3. Counterexamples
+
+**[ACTUALLY EXECUTED]**
+
+No genuine counterexample was found.
+
+There is no tree in the completed searches satisfying both
+
+$$
+n_2(T)\le2\lceil\sqrt n\rceil-2
+$$
+
+and
+
+$$
+b(T)>\lceil\sqrt n\rceil.
+$$
+
+For \(n=19\), this statement applies only to the **first 60,000 filtered candidates actually evaluated**, because the order was not completed.
+
+No counterexample details are therefore available.
+
+## 4. Incomplete computation
+
+### \(n=19\)
+
+All
+
+$$
+317955
+$$
+
+non-isomorphic trees were generated, and all
+
+$$
+288198
+$$
+
+trees satisfying \(n_2\le8\) were identified.
+
+Exact burning-number evaluation was completed for:
+
+$$
+\boxed{60000/288198}
+$$
+
+filtered candidates.
+
+No obstruction was found among them.
+
+The computation stopped because three successive execution windows of approximately 300 seconds each reached the execution time limit during exact burning-number evaluation.
+
+Total measured incomplete windows:
+
+$$
+\boxed{900\text{ s}}
+$$
+
+### \(n=20\)
+
+Not started, because the \(n=19\) exhaustive exact evaluation did not complete.
+
+## 5. Runtime
+
+Recorded runtimes:
+
+```text
+n=5..16 combined: 15.4167 s
+n=17:            23.3003 s
+n=18:           ~506.2 s
+n=19:            900 s of incomplete exact evaluation
+```
+
+These are sums of the recorded execution windows, not a single continuous wall-clock measurement.
+
+## 6. Output files
+
+[minimum_n2_obstruction_search.json](sandbox:/mnt/data/minimum_n2_obstruction_search.json)
+
+[minimum_n2_obstruction_search_report.txt](sandbox:/mnt/data/minimum_n2_obstruction_search_report.txt)
+
+## Execution status
+
+**PARTIALLY COMPLETED**
