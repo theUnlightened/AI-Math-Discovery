@@ -1,0 +1,311 @@
+Continue from the completed experiment
+
+```
+H = K_{1,9}
+S = 0,...,10
+138 subdivision patterns.
+```
+
+Do NOT modify the burning-number definition or the exact burning-number algorithm.
+
+Do NOT perform any all-tree enumeration.
+
+Use the already generated machine-readable file
+
+```
+k19_star_subdivision_scan_S0_S10.json
+```
+
+as the primary dataset.
+
+Your task is now STRUCTURAL DATA MINING.
+
+The goal is to determine whether the observed transition from b(T)=3 to b(T)=4 can be characterized by simple properties of the integer partition
+
+```
+s=(s_1,...,s_9).
+```
+
+Do NOT assume any conjecture in advance.
+
+Do NOT claim a mathematical theorem from finite data.
+
+Every conclusion must be classified as either:
+
+[DIRECTLY FROM DATA]
+
+or
+
+[STRUCTURAL HYPOTHESIS].
+
+==================================================
+
+1. Basic partition statistics
+   ==================================================
+
+For every one of the 138 patterns, compute:
+
+1. S = sum s_i
+2. k = number of positive parts
+3. m1 = max s_i
+4. m2 = second-largest part
+5. m3 = third-largest part
+6. number of parts >= 2
+7. number of parts >= 3
+8. number of parts >= 4
+9. number of parts >= 5
+10. number of parts >= 6
+11. number of parts equal to 1
+12. number of parts equal to 2
+13. number of parts equal to 3
+14. number of parts equal to 4
+15. number of parts equal to 5
+16. number of parts equal to 6 or more.
+
+==================================================
+2. Compare b(T)=3 versus b(T)=4
+===============================
+
+For every statistic above, produce:
+
+* minimum among b=3 patterns
+* maximum among b=3 patterns
+* minimum among b=4 patterns
+* maximum among b=4 patterns
+* overlap between the two classes.
+
+The purpose is to determine whether any single statistic perfectly separates b=3 from b=4.
+
+In particular test:
+
+* number of positive parts
+* maximum part
+* number of parts >=2
+* number of parts >=3
+* number of parts equal to 2
+* number of parts equal to 3.
+
+==================================================
+3. Partition-length analysis
+============================
+
+Group all patterns by
+
+```
+k = number of positive parts.
+```
+
+For every k, report:
+
+* number of patterns
+* number with b=3
+* number with b=4
+* minimum S producing b=4
+* all b=4 patterns for that k.
+
+==================================================
+4. Dominance / majorization analysis
+====================================
+
+This is especially important.
+
+For two partitions a and b of the same S, define the usual dominance order:
+
+a >= b
+
+if for every r,
+
+```
+sum_{i=1}^r a_i >= sum_{i=1}^r b_i,
+```
+
+after sorting both in non-increasing order.
+
+Test whether b(T) is monotone under this order.
+
+Specifically test both possibilities:
+
+A. If partition a dominates partition b, does
+
+```
+b(T_a) >= b(T_b)
+```
+
+always hold?
+
+B. If partition a dominates partition b, does
+
+```
+b(T_a) <= b(T_b)
+```
+
+always hold?
+
+Report every counterexample.
+
+This is important because the earlier data suggest that simple "concentration" is not monotone.
+
+==================================================
+5. Search for threshold rules
+=============================
+
+Automatically test simple rules of the form
+
+```
+F(s) >= C
+```
+
+where F is one of:
+
+* max part
+* number of positive parts
+* number of parts >=2
+* number of parts >=3
+* number of parts equal to 2
+* sum of squares sum(s_i^2)
+* sum of cubes sum(s_i^3)
+* sum of pair products
+* largest three-part sum
+* largest two-part sum
+* sum of excess above 1:
+  sum max(s_i-1,0)
+* sum of excess above 2:
+  sum max(s_i-2,0)
+
+For each statistic, find whether there exists ANY integer threshold C that perfectly separates b=3 from b=4 over the complete 138-point dataset.
+
+If yes, report the statistic and threshold.
+
+If no, report the closest separation and explicit counterexamples.
+
+==================================================
+6. Search for simple two-variable rules
+=======================================
+
+Test pairs of simple statistics.
+
+Examples:
+
+* (max part, number of positive parts)
+* (number >=2, number >=3)
+* (number of 2s, number of 3s)
+* (max part, number >=2)
+* (sum of squares, number of positive parts)
+* (largest part, second-largest part)
+* (largest three-part sum, number of positive parts)
+
+For each pair, determine whether b=3 and b=4 occupy disjoint regions under a simple axis-aligned threshold rule.
+
+Do NOT use machine learning.
+
+Do NOT fit arbitrary nonlinear models.
+
+The purpose is mathematical interpretability.
+
+==================================================
+7. Search specifically for the first transition
+===============================================
+
+Study S=0,...,10 separately.
+
+For each S, report:
+
+* all b=4 patterns
+* all b=3 patterns
+* minimum statistic values among b=4
+* maximum statistic values among b=3.
+
+Pay special attention to the transition
+
+```
+S=5 -> S=6.
+```
+
+Determine whether the appearance of b=4 at S=6 can be explained by a simple partition statistic.
+
+==================================================
+8. Burning-number structural comparison
+=======================================
+
+For every b=4 pattern, record:
+
+* S
+* partition
+* diameter
+* radius
+* max subdivision
+* number of subdivided edges
+* all partition statistics above.
+
+Look for structural families among b=4 patterns.
+
+Group b=4 patterns by partition shape.
+
+Examples:
+
+```
+(a)
+(a,b)
+(a,b,c)
+(a,b,c,d)
+...
+```
+
+Determine whether b=4 patterns exhibit recognizable families.
+
+==================================================
+9. Important mathematical caution
+=================================
+
+Do NOT say:
+
+"we discovered the rule"
+
+unless the rule is exactly verified over all 138 data points.
+
+Even then, call it:
+
+"an exact classification of the finite dataset"
+
+rather than a theorem about all subdivisions.
+
+Do NOT extrapolate beyond S<=10.
+
+==================================================
+10. Output
+
+Create:
+
+```
+k19_partition_structure_mining.json
+```
+
+and
+
+```
+k19_partition_structure_mining_report.txt
+```
+
+The report must contain:
+
+1. all separating statistics, if any;
+2. all failed simple rules and their counterexamples;
+3. majorization counterexamples;
+4. b=3 versus b=4 comparison tables;
+5. candidate structural patterns;
+6. the strongest finite-data classification found;
+7. explicit distinction between data and hypotheses.
+
+Finally answer these questions explicitly:
+
+Q1. Is there a single simple statistic that separates b=3 and b=4?
+
+Q2. Is burning number monotone under partition majorization?
+
+Q3. Is there a simple two-variable structural rule?
+
+Q4. What is the strongest empirically supported description of the b=4 region?
+
+Q5. What is the most mathematically promising next experiment?
+
+Do not perform any experiment beyond the requested analysis.
