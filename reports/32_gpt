@@ -1,0 +1,495 @@
+# A. Formal definition
+
+## A.1. Maximal degree-2 threads
+
+Let TTT be a tree with at least two vertices. Suppress every degree-2 vertex to obtain its topological core HHH.
+
+For each edge e=uv∈E(H)e=uv\in E(H)e=uv∈E(H), let PeP_ePe be the path in TTT that expands eee. Define its subdivision load by
+
+se=∣V(Pe)∩V2(T)∣.s_e=|V(P_e)\cap V_2(T)|.se=∣V(Pe)∩V2(T)∣.
+
+The paths PeP_ePe are the maximal degree-2 threads of TTT. Their internal degree-2 vertex sets are pairwise disjoint, although different threads may share an endpoint of degree different from 2.
+
+Consequently,
+
+n2(T)=∑e∈E(H)se.\boxed{n_2(T)=\sum_{e\in E(H)}s_e.}n2(T)=e∈E(H)∑se.
+
+This is the natural accounting system for any argument intended to establish a lower bound on n2(T)n_2(T)n2(T).
+
+## A.2. Terminal-active threads
+
+Fix a legal burning sequence
+
+σ=(v1,…,vq).\sigma=(v_1,\ldots,v_q).σ=(v1,…,vq).
+
+Let
+
+Ut=V(T)∖BtU_t=V(T)\setminus B_tUt=V(T)∖Bt
+
+be the unburned set after round ttt. For a failed qqq-round sequence, Uq≠∅U_q\ne\varnothingUq=∅.
+
+Call a maximal thread PeP_ePe terminal-active with respect to σ\sigmaσ if
+
+V(Pe)∩Uq≠∅.V(P_e)\cap U_q\ne\varnothing.V(Pe)∩Uq=∅.
+
+Let
+
+A(σ)={e∈E(H):V(Pe)∩Uq≠∅}.\mathcal A(\sigma) = \{e\in E(H):V(P_e)\cap U_q\ne\varnothing\}.A(σ)={e∈E(H):V(Pe)∩Uq=∅}.
+
+This definition is finite, explicit, and checkable. It does not assume that the active threads are long, that the residual component is path-like, or that its boundary avoids branching vertices.
+
+Different terminal-active threads may share branching endpoints, but their degree-2 vertex sets are disjoint.
+
+### Limitation of the definition
+
+An active thread can have a large subdivision load even if only its endpoint remains unburned. Conversely, a residual component can meet only core vertices. Therefore, counting active threads is not itself a charging argument.
+
+A successful lemma must establish a new relationship between the residual burning obstruction and the subdivision loads of the active threads.
+
+# B. Minimal-counterexample consequences
+
+Assume that a counterexample exists and choose one with minimum order.
+
+Thus
+
+q=⌈n⌉,q=\lceil\sqrt n\rceil,q=⌈n⌉,
+
+n2(T)≤2q−2,n_2(T)\le2q-2,n2(T)≤2q−2,
+
+and
+
+b(T)≥q+1.b(T)\ge q+1.b(T)≥q+1.
+
+Every proper tree satisfying the corresponding degree-2 boundary condition at its own order must be q′q'q′-burnable, where q′=⌈n′⌉q'=\lceil\sqrt{n'}\rceilq′=⌈n′⌉.
+
+This minimality assumption yields some genuine constraints.
+
+## B.1. Suppressing one degree-2 vertex
+
+Let vvv have degree 2, and let T′T'T′ be obtained by suppressing vvv. Then
+
+∣V(T′)∣=n−1,n2(T′)=n2(T)−1.|V(T')|=n-1,\qquad n_2(T')=n_2(T)-1.∣V(T′)∣=n−1,n2(T′)=n2(T)−1.
+
+Two elementary burning-number inequalities are relevant:
+
+b(T′)≤b(T)≤b(T′)+1.\boxed{b(T')\le b(T)\le b(T')+1.}b(T′)≤b(T)≤b(T′)+1.
+
+The first follows by contracting an edge: graph distances do not increase under contraction, so a covering of TTT by burning balls induces a covering of the contracted tree.
+
+The second follows because subdividing a single edge increases every distance between old vertices by at most one. A covering of the contracted tree using radii k−1,…,0k-1,\ldots,0k−1,…,0 can therefore be enlarged to a covering of the subdivision using radii k,…,1k,\ldots,1k,…,1, with one additional radius-0 source.
+
+As explained in Section F, static ball coverage suffices to establish a burning-number upper bound, even if the original covering centers cannot themselves be used in the same order.
+
+Now suppose
+
+n−1&gt;(q−1)2.n-1>(q-1)^2.n−1&gt;(q−1)2.
+
+Then T′T'T′ has the same parameter qqq. Since
+
+n2(T′)≤2q−3,n_2(T')\le2q-3,n2(T′)≤2q−3,
+
+minimality implies
+
+b(T′)≤q.b(T')\le q.b(T′)≤q.
+
+Together with the inequalities above and b(T)≥q+1b(T)\ge q+1b(T)≥q+1, this gives
+
+b(T)=q+1,b(T′)=q.\boxed{b(T)=q+1,\qquad b(T')=q.}b(T)=q+1,b(T′)=q.
+
+Thus, except at the lower endpoint of a square interval, every degree-2 vertex of a minimum-order counterexample would be individually critical: suppressing any one of them would reduce the burning number from q+1q+1q+1 to qqq.
+
+This is a real consequence of minimality, but it does not imply that the degree-2 vertices are distributed among disjoint paths.
+
+### Exceptional square-boundary case
+
+If
+
+n=(q−1)2+1,n=(q-1)^2+1,n=(q−1)2+1,
+
+then suppressing one vertex changes qqq to q−1q-1q−1.
+
+In this case, if n2(T)≤2q−3n_2(T)\le2q-3n2(T)≤2q−3, then T′T'T′ satisfies the target boundary at its own order, so
+
+b(T′)≤q−1.b(T')\le q-1.b(T′)≤q−1.
+
+The edge-subdivision inequality would imply b(T)≤qb(T)\le qb(T)≤q, a contradiction.
+
+Therefore, any minimum-order counterexample at this exceptional order would necessarily satisfy
+
+n2(T)=2q−2.\boxed{n_2(T)=2q-2.}n2(T)=2q−2.
+
+At this endpoint, however, suppressing a degree-2 vertex does not necessarily produce a smaller tree within the relevant boundary region. The stronger individual-criticality conclusion is not established there.
+
+## B.2. Deleting a leaf
+
+Let xxx be a leaf with neighbor [www](http://www). The change in n2n_2n2 after deleting xxx is determined exactly by deg⁡T(w)\deg_T(w)degT(w):
+
+n2(T−x)={n2(T)−1,deg⁡T(w)=2,n2(T)+1,deg⁡T(w)=3,n2(T),deg⁡T(w)≥4.n_2(T-x)= \begin{cases} n_2(T)-1,&\deg_T(w)=2,\\ n_2(T)+1,&\deg_T(w)=3,\\ n_2(T),&\deg_T(w)\ge4. \end{cases}n2(T−x)=⎩⎨⎧n2(T)−1,n2(T)+1,n2(T),degT(w)=2,degT(w)=3,degT(w)≥4.
+
+Adding a leaf increases the burning number by at most one, so
+
+b(T)≤b(T−x)+1.b(T)\le b(T-x)+1.b(T)≤b(T−x)+1.
+
+If T−xT-xT−x retains the relevant boundary condition and qqq is unchanged, minimality gives b(T−x)≤qb(T-x)\le qb(T−x)≤q. The counterexample condition then forces
+
+b(T−x)=q,b(T)=q+1.b(T-x)=q,\qquad b(T)=q+1.b(T−x)=q,b(T)=q+1.
+
+Consequently, any such leaf is critical in the sense that deleting it drops the burning number.
+
+But this does not rule out branching vertices with several short branches. When a leaf is adjacent to a vertex of degree at least 4, deleting it leaves n2n_2n2 unchanged; minimality simply permits the burning number to drop from q+1q+1q+1 to qqq.
+
+## B.3. What minimality does not establish
+
+Minimality does not automatically imply that:
+
+* every branching vertex is removable from an obstruction;
+
+* residual components have path-like boundaries;
+
+* different rounds use disjoint degree-2 vertices;
+
+* every degree-2 vertex can be assigned to a unique temporal stage;
+
+* the obstruction is supported on a spider or a small core.
+
+The degree-2 suppression argument gives individual criticality, not a disjoint charging scheme.
+
+# C. Path-packing candidates
+
+The path-packing idea should be separated into distinct possible claims.
+
+## Candidate C1 — The rigid qqq-path lemma
+
+For a minimum-order actual-qqq counterexample, there exist pairwise vertex-disjoint paths P1,…,PqP_1,\ldots,P_qP1,…,Pq such that
+
+∣V(Pi)∩V2(T)∣≥2(1≤i<q)|V(P_i)\cap V_2(T)|\ge2 \quad (1\le i<q)∣V(Pi)∩V2(T)∣≥2(1≤i<q)
+
+and
+
+∣V(Pq)∩V2(T)∣≥1.|V(P_q)\cap V_2(T)|\ge1.∣V(Pq)∩V2(T)∣≥1.
+
+This immediately gives
+
+n2(T)≥2(q−1)+1=2q−1.n_2(T)\ge2(q-1)+1=2q-1.n2(T)≥2(q−1)+1=2q−1.
+
+Strength: the counting is rigorous.
+
+Weakness: the path count and individual loads are unnecessarily rigid. The argument would have to explain why an obstruction requires exactly this kind of packing, rather than a few longer threads or a mixture of short and long threads.
+
+## Candidate C2 — A maximal-thread packing lemma
+
+Replace arbitrary paths by maximal threads of the topological core. Require qqq terminal-active threads whose subdivision loads meet the same 2,…,2,12,\ldots,2,12,…,2,1 pattern.
+
+Their internal degree-2 sets are disjoint, so the count remains valid even if threads share branching endpoints.
+
+Strength: the objects correspond directly to the vertices counted by n2n_2n2.
+
+Weakness: there is no known reason why a residual component at round qqq should activate qqq different core edges, much less force their individual loads.
+
+## Candidate C3 — The aggregate critical-thread lemma
+
+This is the weakest of the three formulations that would directly imply the target.
+
+For a lexicographically maximal failed qqq-round sequence σ\sigmaσ, consider the terminal-active thread set A(σ)\mathcal A(\sigma)A(σ) from Section A.
+
+The candidate statement is
+
+∑e∈A(σ)se≥2q−1.\boxed{ \sum_{e\in\mathcal A(\sigma)}s_e\ge2q-1. }e∈A(σ)∑se≥2q−1.
+
+There is no requirement that the family contain qqq threads, or that every thread contribute at least one or two subdivision vertices.
+
+Since distinct threads have disjoint degree-2 interiors,
+
+n2(T)≥∑e∈A(σ)se.n_2(T)\ge\sum_{e\in\mathcal A(\sigma)}s_e.n2(T)≥e∈A(σ)∑se.
+
+Thus the candidate inequality would imply the desired lower bound immediately.
+
+### Why C3 is preferable
+
+It counts degree-2 vertices without double-counting, accommodates a small number of long threads, and works directly with the core/subdivision representation.
+
+It is also explicit enough to test once an actual-qqq counterexample is available.
+
+However, the inequality is presently a conjectured property of failed sequences, not a consequence of the definition of a terminal-active thread.
+
+# D. Counterexample attack
+
+## D.1. Branching compensation fails without restrictions
+
+Consider the double star with adjacent branching vertices u,vu,vu,v, two leaves attached to each.
+
+For an arbitrary two-round burning attempt, the maximum coverage is five of the six vertices. A maximum-coverage sequence starts at one branching vertex, say uuu, and places the second source on a leaf attached to vvv.
+
+The final unburned component is the other leaf of vvv, whose boundary vertex has degree 3.
+
+No maximum-coverage two-round sequence moves this residual component to a boundary of degree at most 2.
+
+The tree has
+
+n2=0.n_2=0.n2=0.
+
+So the unrestricted idea that branching boundaries can always be removed, or that every persistence layer must consume degree-2 vertices, is false.
+
+Qualification: for this tree the actual square parameter is
+
+⌈6⌉=3.\lceil\sqrt6\rceil=3.⌈6⌉=3.
+
+It is not a counterexample to the target. It only refutes the unrestricted intermediate mechanism.
+
+## D.2. A single long path can be reused temporally
+
+A path can have the same unburned interval surviving several rounds. The fact that it survives several times does not produce several disjoint sets of degree-2 vertices.
+
+This is precisely where a temporal charging argument can double-count.
+
+A proof must exhibit an injection from persistence events into fresh degree-2 vertices, or into disjoint path segments. Merely associating one path with each round is insufficient.
+
+## D.3. The core cannot be assumed to be a star
+
+The exact n=16,n2=6,b=4n=16,n_2=6,b=4n=16,n2=6,b=4 computation contains 10 different suppressed-core isomorphism classes.
+
+Consequently, an argument that only handles subdivided stars would miss many boundary trees.
+
+## D.4. Concentration and balance
+
+The K1,9K_{1,9}K1,9 experiments give two useful stress tests:
+
+* At subdivision sum 6, the pattern (6,0,…,0)(6,0,\ldots,0)(6,0,…,0) has burning number 3.
+
+* At the same sum, (2,2,2,0,…,0)(2,2,2,0,\ldots,0)(2,2,2,0,…,0) has burning number 4.
+
+The pattern (3,3,3,3,0,…,0)(3,3,3,3,0,\ldots,0)(3,3,3,3,0,…,0) later gives burning number 5 at subdivision sum 12.
+
+Thus maximum thread length alone is insufficient, and the placement of subdivision mass among several threads matters in this family.
+
+These observations support investigating subdivision-load distributions, but neither proves nor disproves C3.
+
+## D.5. Overall attack result
+
+The following unrestricted claims are refuted:
+
+every branching boundary can be removed\text{every branching boundary can be removed}every branching boundary can be removed
+
+and
+
+every persistence layer automatically costs two degree-2 vertices.\text{every persistence layer automatically costs two degree-2 vertices}.every persistence layer automatically costs two degree-2 vertices.
+
+The restricted aggregate statement C3, applying only to a minimum actual-qqq counterexample, remains unresolved.
+
+# E. Square-deficit analysis
+
+Let
+
+d=q2−n.d=q^2-n.d=q2−n.
+
+Since
+
+(q−1)2<n≤q2,(q-1)^2<n\le q^2,(q−1)2<n≤q2,
+
+we have
+
+0≤d≤2q−2.\boxed{0\le d\le2q-2.}0≤d≤2q−2.
+
+The target threshold satisfies
+
+2q−1=q2−(q−1)2.2q-1=q^2-(q-1)^2.2q−1=q2−(q−1)2.
+
+This is the exact difference between consecutive squares.
+
+There are precisely 2q−12q-12q−1 integer orders in the qqq-block
+
+(q−1)2+1,…,q2.(q-1)^2+1,\ldots,q^2.(q−1)2+1,…,q2.
+
+The condition
+
+n2≤2q−2n_2\le2q-2n2≤2q−2
+
+therefore bounds the number of degree-2 vertices by one less than the number of orders in the current square block.
+
+That numerical coincidence is genuine. But it does not yet supply a proof mechanism.
+
+In particular, ddd and n2n_2n2 are different quantities:
+
+d=q2−n,n2=∑ese.d=q^2-n,\qquad n_2=\sum_e s_e.d=q2−n,n2=e∑se.
+
+The existing computations do not establish a useful inequality linking them.
+
+### A possible square-capacity perspective
+
+A path ball of radius rrr contains at most 2r+12r+12r+1 vertices. The total cardinality allowance for balls of radii q−1,…,0q-1,\ldots,0q−1,…,0, if treated as disjoint path intervals, is
+
+∑r=0q−1(2r+1)=q2.\sum_{r=0}^{q-1}(2r+1)=q^2.r=0∑q−1(2r+1)=q2.
+
+This explains why squares are natural in path-burning problems.
+
+But trees with branching may have balls much larger than path balls, and overlaps complicate the capacity calculation. No argument currently converts this q2q^2q2 capacity into a lower bound on total subdivision load.
+
+Conclusion: the square-gap interpretation is a promising direction, but 2q−12q-12q−1 remains unexplained by a rigorous invariant.
+
+# F. Burning-order lemma
+
+There are two distinct questions:
+
+1. Does a static ball cover imply b(T)≤qb(T)\le qb(T)≤q?
+
+2. Must the same centers admit an ordering that is a legal burning sequence?
+
+The answers differ.
+
+## F.1. Static cover implies a burning-number upper bound
+
+For any graph, suppose
+
+V(T)⊆⋃i=1kB(vi,k−i).V(T)\subseteq \bigcup_{i=1}^k B(v_i,k-i).V(T)⊆i=1⋃kB(vi,k−i).
+
+Then
+
+b(T)≤k.\boxed{b(T)\le k.}b(T)≤k.
+
+This can be proved directly using the source-selection rule.
+
+Construct a legal burning process inductively. At round iii:
+
+* if viv_ivi is unburned, choose it;
+
+* if viv_ivi is already burned, choose any unburned vertex instead;
+
+* if there is no unburned vertex, the graph has already been burned in fewer than kkk rounds.
+
+Why does replacing an already-burned viv_ivi preserve coverage?
+
+Suppose an earlier actual source uju_juj, with j<ij<ij<i, has already reached viv_ivi before round iii. Then
+
+d(uj,vi)≤i−j−1.d(u_j,v_i)\le i-j-1.d(uj,vi)≤i−j−1.
+
+For any x∈B(vi,k−i)x\in B(v_i,k-i)x∈B(vi,k−i),
+
+d(uj,x)≤d(uj,vi)+d(vi,x)≤(i−j−1)+(k−i)=k−j−1.\begin{aligned} d(u_j,x) &\le d(u_j,v_i)+d(v_i,x)\\ &\le (i-j-1)+(k-i)\\ &=k-j-1. \end{aligned}d(uj,x)≤d(uj,vi)+d(vi,x)≤(i−j−1)+(k−i)=k−j−1.
+
+Thus the entire assigned ball around viv_ivi is already contained in the final radius of the earlier actual source uju_juj.
+
+Replacing viv_ivi therefore loses no required coverage. Repeating this argument produces a legal process that burns the graph within kkk rounds.
+
+This proof does not require the graph to be a tree.
+
+## F.2. The same centers need not admit a legal ordering
+
+The stronger statement is false.
+
+Consider the path
+
+x1−x2−x3−x4−x5x_1-x_2-x_3-x_4-x_5x1−x2−x3−x4−x5
+
+with k=3k=3k=3, and the distinct center set
+
+S={x2,x3,x4}.S=\{x_2,x_3,x_4\}.S={x2,x3,x4}.
+
+There is a static covering:
+
+B(x2,2)∪B(x4,1)∪B(x3,0)=V(P5).B(x_2,2)\cup B(x_4,1)\cup B(x_3,0)=V(P_5).B(x2,2)∪B(x4,1)∪B(x3,0)=V(P5).
+
+However, no permutation of these three centers is a valid three-round burning sequence that covers P5P_5P5.
+
+To cover x1x_1x1, center x2x_2x2 must receive radius at least 1. To cover x5x_5x5, center x4x_4x4 must receive radius at least 1. Therefore x3x_3x3 must be assigned radius 0 and be placed last.
+
+But x3x_3x3 is adjacent to both x2x_2x2 and x4x_4x4. Whichever of those centers is selected first is at distance 1 from the last source, whereas a legal three-round sequence requires distance at least 2 between its first and last sources.
+
+A small brute-force check finds this n=5n=5n=5, k=3k=3k=3 example as the smallest instance of the same-center obstruction. 
+
+Yet
+
+b(P5)=3.b(P_5)=3.b(P5)=3.
+
+For example, the center source x3x_3x3, followed by the endpoint sources x1,x5x_1,x_5x1,x5, is a legal burning sequence.
+
+### Implication for the thread approach
+
+The static covering formulation is valid at the existence level. But an argument must not insist that the centers in one particular covering certificate can be reordered without changing them.
+
+That restriction would be unnecessarily strong.
+
+# G. Best surviving lemma
+
+The best current candidate is C3, strengthened by the minimum-order consequences.
+
+## Critical Active-Thread Lemma
+
+### \(STRUCTURAL HYPOTHESIS\)
+
+Let TTT be a minimum-order counterexample satisfying
+
+q=⌈n⌉,n2(T)≤2q−2,b(T)≥q+1.q=\lceil\sqrt n\rceil,\qquad n_2(T)\le2q-2,\qquad b(T)\ge q+1.q=⌈n⌉,n2(T)≤2q−2,b(T)≥q+1.
+
+Choose a legal qqq-round burning sequence σ\sigmaσ that lexicographically maximizes the coverage profile
+
+(∣B1∣,∣B2∣,…,∣Bq∣).(|B_1|,|B_2|,\ldots,|B_q|).(∣B1∣,∣B2∣,…,∣Bq∣).
+
+Let HHH be the degree-2-suppressed core, and let A(σ)\mathcal A(\sigma)A(σ) consist of the core edges whose expanded threads contain at least one vertex unburned after round qqq.
+
+The candidate lemma is
+
+∑e∈A(σ)se≥2q−1.\boxed{ \sum_{e\in\mathcal A(\sigma)}s_e\ge2q-1. }e∈A(σ)∑se≥2q−1.
+
+Because the internal degree-2 vertices of distinct core-edge threads are disjoint,
+
+n2(T)=∑e∈E(H)se≥∑e∈A(σ)se.n_2(T) =\sum_{e\in E(H)}s_e \ge \sum_{e\in\mathcal A(\sigma)}s_e.n2(T)=e∈E(H)∑se≥e∈A(σ)∑se.
+
+The candidate lemma would therefore yield
+
+n2(T)≥2q−1,n_2(T)\ge2q-1,n2(T)≥2q−1,
+
+contradicting the assumed counterexample condition.
+
+### Why this is better than the original charging argument
+
+It does not require:
+
+* exactly qqq paths;
+
+* exactly two degree-2 vertices on each of q−1q-1q−1 paths;
+
+* a special terminal path with exactly one degree-2 vertex;
+
+* every residual component to be a path;
+
+* every branching boundary to be removable.
+
+It requires only that the threads supporting a maximally persistent residual obstruction carry enough total subdivision load.
+
+The theorem-relevant issue is now focused on a checkable family of core-edge paths.
+
+### Mechanism ranking
+
+The following ranking is provisional and reflects current mathematical plausibility, not proof.
+
+| Rank | Mechanism                        | Strongest reason in its favor                                                                          | Strongest objection                                                                                        | Next precise result needed                                                                     |
+| ---- | -------------------------------- | ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| 1    | Topological-core reduction       | n2=∑esen\_2=\sum\_e s\_en2=∑ese exactly, and subdivision placement matters in the computed examples    | Core structures are diverse; no universal critical-core form is known                                      | Extract a critical subset of core threads with total load at least 2q−12q-12q−1                |
+| 2    | Burning-ball overlap/packing     | Directly represents the failure of a qqq-ball covering and connects naturally to square-scale capacity | Branching can greatly increase ball size, and overlap alone does not count degree-2 vertices               | Bound unavoidable covering deficit in terms of subdivision loads                               |
+| 3    | Leaf-to-leaf path packing        | Disjoint paths provide a transparent way to count degree-2 vertices without double-counting            | Critical paths may run from leaves to branching vertices or between branching vertices                     | Show that every minimal obstruction has enough disjoint critical paths with leaf endpoints     |
+| 4    | Persistent-corridor charging     | A stubborn uncovered interval naturally propagates along a degree-2 thread                             | A path segment can persist across many rounds; temporal layers do not automatically consume fresh vertices | Prove a disjointness theorem for the charged thread segments                                   |
+| 5    | Diameter/radius argument         | Captures large-scale separation that can make burning difficult                                        | The same diameter can occur with different burning numbers; the boundary data are structurally diverse     | A sharp diameter-plus-subdivision bound that includes branching                                |
+| 6    | Branching compensation           | Could explain why obstruction material must lie inside threads rather than at branch points            | Its unrestricted form is refuted by the double star                                                        | Prove a restricted source-rerouting lemma specifically for a minimum actual-qqq counterexample |
+| 7    | A completely different invariant | May capture timing in a way that simple path counts cannot                                             | No concrete invariant has yet been identified                                                              | Propose an explicit invariant bounded by n2+Cn_2+Cn2+C and prove a per-round change inequality |
+
+This ranks the explicit core and covering approaches ahead of unqualified branching compensation.
+
+# H. Exact remaining gap
+
+The Critical Active-Thread Lemma is strong enough to imply the target, but the definition of an active thread alone does not imply the required load inequality.
+
+The single hardest missing statement is:
+
+If a minimum-order actual-q counterexample exists,then a lexicographically maximal failed q-round sequencemust leave residual vertices on threads carrying totaldegree-2 subdivision load at least 2q−1.\boxed{ \begin{gathered} \text{If a minimum-order actual-}q\text{ counterexample exists,}\\ \text{then a lexicographically maximal failed }q\text{-round sequence}\\ \text{must leave residual vertices on threads carrying total}\\ \text{degree-2 subdivision load at least }2q-1. \end{gathered} }If a minimum-order actual-q counterexample exists,then a lexicographically maximal failed q-round sequencemust leave residual vertices on threads carrying totaldegree-2 subdivision load at least 2q−1.
+
+The available minimality argument says that, except at the lower endpoint of a square block, every degree-2 vertex is individually critical: suppressing it lowers the burning number from q+1q+1q+1 to qqq.
+
+But individual criticality does not show that different temporal obstructions use different vertices.
+
+That is the decisive gap.
+
+A complete argument needs to establish a non-overlapping extraction principle: each relevant failure of the qqq-round covering must be associated with subdivision material that cannot be reused to account for another failure. The current candidate does not yet supply that principle.
+
+The most useful next step is therefore not to count rounds, but to define and prove an exchange or packing theorem for the terminal-active threads of a maximal failed burning sequence. If that theorem fails even for a minimum actual-qqq counterexample, the corridor-charging strategy should be abandoned in favor of a different invariant.
+
+### INCONCLUSIVE
