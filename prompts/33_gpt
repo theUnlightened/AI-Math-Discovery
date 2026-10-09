@@ -1,0 +1,85 @@
+You are acting as a rigorous mathematical research auditor.
+
+Our target is the following statement for every tree T of order n:
+
+Let q = ceil(sqrt(n)). Then
+
+n_2(T) <= 2q - 2  implies  b(T) <= q,
+
+where n_2(T) is the number of degree-2 vertices and b(T) is the burning number.
+
+We have exhaustively verified the target-relevant cases for 5 <= n <= 19. This is computational evidence only, not a proof.
+
+A previous attempt based on persistent-corridor charging has not produced a valid proof. Its unrestricted branching-compensation claim is false, and its proposed aggregate active-thread inequality merely restates the central difficulty.
+
+Your task is NOT to repeat that mechanism.
+
+## Task 1 — Audit the 2026 preprint
+
+Examine the full text, not just the abstract, of:
+
+Das, Islam, Mitra, Paul, “The Burning Number Conjecture is true for Trees with Few Degree-2 Vertices” (SSRN, August 2026).
+
+The paper claims that n_2(T) <= 2 ceil(sqrt(n)) - 3 implies b(T) <= ceil(sqrt(n)).
+
+Check the exact theorem statement, every essential assumption, and the proof of the main result. Identify any unproved step, hidden assumption, boundary-case omission, or possible error. Do not assume the result is correct merely because it appears in the abstract.
+
+If the full text cannot be accessed, say so explicitly and do not pretend to have verified the proof.
+
+## Task 2 — Audit the older general bound
+
+A 2023 paper states that, for n >= 50,
+
+b(T) <= ceil(sqrt(n + n_2(T) + 8)) - 1.
+
+Verify the theorem and its assumptions from the paper.
+
+Derive precisely which cases of the target follow from this inequality when n_2(T) <= 2 ceil(sqrt(n)) - 2.
+
+Show every algebraic step.
+
+## Task 3 — Produce an exact residual case statement
+
+If Task 1's theorem is correct, combine the two results and prove that only the equality case
+
+n_2(T) = 2q - 2
+
+requires new work.
+
+For n >= 50, determine precisely which orders remain after applying Task 2. Express them as n = q^2 - j and give the exact range of j and q.
+
+Keep the finite range n < 50 separate. Do not claim it has been resolved unless a theorem or exhaustive computation actually resolves it.
+
+If Task 1 is not established, provide the residual cases supported by Task 2 alone.
+
+## Task 4 — Formulate one genuinely stronger research question
+
+For the residual equality case, suppress all degree-2 vertices to obtain a core tree H. Let s_e be the number of suppressed degree-2 vertices on the path corresponding to each edge e of H.
+
+Use
+
+n_2(T) = sum_e s_e
+
+and
+
+|V(H)| = n - n_2(T).
+
+Propose ONE precise structural lemma about H and its subdivision loads that would imply b(T) <= q for the residual cases.
+
+The lemma must contain a checkable structural condition or a constructive burning procedure. It must not simply restate b(T) <= q, and it must not rely on an unproved assumption that burning H transfers unchanged to T.
+
+Try to falsify your proposed lemma on small trees or computational examples before recommending it.
+
+## Required output
+
+A. Verified literature facts, with exact sources.
+
+B. Algebraic reduction, with every inequality justified.
+
+C. Exact list of residual cases.
+
+D. One proposed nontrivial structural lemma, including stress tests.
+
+E. A clear verdict: PROOF FOUND, REDUCTION ONLY, or INSUFFICIENT INFORMATION.
+
+Do not invent results, sources, or computational outcomes. Do not claim novelty. State clearly which parts you have personally verified and which remain conditional.
